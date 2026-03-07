@@ -109,7 +109,7 @@ interface InvestigationState {
 }
 
 interface UIState {
-  activeScreen: 0 | 1 | 2
+  activeScreen: -1 | 0 | 1 | 2
   rightPanelTab: 'evidence' | 'tokens' | 'reasoning'
   mockMode: boolean
   mockPlaybackSpeed: number
@@ -118,7 +118,7 @@ interface UIState {
   tierTransitionFrom: TierLevel | null
   tierTransitionTo: TierLevel | null
 
-  setActiveScreen: (screen: 0 | 1 | 2) => void
+  setActiveScreen: (screen: -1 | 0 | 1 | 2) => void
   setRightPanelTab: (tab: 'evidence' | 'tokens' | 'reasoning') => void
   setMockMode: (enabled: boolean) => void
   setMockPlaybackSpeed: (speed: number) => void
@@ -170,7 +170,7 @@ export const useStore = create<Store>()(
     allCycleSnapshots: [],
 
     // UI defaults
-    activeScreen: 0,
+    activeScreen: -1,
     rightPanelTab: 'evidence',
     mockMode: true,
     mockPlaybackSpeed: 1,

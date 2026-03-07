@@ -35,6 +35,11 @@ export function ContextBreathingChart() {
         </div>
       </div>
 
+      {/* Workspace label */}
+      <div className="mb-2 text-[8px] font-mono" style={{ color: '#4A3D2A' }}>
+        Context window as workspace — each cycle loads fresh evidence into a clean window
+      </div>
+
       {/* Per-cycle rows */}
       <div className="space-y-1.5">
         {cycles

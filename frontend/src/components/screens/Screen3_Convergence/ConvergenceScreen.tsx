@@ -112,20 +112,20 @@ export function ConvergenceScreen() {
             <div className="grid grid-cols-2 gap-3">
               <div style={{ border: '1px solid #2E2820', backgroundColor: '#0C0A07' }}>
                 <div className="px-3 py-2" style={{ borderBottom: '1px solid #2E2820' }}>
-                  <span className="text-[8px] font-mono tracking-wider" style={{ color: '#4A3D2A' }}>SINGLE-PASS ANALYSIS</span>
+                  <span className="text-[8px] font-mono tracking-wider" style={{ color: '#4A3D2A' }}>SINGLE-PASS AI</span>
                 </div>
                 <div className="px-3 py-2">
                   <p className="text-[9px] font-mono leading-relaxed italic" style={{ color: '#4A3D2A' }}>
                     "{alertDiagnosis.singlePassSummary}"
                   </p>
                   <div className="mt-1.5 text-[7px] font-mono" style={{ color: '#4A3D2A' }}>
-                    Generic pattern-matching output
+                    "Risk is elevated. Recommend hedging exposure."
                   </div>
                 </div>
               </div>
               <div style={{ border: '1px solid #2E9E7220', backgroundColor: '#0C0A07' }}>
                 <div className="px-3 py-2" style={{ borderBottom: '1px solid #2E9E7220' }}>
-                  <span className="text-[8px] font-mono tracking-wider" style={{ color: '#2E9E72' }}>ITERATIVE HYPOTHESIS ELIMINATION</span>
+                  <span className="text-[8px] font-mono tracking-wider" style={{ color: '#2E9E72' }}>IHEE — 3 CYCLES</span>
                 </div>
                 <div className="px-3 py-2">
                   <div className="flex flex-wrap gap-1 mb-2">
@@ -147,7 +147,7 @@ export function ConvergenceScreen() {
                     })}
                   </div>
                   <div className="text-[7px] font-mono" style={{ color: '#2E9E72' }}>
-                    Specific causal chain with evidence citations
+                    Identified structural resolution path before market consensus
                   </div>
                 </div>
               </div>
@@ -398,9 +398,9 @@ export function ConvergenceScreen() {
             className="px-4 py-2 text-[8px] font-mono leading-relaxed"
             style={{ borderTop: '1px solid #2E2820', color: '#4A3D2A' }}
           >
-            The context window fills with reasoning during each cycle, then compresses between cycles — preserving
-            surviving hypotheses, elimination chains, and cross-modal contradictions while discarding raw reasoning.
-            Reasoning tokens consumed 4x more context than evidence data. This is inference-time compute, not storage.
+            Early cycles load the rules. Middle cycles test against reality. Late cycles simulate forward —
+            what resolution path is structurally possible? The context window is a workspace for reasoning,
+            not a database for storage.
           </div>
         </motion.div>
       </div>

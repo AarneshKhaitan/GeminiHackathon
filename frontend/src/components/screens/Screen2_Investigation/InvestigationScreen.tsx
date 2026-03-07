@@ -31,10 +31,10 @@ export function InvestigationScreen() {
               className="text-[9px] tracking-widest font-medium"
               style={{ fontFamily: 'Syne, sans-serif', color: '#D14B35' }}
             >
-              T3 — FULL INVESTIGATION
+              DEEP INVESTIGATION
             </span>
             <span className="text-[9px] font-mono" style={{ color: '#8C7A5E' }}>
-              4-5 deep reasoning cycles · Orchestrator + Investigator + Evidence Packager
+              Generating hypotheses · Scoring against evidence · Eliminating what's structurally impossible
             </span>
           </div>
           <span

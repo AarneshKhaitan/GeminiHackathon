@@ -50,8 +50,8 @@ export function SignalIntakeScreen() {
           Signal Intake
         </h1>
         <p className="text-[11px] font-mono leading-relaxed" style={{ color: '#8C7A5E' }}>
-          Events are evaluated for severity before initiating investigation.
-          Most signals are dismissed at T2. Only credible crises escalate to T3.
+          A market signal arrives that can't be explained away.
+          The system evaluates severity, then decides: dismiss or investigate.
         </p>
       </div>
 
@@ -62,7 +62,7 @@ export function SignalIntakeScreen() {
           style={{ border: '1px solid #2E2820', backgroundColor: '#161310' }}
         >
           <span className="font-medium tracking-wider" style={{ color: '#D4651A' }}>T2</span>
-          <span style={{ color: '#8C7A5E' }}>SEMANTIC EVAL</span>
+          <span style={{ color: '#8C7A5E' }}>EVALUATE</span>
           <span style={{ color: '#4A3D2A' }}>1 CALL</span>
         </div>
 
@@ -86,8 +86,8 @@ export function SignalIntakeScreen() {
               style={{ color: '#D14B35', borderColor: '#D14B3540', backgroundColor: '#D14B3510' }}
             >CORE</span>
           </div>
-          <span style={{ color: '#8C7A5E' }}>FULL INVESTIGATION</span>
-          <span style={{ color: '#4A3D2A' }}>4-5 DEEP CYCLES</span>
+          <span style={{ color: '#8C7A5E' }}>DEEP INVESTIGATION</span>
+          <span style={{ color: '#4A3D2A' }}>3-5 CYCLES</span>
         </div>
 
         <div className="flex flex-col items-center gap-1 px-3">
@@ -193,7 +193,7 @@ export function SignalIntakeScreen() {
                   style={{ backgroundColor: '#D4651A', animation: 'pulse-dot 0.8s ease-in-out infinite' }}
                 />
                 <span className="text-[9px] font-mono tracking-wider" style={{ color: '#D4651A' }}>
-                  T2 — SEMANTIC EVALUATION
+                  SIGNAL EVALUATION
                 </span>
               </div>
               <span className="text-[9px] font-mono" style={{ color: '#4A3D2A' }}>
@@ -251,10 +251,10 @@ export function SignalIntakeScreen() {
                           animation: 'pulse-tier 0.8s ease-in-out 3',
                         }}
                       >
-                        ↑ ESCALATE → T3 FULL INVESTIGATION
+                        ↑ ESCALATE — Signal warrants deep investigation
                       </span>
                       <span className="text-[9px] font-mono" style={{ color: '#8C7A5E' }}>
-                        4-5 deep reasoning cycles · Iterative hypothesis elimination
+                        Generating competing hypotheses · Testing against structural evidence · Eliminating what's impossible
                       </span>
                     </div>
                     <TagPill type="critical" label="T2 → T3" />

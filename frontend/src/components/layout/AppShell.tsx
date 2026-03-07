@@ -9,6 +9,7 @@ interface AppShellProps {
 }
 
 export function AppShell({ children, tierActive }: AppShellProps) {
+  const activeScreen = useStore((s) => s.activeScreen)
   const alertFlashActive = useStore((s) => s.alertFlashActive)
 
   return (
@@ -24,7 +25,7 @@ export function AppShell({ children, tierActive }: AppShellProps) {
         />
       )}
 
-      <StatusBar t3Active={tierActive === 3} />
+      {activeScreen !== -1 && <StatusBar t3Active={tierActive === 3} />}
 
       <main
         className="flex-1 overflow-hidden relative z-0"
