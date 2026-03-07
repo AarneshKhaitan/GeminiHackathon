@@ -30,11 +30,6 @@
   /* Typography — one font, intentional */
   --font-mono: "IBM Plex Mono", monospace;
 
-  /* Keep these as aliases for existing components */
-  --font-terminal: "IBM Plex Mono", monospace;
-  --font-display: "IBM Plex Mono", monospace;
-  --font-evidence: "IBM Plex Mono", monospace;
-
   /* Animations */
   --animate-pulse-dot: pulse-dot 1.5s ease-in-out infinite;
   --animate-pulse-tier: pulse-tier 0.6s ease-in-out 3;
@@ -67,8 +62,8 @@
 }
 
 @keyframes glow-contradiction {
-  0%, 100% { box-shadow: none; }
-  50% { box-shadow: inset 2px 0 0 #F59E0B; }
+  0%, 100% { background-color: #000000; }
+  50% { background-color: #140900; }
 }
 
 @keyframes blink {
@@ -120,20 +115,3 @@ body {
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Strikethrough animation */
-.strikethrough {
-  position: relative;
-}
-.strikethrough::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 0;
-  height: 1px;
-  background: #FF3333;
-  transition: width 0.4s ease-out;
-}
-.strikethrough.active::after {
-  width: 100%;
-}
