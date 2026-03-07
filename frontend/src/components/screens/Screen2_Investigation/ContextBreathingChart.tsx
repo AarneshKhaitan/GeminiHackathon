@@ -1,12 +1,7 @@
 import { useStore } from '../../../store'
 import { ContextWindowBar } from '../../layout/StatusBar/ContextWindowBar'
 import { MonoValue } from '../../shared/MonoValue'
-
-function fmt(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`
-  if (n >= 1000) return `${(n / 1000).toFixed(0)}K`
-  return `${n}`
-}
+import { fmt } from '../../../utils/format'
 
 export function ContextBreathingChart() {
   const cycles = useStore((s) => s.cycles)
@@ -103,7 +98,7 @@ export function ContextBreathingChart() {
         {/* Empty state */}
         {cycles.length === 0 && !isLiveActive && (
           <div className="flex items-center justify-center h-6">
-            <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">
+            <span className="text-[9px] font-mono text-[#333333] tracking-wider">
               CONTEXT WINDOW IDLE — 1M TOKENS AVAILABLE
             </span>
           </div>

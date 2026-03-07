@@ -1,11 +1,6 @@
 import { useStore } from '../../../../store'
 import { MonoValue } from '../../../shared/MonoValue'
-
-function fmt(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`
-  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`
-  return String(n)
-}
+import { fmt } from '../../../../utils/format'
 
 interface AgentBarProps {
   label: string
@@ -232,7 +227,7 @@ export function TokenUsagePanel() {
 
       {byCycle.length === 0 && (
         <div className="flex flex-col items-center justify-center h-24 gap-1">
-          <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">NO CYCLE DATA</span>
+          <span className="text-[9px] font-mono text-[#333333] tracking-wider">NO CYCLE DATA</span>
         </div>
       )}
     </div>
