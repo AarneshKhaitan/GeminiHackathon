@@ -70,7 +70,7 @@ export function SurvivingCard({ hypothesis, showChain = false }: SurvivingCardPr
         {isContradiction && hypothesis.crossModalConflict && (
           <div
             className="mt-1.5 p-2"
-            style={{ border: '1px solid #F59E0B20', backgroundColor: '#0A0600' }}
+            style={{ border: '1px solid #F59E0B20', backgroundColor: '#140900' }}
           >
             <div className="text-[8px] font-mono text-[#F59E0B] tracking-wider mb-1">
               CROSS-MODAL CONTRADICTION

@@ -17,7 +17,7 @@ export function InvestigationScreen() {
         <div
           className="shrink-0 flex items-center justify-between px-4 py-1.5"
           style={{
-            backgroundColor: '#050000',
+            backgroundColor: '#1A0000',
             borderBottom: '1px solid #FF3333',
           }}
         >
