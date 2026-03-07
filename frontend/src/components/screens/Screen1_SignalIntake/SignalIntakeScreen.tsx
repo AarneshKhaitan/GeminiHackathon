@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../../store'
 import { TRIGGERS } from '../../../data/triggers'
 import { useMockPlayback } from '../../../hooks/useMockPlayback'
+import { useWebSocket } from '../../../hooks/useWebSocket'
 import { TagPill } from '../../shared/TagPill'
 import type { TriggerEvent } from '../../../types/api'
 
@@ -11,7 +12,10 @@ export function SignalIntakeScreen() {
   const [evalPhase, setEvalPhase] = useState<'idle' | 'evaluating' | 'done'>('idle')
   const tier2EvalText = useStore((s) => s.tier2EvalText)
   const tier2EvalDone = useStore((s) => s.tier2EvalDone)
+  const mockMode = useStore((s) => s.mockMode)
+  const setMockMode = useStore((s) => s.setMockMode)
   const { start: startMock } = useMockPlayback()
+  const { startInvestigation } = useWebSocket()
   const resetInvestigation = useStore((s) => s.resetInvestigation)
   const applyWebSocketMessage = useStore((s) => s.applyWebSocketMessage)
 
@@ -19,10 +23,14 @@ export function SignalIntakeScreen() {
     resetInvestigation()
     setSelectedTrigger(trigger)
     setEvalPhase('evaluating')
-    applyWebSocketMessage({ type: 'SESSION_STARTED', entity: trigger.entity, tier: 2 })
     useStore.getState().setEntity(trigger.entity, trigger.ticker)
-    startMock()
-    setEvalPhase('done')
+    if (mockMode) {
+      applyWebSocketMessage({ type: 'SESSION_STARTED', entity: trigger.entity, tier: 2 })
+      startMock()
+      setEvalPhase('done')
+    } else {
+      startInvestigation(trigger)
+    }
   }
 
   const sigmaColor = (s: number) => s >= 4 ? '#D14B35' : s >= 3 ? '#D4651A' : '#2E9E72'
@@ -113,10 +121,34 @@ export function SignalIntakeScreen() {
       {/* Trigger selection */}
       <div className="w-full max-w-2xl">
         <div
-          className="text-[9px] font-mono tracking-[0.25em] mb-2 pb-2"
-          style={{ color: '#4A3D2A', borderBottom: '1px solid #2E2820' }}
+          className="flex items-center justify-between mb-2 pb-2"
+          style={{ borderBottom: '1px solid #2E2820' }}
         >
-          SELECT TRIGGER EVENT
+          <span className="text-[9px] font-mono tracking-[0.25em]" style={{ color: '#4A3D2A' }}>
+            SELECT TRIGGER EVENT
+          </span>
+          {/* MOCK / LIVE mode toggle */}
+          <div className="flex items-center gap-1">
+            {(['MOCK', 'LIVE'] as const).map((mode) => {
+              const isActive = mode === 'MOCK' ? mockMode : !mockMode
+              return (
+                <button
+                  key={mode}
+                  onClick={() => setMockMode(mode === 'MOCK')}
+                  disabled={evalPhase !== 'idle'}
+                  className="px-2 py-0.5 text-[8px] font-mono tracking-widest transition-colors duration-100"
+                  style={{
+                    border: `1px solid ${isActive ? (mode === 'LIVE' ? '#2E9E72' : '#C8912A') : '#2E2820'}`,
+                    backgroundColor: isActive ? (mode === 'LIVE' ? '#0A2D1E' : '#2D1E07') : '#161310',
+                    color: isActive ? (mode === 'LIVE' ? '#2E9E72' : '#C8912A') : '#4A3D2A',
+                    cursor: evalPhase !== 'idle' ? 'default' : 'pointer',
+                  }}
+                >
+                  {mode}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {TRIGGERS.map((trigger) => {
