@@ -23,6 +23,9 @@ from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import JsonOutputParser
 
 import config
+from utils.logger import get_logger
+
+logger = get_logger("gemini")
 
 
 class GeminiClient:
@@ -76,6 +79,8 @@ class GeminiClient:
 
         for attempt in range(max_retries):
             try:
+                logger.info(f"Gemini API call attempt {attempt + 1}/{max_retries}")
+
                 # Make async LangChain API call
                 message = HumanMessage(content=json_prompt)
                 response = await self.llm.ainvoke([message])
@@ -167,6 +172,7 @@ class GeminiClient:
 
                 # If we got valid token counts, return them
                 if token_usage["input_tokens"] > 0 and token_usage["output_tokens"] > 0:
+                    logger.info(f"Gemini API success: {token_usage['input_tokens']} in, {token_usage['output_tokens']} out, {token_usage['reasoning_tokens']} reasoning")
                     return {
                         "response": parsed,
                         "token_usage": token_usage
@@ -174,6 +180,7 @@ class GeminiClient:
 
                 # Estimate if no metadata available
                 print(f"⚠️  No token usage metadata found, estimating from content length")
+                logger.warning("No token usage metadata found, estimating from content length")
                 token_usage["input_tokens"] = len(json_prompt) // 4  # Rough estimate: 4 chars per token
                 token_usage["output_tokens"] = len(content) // 4
                 token_usage["total_tokens"] = token_usage["input_tokens"] + token_usage["output_tokens"]
@@ -185,6 +192,7 @@ class GeminiClient:
 
             except Exception as e:
                 print(f"⚠️  Gemini API attempt {attempt + 1}/{max_retries} failed: {e}")
+                logger.error(f"Gemini API attempt {attempt + 1}/{max_retries} failed: {e}")
 
                 if attempt < max_retries - 1:
                     # Exponential backoff: 1s, 2s, 4s

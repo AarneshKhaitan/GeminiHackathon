@@ -42,6 +42,7 @@ from agents.investigator_v2 import investigate
 
 # Phase 4: Evidence Pipeline
 from agents.evidence.packager import gather_evidence
+from agents.evidence.batch_tagger import tag_all_evidence_parallel
 
 
 # =============================================================================
@@ -65,6 +66,9 @@ class InvestigationState(TypedDict, total=False):
 
     # Core state
     case_file: dict
+
+    # Pre-tagged evidence cache (tagged once at start)
+    all_tagged_evidence: list[dict]
 
     # Intermediate results
     tier2_assessment: dict
@@ -136,6 +140,30 @@ async def investigate_node(state: InvestigationState) -> InvestigationState:
 
     state["investigation_output"] = result
 
+    # If Cycle 1 and we have hypotheses, launch parallel batch tagging in background
+    if cycle_num == 1 and result.get("surviving_hypotheses") and not state.get("all_tagged_evidence"):
+        import asyncio
+        entity = state["case_file"]["entity"]
+        hypotheses = result["surviving_hypotheses"]
+
+        print(f"  🏷️  Launching parallel batch tagging in background (10 parallel batches)...")
+
+        # Launch batch tagging as background task (don't wait)
+        async def batch_tag_background():
+            try:
+                all_tagged = await tag_all_evidence_parallel(
+                    entity=entity,
+                    hypotheses=hypotheses,
+                    batch_size=7,  # 71 observations / 10 batches ≈ 7 per batch
+                )
+                state["all_tagged_evidence"] = all_tagged
+                print(f"  ✓ Background tagging complete: {len(all_tagged)} observations")
+            except Exception as e:
+                print(f"  ⚠️  Background tagging failed: {e}")
+
+        # Create task but don't await it - let it run in parallel
+        asyncio.create_task(batch_tag_background())
+
     print(f"  Completed: {result['token_usage']['total']} tokens used")
 
     return state
@@ -201,14 +229,60 @@ async def gather_evidence_node(state: InvestigationState) -> InvestigationState:
     active_hypotheses = state["case_file"]["active_hypotheses"]
     entity = state["case_file"]["entity"]
 
-    print(f"  Requests: {len(evidence_requests)}")
+    # Track which observations have already been gathered
+    already_gathered = []
+    for cycle in state["case_file"].get("cycle_history", []):
+        if "evidence_gathered" in cycle:
+            already_gathered.extend(cycle["evidence_gathered"])
 
-    # Gather and tag evidence
-    tagged_evidence = await gather_evidence(
-        evidence_requests=evidence_requests,
-        active_hypotheses=active_hypotheses,
-        entity=entity,
-    )
+    print(f"  Requests: {len(evidence_requests)}")
+    print(f"  Already gathered: {len(already_gathered)} observations")
+
+    # Use pre-tagged evidence cache if available (from parallel batch tagging)
+    if state.get("all_tagged_evidence"):
+        print(f"  ✓ Using pre-tagged cache ({len(state['all_tagged_evidence'])} observations)")
+        all_evidence = state["all_tagged_evidence"]
+
+        # Filter: remove already-gathered
+        available = [
+            obs for obs in all_evidence
+            if obs['observation_id'] not in already_gathered
+        ]
+        print(f"  Available after filtering: {len(available)} observations")
+
+        # Filter by request relevance
+        if evidence_requests and available:
+            requested_types = {req.get('type', '').lower() for req in evidence_requests if req.get('type')}
+            keywords = [w for req in evidence_requests for w in req.get('description', '').lower().split() if len(w) > 4]
+
+            filtered = []
+            for obs in available:
+                obs_type = obs.get('type', '').lower()
+                content = obs.get('content', '').lower()
+                type_match = obs_type in requested_types or not requested_types
+                keyword_match = any(kw in content for kw in keywords) if keywords else False
+
+                if type_match or keyword_match:
+                    if keyword_match:
+                        filtered.insert(0, obs)
+                    else:
+                        filtered.append(obs)
+
+            if filtered:
+                available = filtered
+                print(f"  Filtered by relevance: {len(available)} observations")
+
+        # Limit to 15
+        tagged_evidence = available[:15]
+    else:
+        # Fallback: batch tagging not ready yet, use slower on-the-fly tagging
+        print(f"  ⚠️  Pre-tagged cache not ready, falling back to on-the-fly tagging")
+        tagged_evidence = await gather_evidence(
+            evidence_requests=evidence_requests,
+            active_hypotheses=active_hypotheses,
+            entity=entity,
+            already_gathered=already_gathered,
+        )
 
     state["new_evidence"] = tagged_evidence
 

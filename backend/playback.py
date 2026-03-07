@@ -27,12 +27,13 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
         SSE-formatted event strings
     """
 
-    # Load cached investigation - use demo file for Credit Suisse
+    # Load cached investigation - use full_run file (newly generated)
     if entity.lower() == "credit suisse":
-        cache_file = Path(__file__).parent / "corpus" / "cached" / "credit_suisse_demo.json"
+        cache_file = Path(__file__).parent / "corpus" / "cached" / "credit_suisse_full_run.json"
     else:
         cache_file = Path(__file__).parent / "corpus" / "cached" / f"{entity.lower().replace(' ', '_')}_full_run.json"
 
+    # Fallback to demo if full_run doesn't exist
     if not cache_file.exists():
         cache_file = Path(__file__).parent / "corpus" / "cached" / "credit_suisse_demo.json"
 

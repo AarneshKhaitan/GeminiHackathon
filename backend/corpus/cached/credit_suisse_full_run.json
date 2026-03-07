@@ -2,16 +2,16 @@
   "metadata": {
     "entity": "Credit Suisse",
     "trigger_date": "2023-02-09",
-    "investigation_run_date": "2026-03-07T17:30:00.000000",
-    "duration_seconds": 280,
-    "total_tokens": 145000
+    "investigation_run_date": "2026-03-07T19:29:30.159706",
+    "duration_seconds": 558.63551,
+    "total_tokens": 212558
   },
   "trigger": {
     "entity": "Credit Suisse",
     "event": "Q4 2022 earnings reveal CHF 110.5 billion deposit outflows",
     "date": "2023-02-09",
     "magnitude": "CHF 110.5 billion (Q4 2022)",
-    "description": "On February 9, 2023, Credit Suisse reported Q4 2022 earnings revealing CHF 110.5 billion in net new asset outflows during the quarter."
+    "description": "On February 9, 2023, Credit Suisse reported Q4 2022 earnings revealing CHF 110.5 billion in net new asset outflows during the quarter - approximately 8% of total assets under management. The bank disclosed that outflows 'substantially exceeded' Q3 levels, with two-thirds concentrated in October 2022 (immediately after restructuring announcement). Wealth Management alone saw ~15% of AUM flee in Q4. Despite completing a CHF 4 billion capital raise and reporting adequate capital ratios (CET1 14.1%), the magnitude of deposit flight revealed that the October restructuring plan failed to restore client confidence. The bank reported CHF 7.3 billion in annual losses for 2022."
   },
   "case_file": {
     "entity": "Credit Suisse",
@@ -20,106 +20,213 @@
     "trigger": {
       "entity": "Credit Suisse",
       "event": "Q4 2022 earnings reveal CHF 110.5 billion deposit outflows",
-      "date": "2023-02-09"
+      "date": "2023-02-09",
+      "magnitude": "CHF 110.5 billion (Q4 2022)",
+      "description": "On February 9, 2023, Credit Suisse reported Q4 2022 earnings revealing CHF 110.5 billion in net new asset outflows during the quarter - approximately 8% of total assets under management. The bank disclosed that outflows 'substantially exceeded' Q3 levels, with two-thirds concentrated in October 2022 (immediately after restructuring announcement). Wealth Management alone saw ~15% of AUM flee in Q4. Despite completing a CHF 4 billion capital raise and reporting adequate capital ratios (CET1 14.1%), the magnitude of deposit flight revealed that the October restructuring plan failed to restore client confidence. The bank reported CHF 7.3 billion in annual losses for 2022."
     },
     "active_hypotheses": [
       {
         "id": "H01",
-        "name": "Reputational Crisis Post-Archegos/Greensill",
-        "description": "Client trust erosion following 2021 scandals",
-        "score": 0.92,
-        "evidence_chain": ["S12", "E02", "E03"],
+        "name": "Reputational Crisis & Loss of Client Confidence",
+        "description": "",
+        "score": 0.98,
+        "evidence_chain": [],
         "status": "active"
       },
       {
         "id": "H02",
-        "name": "Restructuring Plan Failed to Restore Confidence",
-        "description": "October 2022 restructuring announcement triggered further outflows",
-        "score": 0.88,
-        "evidence_chain": ["E04", "E10"],
+        "name": "Perceived Structural Weakness & Liquidity Concerns",
+        "description": "",
+        "score": 0.95,
+        "evidence_chain": [],
         "status": "active"
       },
       {
         "id": "H03",
-        "name": "Wealth Management Client De-risking",
-        "description": "High-net-worth clients systematically moving assets",
+        "name": "Ineffective or Poorly Communicated Restructuring Plan",
+        "description": "",
+        "score": 0.98,
+        "evidence_chain": [],
+        "status": "active"
+      },
+      {
+        "id": "H04",
+        "name": "Regulatory Scrutiny & Legal Liabilities",
+        "description": "",
+        "score": 0.8,
+        "evidence_chain": [],
+        "status": "active"
+      },
+      {
+        "id": "H06",
+        "name": "Contagion from Broader Economic/Banking Sector Instability",
+        "description": "",
+        "score": 0.7,
+        "evidence_chain": [],
+        "status": "active"
+      },
+      {
+        "id": "H07",
+        "name": "Targeted Exodus of Wealth Management Clients",
+        "description": "",
         "score": 0.85,
-        "evidence_chain": ["E11"],
+        "evidence_chain": [],
+        "status": "active"
+      },
+      {
+        "id": "H08",
+        "name": "Perceived Operational Weakness or Key Personnel Departures",
+        "description": "",
+        "score": 0.75,
+        "evidence_chain": [],
         "status": "active"
       }
     ],
     "eliminated_hypotheses": [
       {
-        "id": "H04",
-        "name": "Undisclosed AT1 Write-down Risk",
-        "killed_by_atom": "S01",
-        "killed_in_cycle": 2,
-        "reason": "Structural evidence shows AT1 terms were fully disclosed in public filings since 2019"
-      },
-      {
         "id": "H05",
-        "name": "Hidden Regulatory Capital Breach",
-        "killed_by_atom": "E06",
+        "name": "Market-Driven Opportunity Cost",
+        "killed_by_atom": "E45",
         "killed_in_cycle": 2,
-        "reason": "Q4 earnings showed CET1 ratio at 14.1%, well above regulatory minimums"
-      },
-      {
-        "id": "H06",
-        "name": "Liquidity Crisis (Imminent Insolvency)",
-        "killed_by_atom": "E10",
-        "killed_in_cycle": 3,
-        "reason": "LCR maintained above 144% throughout Q4, no actual liquidity stress"
-      },
-      {
-        "id": "H07",
-        "name": "Undisclosed Counterparty Exposure",
-        "killed_by_atom": "S13",
-        "killed_in_cycle": 3,
-        "reason": "Counterparty disclosures in annual report showed no concentrated risk"
+        "reason": "This hypothesis claims clients moved deposits 'in search of better returns'. However, empirical evidence (E45, E44, E43, E42, E40, E38, E37, E36, E35, E34, E33, E32) overwhelmingly demonstrates a market in extreme panic, characterized by a flight from risk and severe loss of confidence. Credit Suisse's CDS spreads (E45) were 5-10 times higher than peers, indicating extreme risk perception, which is fundamentally inconsistent with clients calmly seeking 'better returns' as a primary driver for massive outflows. The observed market behavior (stock crash, emergency liquidity, panic reaction to investor statements) makes it logically impossible for 'opportunity cost' to be the significant underlying motivation for the scale of withdrawals seen during this crisis."
       }
     ],
-    "evidence_collected": [],
     "cross_modal_flags": [],
+    "key_insights": [
+      "Empirical evidence from March 2023 strongly supports Reputational Crisis (H01), Perceived Structural Weakness (H02), and Ineffective Restructuring Plan (H03) as primary drivers of the crisis.",
+      "The 'Market-Driven Opportunity Cost' hypothesis (H05) was definitively eliminated as market behavior indicated extreme fear and risk aversion, not a calm search for better returns.",
+      "The absence of structural evidence in this cycle prevented the detection of cross-modal contradictions.",
+      "Critical evidence from Q4 2022 (restructuring plan details, Q4 market reaction, and deposit outflow breakdown) is still needed to fully understand the crisis's origins and specific impacts on client segments.",
+      "All 7 active hypotheses were further strengthened by empirical evidence from March 2023, leading to increased confidence scores, with H01 and H03 now at 0.98.",
+      "No hypotheses were eliminated in Cycle 3, indicating that all remaining hypotheses are still considered plausible and require further investigation.",
+      "The continued absence of structural evidence prevented the detection of cross-modal contradictions in Cycle 3, highlighting a critical information gap.",
+      "Detailed forward simulations have been developed for all surviving hypotheses, providing clear testable predictions for future evidence collection.",
+      "The evidence requests for Cycle 4 are precisely targeted to address the crux question regarding Q4 2022 deposit composition and the initial market reaction to the October 2022 restructuring plan, which are crucial for discriminating between top hypotheses."
+    ],
+    "evidence_collected": [],
+    "evidence_pending": [
+      {
+        "type": "structural",
+        "description": "A detailed breakdown of the CHF 110.5 billion deposit outflows for Q4 2022, categorized by client segment (e.g., Wealth Management, Investment Bank, Swiss Bank, Asset Management) and, if available, by client type (e.g., institutional, high-net-worth individual, retail).",
+        "reason": "This evidence is critical to precisely quantify the composition of the Q4 2022 outflows, directly testing the prediction from H07 regarding a targeted exodus of Wealth Management clients. It also helps discriminate between H01 and H02 by showing which client segments were most sensitive to the crisis.",
+        "tests_hypothesis": [
+          "H07",
+          "H01",
+          "H02"
+        ],
+        "expected_if_h07": "The breakdown would show a disproportionately large share of the CHF 110.5 billion outflows originating from the Wealth Management division, potentially also from high-net-worth individual clients.",
+        "expected_if_h01_h02": "While Wealth Management would likely contribute, outflows might be more broadly distributed across client segments (e.g., Investment Bank, Asset Management, institutional clients) reflecting a general flight of capital due to systemic concerns rather than a specific targeting of WM."
+      },
+      {
+        "type": "structural",
+        "description": "A comprehensive report detailing the specific strategic changes, asset sales, capital raise mechanisms, and projected financial impacts of the October 2022 Credit Suisse restructuring plan, including official communication materials and immediate analyst/media commentary following its announcement.",
+        "reason": "This evidence directly addresses the 'initial market reaction' part of the crux question and is crucial for testing H03 (Ineffective or Poorly Communicated Restructuring Plan). It will reveal the specifics of the plan and how it was initially perceived by experts, which also informs H01 and H02 by indicating the level of confidence (or lack thereof) in the bank's future.",
+        "tests_hypothesis": [
+          "H03",
+          "H01",
+          "H02"
+        ],
+        "expected_if_h03": "Official communication might be vague or lack concrete details, and immediate analyst/media commentary would express significant skepticism, highlight perceived gaps, or criticize the feasibility of the plan's targets.",
+        "expected_if_h01_h02": "The plan's details might appear sound on paper, but analyst/media commentary would still reflect deep-seated market distrust, focusing on the bank's history, governance issues, or broader systemic fears, rather than just the plan's specifics."
+      },
+      {
+        "type": "empirical",
+        "description": "Daily or weekly 5-year Credit Default Swap (CDS) spreads for Credit Suisse and yields on Credit Suisse's senior unsecured bonds for Q4 2022, focusing on the period immediately following the October 2022 restructuring announcement.",
+        "reason": "This empirical data directly measures the market's real-time assessment of Credit Suisse's credit risk and funding costs immediately after the restructuring plan was announced. It is vital for understanding the 'initial market reaction' (crux question) and for testing predictions from H01 (Reputational Crisis), H02 (Perceived Structural Weakness), and H03 (Ineffective Restructuring Plan).",
+        "tests_hypothesis": [
+          "H01",
+          "H02",
+          "H03"
+        ],
+        "expected_if_h01_h02_h03": "CDS spreads and bond yields would show a significant and sustained increase immediately following the October 2022 restructuring announcement, indicating that the market did not find the plan reassuring and perceived heightened risk.",
+        "expected_if_h03_effective_but_other_factors_dominant": "CDS spreads and bond yields might initially stabilize or even decrease slightly after the announcement, only to rise later in Q4 or Q1 2023 due to other emerging factors, suggesting the plan itself was not immediately rejected."
+      }
+    ],
+    "compressed_reasoning": "CYCLE 3 CUMULATIVE STATE: The investigation into Credit Suisse's CHF 110.5 billion deposit outflows in Q4 2022 and the subsequent March 2023 crisis has progressed through Cycle 3. Initial hypotheses were generated in Cycle 1. In Cycle 2, extensive empirical evidence from March 2023 (E31-E46) was analyzed, and this evidence was re-evaluated in Cycle 3, leading to updated scores for all hypotheses. No hypotheses were eliminated in Cycle 3, and no new structural evidence was provided, preventing the detection of cross-modal contradictions.\n\n**Surviving Hypotheses (with updated scores from Cycle 3):**\n- H01: Reputational Crisis & Loss of Client Confidence (score: 0.98) - Strongly supported by overwhelming evidence of market panic, extreme CDS spreads, and the impact of the Saudi chairman's statement.\n- H02: Perceived Structural Weakness & Liquidity Concerns (score: 0.95) - Strongly supported by SNB intervention, extreme CDS spreads, and market panic despite regulatory assurances.\n- H03: Ineffective or Poorly Communicated Restructuring Plan (score: 0.98) - Strongly supported by the need for emergency liquidity post-plan and the market's negative reaction to investor statements despite confidence in the plan.\n- H04: Regulatory Scrutiny & Legal Liabilities (score: 0.8) - Supported by explicit mention of regulatory constraints by a key investor and analyst commentary on past scandals.\n- H06: Contagion from Broader Economic/Banking Sector Instability (score: 0.7) - Partially supported as an exacerbating factor, but CS's decline was disproportionately worse than the sector.\n- H07: Targeted Exodus of Wealth Management Clients (score: 0.85) - Remains plausible; strong indirect support from overall panic and deposit outflows, but direct evidence is still pending.\n- H08: Perceived Operational Weakness or Key Personnel Departures (score: 0.75) - Supported by analyst commentary on governance and management issues, and the resignation of a key investor.\n\n**Eliminated Hypotheses:**\n- H05: Market-Driven Opportunity Cost (killed_by_atom: E45, killed_in_cycle: 2) - This hypothesis was definitively eliminated because empirical evidence (E45, E44, E43, E42, E40, E38, E37, E36, E35, E34, E33, E32) overwhelmingly showed a market driven by extreme fear, risk aversion, and panic (e.g., CDS spreads 5-10x peers), making the premise of clients moving for 'better returns' as a primary driver logically impossible.\n\n**Cross-Modal Contradictions:** None detected in Cycle 3 due to the continued absence of structural evidence.\n\n**Forward Simulation Insights (from Cycle 3):** All surviving hypotheses have undergone forward simulation, generating testable predictions. Key structural consequences include sustained client outflows and increased funding costs (H01), continued reliance on emergency liquidity and potential credit downgrades (H02), failure to meet restructuring targets and market skepticism (H03), increased fines, legal provisions, and operational burdens (H04), broader market volatility and systemic stress (H06), significant reduction in Wealth Management AUM and fee income (H07), and further executive departures and governance issues (H08).\n\n**Crux Question:** The primary drivers of the Q4 2022 deposit outflows and the subsequent March 2023 crisis are largely understood to be a combination of reputational damage, perceived structural weakness, and an ineffective restructuring plan. The remaining crux is to precisely quantify the *composition* of the CHF 110.5 billion Q4 2022 outflows and the *initial market reaction* to the October 2022 restructuring plan, to fully understand the timeline and specific client segments most affected.\n\n**Evidence Still Needed (for Cycle 4):**\n1.  A detailed breakdown of the CHF 110.5 billion deposit outflows for Q4 2022, categorized by client segment (e.g., Wealth Management, Investment Bank, Swiss Bank, Asset Management) and, if available, by client type (e.g., institutional, high-net-worth individual, retail) (structural).\n2.  A comprehensive report detailing the specific strategic changes, asset sales, capital raise mechanisms, and projected financial impacts of the October 2022 Credit Suisse restructuring plan, including official communication materials and immediate analyst/media commentary following its announcement (structural).\n3.  Daily or weekly 5-year Credit Default Swap (CDS) spreads for Credit Suisse and yields on Credit Suisse's senior unsecured bonds for Q4 2022, focusing on the period immediately following the October 2022 restructuring announcement (empirical).\n\n**Historical Context:** The investigation began by hypothesizing reasons for significant deposit outflows and market instability. Cycle 2 provided strong empirical backing for several key hypotheses related to the March 2023 crisis, allowing for the elimination of one hypothesis. Cycle 3 further refined hypothesis scores, generated detailed forward simulations, and reiterated specific evidence requests to address the remaining crux questions.",
     "cycle_history": [
       {
         "cycle_num": 1,
-        "hypotheses_count": 7,
+        "hypotheses_count": 8,
         "eliminations_count": 0,
-        "evidence_collected_count": 8,
+        "evidence_collected_count": 0,
         "token_usage": {
-          "input": 25000,
-          "output": 12000,
-          "total": 37000
-        }
+          "input": 3522,
+          "output": 9528,
+          "reasoning": 5567,
+          "total": 13050
+        },
+        "duration_seconds": null
       },
       {
         "cycle_num": 2,
-        "hypotheses_count": 5,
-        "eliminations_count": 2,
-        "evidence_collected_count": 5,
+        "hypotheses_count": 7,
+        "eliminations_count": 1,
+        "evidence_collected_count": 0,
         "token_usage": {
-          "input": 35000,
-          "output": 18000,
-          "total": 53000
-        }
+          "input": 61376,
+          "output": 24437,
+          "reasoning": 15204,
+          "total": 85813
+        },
+        "duration_seconds": null
       },
       {
         "cycle_num": 3,
-        "hypotheses_count": 3,
-        "eliminations_count": 2,
-        "evidence_collected_count": 4,
+        "hypotheses_count": 7,
+        "eliminations_count": 0,
+        "evidence_collected_count": 0,
         "token_usage": {
-          "input": 38000,
-          "output": 17000,
-          "total": 55000
-        }
+          "input": 88051,
+          "output": 25644,
+          "reasoning": 13295,
+          "total": 113695
+        },
+        "duration_seconds": null
       }
     ],
+    "context_windows": {},
+    "token_usage": {
+      "investigator_cycle_1": {
+        "input": 3522,
+        "output": 9528,
+        "reasoning": 5567,
+        "total": 13050
+      },
+      "investigator_cycle_2": {
+        "input": 61376,
+        "output": 24437,
+        "reasoning": 15204,
+        "total": 85813
+      },
+      "investigator_cycle_3": {
+        "input": 88051,
+        "output": 25644,
+        "reasoning": 13295,
+        "total": 113695
+      }
+    },
     "alert": {
       "level": "CRITICAL",
-      "severity": "critical",
-      "summary": "3 risk factors confirmed after eliminating 4 hypotheses"
+      "diagnosis": "HIGH RISK: 7 hypothesis(es) indicate systemic concern - Reputational Crisis & Loss of Client Confidence, Perceived Structural Weakness & Liquidity Concerns, Ineffective or Poorly Communicated Restructuring Plan, Regulatory Scrutiny & Legal Liabilities, Contagion from Broader Economic/Banking Sector Instability, Targeted Exodus of Wealth Management Clients, Perceived Operational Weakness or Key Personnel Departures",
+      "surviving_hypotheses": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H06",
+        "H07",
+        "H08"
+      ],
+      "key_evidence": [],
+      "recommended_actions": [
+        "Immediate escalation to risk committee",
+        "Activate enhanced monitoring protocols",
+        "Assess counterparty exposure",
+        "Prepare contingency plans"
+      ]
     },
-    "compressed_reasoning": "Investigation converged after 3 cycles. Started with 7 hypotheses about CHF 110.5B deposit outflows. Eliminated 4 hypotheses through evidence contradictions: (1) AT1 write-down risk was disclosed, not hidden (2) Capital ratios adequate (3) No actual liquidity crisis (4) No undisclosed counterparty risk. Final diagnosis: Reputational crisis from 2021 scandals, failed restructuring plan, and systematic wealth management client exodus. Root cause is confidence collapse, not solvency."
+    "network_alerts": [],
+    "created_at": "2026-03-07 11:29:42.351088+00:00",
+    "updated_at": "2026-03-07 11:38:48.794802+00:00"
   }
 }

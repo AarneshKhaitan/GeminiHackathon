@@ -5,6 +5,7 @@ dist/
 *.local
 .DS_Store
 *.log
+logs/
 venv
 __pycache__/
 __pycache__

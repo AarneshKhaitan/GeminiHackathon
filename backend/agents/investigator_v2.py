@@ -14,6 +14,9 @@ Each phase receives the FULL output from all previous phases as input.
 
 import json
 from gemini.client import call_gemini
+from utils.logger import get_logger
+
+logger = get_logger("investigator")
 from gemini.prompts.investigation_phases_v2 import (
     build_phase1_score_and_crossmodal_prompt,
     build_phase2_elimination_prompt,
@@ -57,10 +60,14 @@ async def investigate(context: dict) -> dict:
     phase_outputs = {}
     total_tokens = {"input": 0, "output": 0, "reasoning": 0, "total": 0}
 
+    logger.info(f"Starting investigation cycle {context['cycle_num']} for {context['entity']}")
+    logger.info(f"Input: {len(context.get('evidence', []))} evidence, {len(context.get('active_hypotheses', []))} hypotheses")
+
     # =========================================================================
     # PHASE 1: SCORE + CROSS-MODAL - Combined scoring and contradiction detection
     # =========================================================================
     print(f"  Phase 1/5: Scoring + Cross-Modal Analysis...")
+    logger.info(f"Cycle {context['cycle_num']}: Starting Phase 1 - Score + Cross-Modal")
     phase1_prompt = build_phase1_score_and_crossmodal_prompt(
         cycle_num=context["cycle_num"],
         trigger=context["trigger"],
@@ -85,12 +92,14 @@ async def investigate(context: dict) -> dict:
         hypotheses_count = len(phase1_output.get(hypotheses_key, []))
         cross_modal_count = 0
         print(f"    ✓ {hypotheses_count} hypotheses generated")
+        logger.info(f"Cycle 1 Phase 1: Generated {hypotheses_count} hypotheses")
     else:
         hypotheses_key = "scored_hypotheses"
         hypotheses_count = len(phase1_output.get(hypotheses_key, []))
         cross_modal_count = len(phase1_output.get("cross_modal_flags", []))
         print(f"    ✓ {hypotheses_count} hypotheses scored")
         print(f"    ✓ {cross_modal_count} cross-modal flags detected")
+        logger.info(f"Cycle {context['cycle_num']} Phase 1: Scored {hypotheses_count} hypotheses, detected {cross_modal_count} cross-modal flags")
 
     print(f"    ✓ Phase 1 output: {len(json.dumps(phase1_output))} chars")
     print(f"    ✓ Token usage: {phase1_result['token_usage']['input_tokens']} in, {phase1_result['token_usage']['output_tokens']} out")
@@ -99,6 +108,7 @@ async def investigate(context: dict) -> dict:
     if context["cycle_num"] == 1:
         # PHASE 4: REQUEST - Evidence needs for cycle 2
         print(f"  Phase 4/5: Requesting evidence...")
+        logger.info(f"Cycle 1: Starting Phase 4 - Evidence Requests")
 
         # Build prompt with Phase 1 full output as context
         phase4_prompt = f"""
@@ -131,11 +141,14 @@ Based on the hypotheses generated in Phase 1, identify 3-5 pieces of SPECIFIC ev
 
         print(f"    ✓ {len(phase4_output.get('evidence_requests', []))} evidence requests")
         print(f"    ✓ Token usage: {phase4_result['token_usage']['input_tokens']} in, {phase4_result['token_usage']['output_tokens']} out")
+        logger.info(f"Cycle 1 Phase 4: Requested {len(phase4_output.get('evidence_requests', []))} pieces of evidence")
 
         # Simple compression for cycle 1
         compressed_state = f"CYCLE 1: Generated {len(phase1_output.get('surviving_hypotheses', []))} hypotheses. Need evidence: {[r.get('description', '') for r in phase4_output.get('evidence_requests', [])[:3]]}"
 
         total_tokens["total"] = total_tokens["input"] + total_tokens["output"]
+
+        logger.info(f"Cycle 1 complete: {total_tokens['total']:,} tokens used")
 
         return {
             "surviving_hypotheses": phase1_output.get("surviving_hypotheses", []),
@@ -153,6 +166,7 @@ Based on the hypotheses generated in Phase 1, identify 3-5 pieces of SPECIFIC ev
     # PHASE 2: ELIMINATE - Kill contradicted hypotheses
     # =========================================================================
     print(f"  Phase 2/5: Identifying eliminations...")
+    logger.info(f"Cycle {context['cycle_num']}: Starting Phase 2 - Elimination")
 
     # Build prompt with Phase 1 FULL CONTEXT (input + output)
     phase2_prompt = f"""
@@ -187,23 +201,29 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
     total_tokens["output"] += phase2_result["token_usage"]["output_tokens"]
     total_tokens["reasoning"] += phase2_result["token_usage"].get("reasoning_tokens", 0)
 
-    # Post-process: Add score-based eliminations (score < 0.2)
+    # Post-process: Add score-based eliminations (score < 0.15 - very conservative)
     eliminated = list(phase2_output.get("eliminated_hypotheses", []))
     surviving = list(phase2_output.get("surviving_hypotheses", []))
+
+    # SAFETY CHECK: If Gemini returned empty survivors but has scored_hypotheses from Phase 1, use those
+    if len(surviving) == 0 and len(phase1_output.get("scored_hypotheses", [])) > 0:
+        print(f"    ⚠️  WARNING: Phase 2 returned 0 survivors. Falling back to Phase 1 scored_hypotheses.")
+        logger.warning(f"Cycle {context['cycle_num']} Phase 2: Gemini returned 0 survivors, falling back to Phase 1 scored_hypotheses")
+        surviving = list(phase1_output.get("scored_hypotheses", []))
 
     # Check each survivor's score
     low_score_eliminations = []
     final_survivors = []
 
     for hyp in surviving:
-        if hyp.get("score", 1.0) < 0.2:
+        if hyp.get("score", 1.0) < 0.15:  # Changed from 0.2 to 0.15 - more conservative
             # Eliminate due to low confidence
             low_score_eliminations.append({
                 "id": hyp["id"],
                 "name": hyp["name"],
                 "killed_by_atom": "low_confidence",
                 "killed_in_cycle": context["cycle_num"],
-                "reason": f"Score {hyp['score']:.2f} dropped below 0.2 threshold, indicating hypothesis is highly implausible"
+                "reason": f"Score {hyp['score']:.2f} dropped below 0.15 threshold, indicating hypothesis is virtually impossible"
             })
         else:
             final_survivors.append(hyp)
@@ -221,6 +241,7 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
     print(f"      - {len(low_score_eliminations)} score-based (< 0.2 threshold)")
     print(f"    ✓ {len(final_survivors)} survivors")
     print(f"    ✓ Token usage: {phase2_result['token_usage']['input_tokens']} in, {phase2_result['token_usage']['output_tokens']} out")
+    logger.info(f"Cycle {context['cycle_num']} Phase 2: Eliminated {len(eliminated)} ({gemini_eliminations} evidence-based, {len(low_score_eliminations)} score-based), {len(final_survivors)} survivors")
 
     # =========================================================================
     # PHASE 3: FORWARD SIMULATE - Predict outcomes (Cycles 3+ only)
@@ -229,6 +250,7 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
 
     if context["cycle_num"] >= 3:
         print(f"  Phase 3/5: Forward simulation...")
+        logger.info(f"Cycle {context['cycle_num']}: Starting Phase 3 - Forward Simulation")
 
         # Build prompt with Phase 1 + 2 FULL CONTEXT
         phase3_prompt = f"""
@@ -272,13 +294,16 @@ Simulate forward: what happens next if each surviving hypothesis is true?
 
         print(f"    ✓ {len(forward_simulations)} forward simulations")
         print(f"    ✓ Token usage: {phase3_result['token_usage']['input_tokens']} in, {phase3_result['token_usage']['output_tokens']} out")
+        logger.info(f"Cycle {context['cycle_num']} Phase 3: Generated {len(forward_simulations)} forward simulations")
     else:
         print(f"  Phase 3/5: Forward simulation (skipped - Cycle {context['cycle_num']} < 3)")
+        logger.info(f"Cycle {context['cycle_num']}: Skipping Phase 3 (forward simulation only for Cycle 3+)")
 
     # =========================================================================
     # PHASE 4: REQUEST - Evidence needs
     # =========================================================================
     print(f"  Phase 4/5: Requesting evidence...")
+    logger.info(f"Cycle {context['cycle_num']}: Starting Phase 4 - Evidence Requests")
 
     # Build prompt with all previous phases
     evidence_collected = [obs['observation_id'] for obs in context.get("evidence", [])]
@@ -359,11 +384,13 @@ Based on all previous phases, identify SPECIFIC evidence to discriminate between
 
     print(f"    ✓ {len(phase4_output.get('evidence_requests', []))} evidence requests")
     print(f"    ✓ Token usage: {phase4_result['token_usage']['input_tokens']} in, {phase4_result['token_usage']['output_tokens']} out")
+    logger.info(f"Cycle {context['cycle_num']} Phase 4: Requested {len(phase4_output.get('evidence_requests', []))} pieces of evidence")
 
     # =========================================================================
     # PHASE 5: COMPRESS - Self-compress state
     # =========================================================================
     print(f"  Phase 5/5: Compressing state...")
+    logger.info(f"Cycle {context['cycle_num']}: Starting Phase 5 - Compression")
 
     # Build prompt with ALL previous phase FULL CONTEXT
     all_phase_outputs = {
@@ -447,11 +474,14 @@ Compress ALL findings from this cycle into a cumulative compressed state.
 
     print(f"    ✓ Compressed state: {len(phase5_output.get('compressed_state', ''))} chars")
     print(f"    ✓ Token usage: {phase5_result['token_usage']['input_tokens']} in, {phase5_result['token_usage']['output_tokens']} out")
+    logger.info(f"Cycle {context['cycle_num']} Phase 5: Compressed state to {len(phase5_output.get('compressed_state', ''))} chars")
 
     # =========================================================================
     # RETURN COMBINED OUTPUTS
     # =========================================================================
     print(f"  ✓ Total tokens: {total_tokens['input']:,} in, {total_tokens['output']:,} out, {total_tokens['reasoning']:,} reasoning")
+    logger.info(f"Cycle {context['cycle_num']} complete: {total_tokens['total']:,} total tokens ({total_tokens['input']:,} in, {total_tokens['output']:,} out, {total_tokens['reasoning']:,} reasoning)")
+    logger.info(f"Cycle {context['cycle_num']} result: {len(phase2_output.get('surviving_hypotheses', []))} survivors, {len(phase2_output.get('eliminated_hypotheses', []))} eliminated")
 
     return {
         "surviving_hypotheses": phase2_output.get("surviving_hypotheses", []),

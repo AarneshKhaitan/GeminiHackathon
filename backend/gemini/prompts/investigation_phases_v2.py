@@ -228,23 +228,33 @@ You have scored hypotheses. Now identify which ones MUST be eliminated.
 
 ## ELIMINATION CRITERIA
 
+**BE CONSERVATIVE**: Only eliminate hypotheses with CLEAR, DEFINITIVE evidence of impossibility.
+
 Eliminate a hypothesis if ANY of these conditions are met:
 
-1. **Evidence-Based Elimination:**
-   - Evidence directly contradicts hypothesis
-   - Makes hypothesis logically IMPOSSIBLE (not just unlikely)
+1. **Evidence-Based Elimination (HIGH BAR):**
+   - Evidence DIRECTLY AND DEFINITIVELY contradicts hypothesis
+   - Makes hypothesis logically IMPOSSIBLE (not just unlikely or weak)
    - Must cite specific observation ID as kill atom
+   - Examples:
+     * "Liquidity crisis" hypothesis when LCR is 144% (well above minimum)
+     * "Hidden capital breach" when CET1 ratio publicly disclosed at 14%
+   - DO NOT eliminate if evidence merely weakens or reduces confidence
 
-2. **Score-Based Elimination:**
-   - Hypothesis score below 0.2
-   - Indicates hypothesis is highly implausible
+2. **Score-Based Elimination (ONLY EXTREME CASES):**
+   - Hypothesis score below 0.15 (changed from 0.2 to be more conservative)
+   - Indicates hypothesis is virtually impossible
    - Cite "low_confidence" as reason
+   - BE CONSERVATIVE: Don't use this criterion unless score is truly abysmal
 
 3. **Subsumption Elimination:**
    - One hypothesis logically contains another
    - Example: "Duration mismatch + HTM accounting" subsumes "Duration mismatch alone"
-   - Eliminate the weaker/narrower hypothesis
+   - Eliminate the weaker/narrower hypothesis ONLY if it adds no additional explanatory value
    - Cite "subsumed_by_H0X" as reason
+
+**IMPORTANT**: When in doubt, KEEP the hypothesis. It's better to have survivors than eliminate everything.
+Aim to keep at least 3-5 hypotheses surviving each cycle unless evidence clearly rules them out.
 
 ## OUTPUT FORMAT (JSON):
 
@@ -397,7 +407,7 @@ def build_phase4_request_prompt(
     ])
 
     simulations_text = "\n\n".join([
-        f"## {sim['hypothesis_id']}: {sim['hypothesis_name']}\n"
+        f"## {sim['hypothesis_id']}: {sim.get('hypothesis_name', sim.get('name', 'Unknown'))}\n"
         f"Predictions: {', '.join(sim.get('empirical_predictions', []))}\n"
         f"Testable via: {', '.join(sim.get('testable_evidence', []))}"
         for sim in forward_simulations

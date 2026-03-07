@@ -27,7 +27,11 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git pull:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(chmod +x:*)",
+      "Bash(lsof:*)",
+      "Bash(source:*)",
+      "Bash(python3:*)"
     ]
   }
 }
