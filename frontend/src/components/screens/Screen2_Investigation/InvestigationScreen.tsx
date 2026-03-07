@@ -10,37 +10,32 @@ export function InvestigationScreen() {
   return (
     <div
       className="flex flex-col h-full"
-      style={{ backgroundColor: '#0F172A' }}
+      style={{ backgroundColor: '#000000' }}
     >
-      {/* T3 investigation banner */}
+      {/* T3 investigation banner — tight, surgical */}
       {tier === 3 && (
         <div
-          className="shrink-0 flex items-center justify-between px-4 py-1.5 border-b"
+          className="shrink-0 flex items-center justify-between px-4 py-1.5"
           style={{
-            backgroundColor: '#0D0000',
-            borderColor: '#EF444420',
-            boxShadow: 'inset 0 -1px 0 #EF444410',
+            backgroundColor: '#050000',
+            borderBottom: '1px solid #FF3333',
           }}
         >
           <div className="flex items-center gap-3">
-            <div
-              className="w-1.5 h-1.5 rounded-full"
-              style={{
-                backgroundColor: '#EF4444',
-                boxShadow: '0 0 8px #EF4444, 0 0 3px #EF4444',
-                animation: 'pulse-dot 0.8s ease-in-out infinite',
-              }}
+            <span
+              className="inline-block w-1.5 h-1.5"
+              style={{ backgroundColor: '#FF3333', animation: 'pulse-dot 0.8s ease-in-out infinite' }}
             />
-            <span className="text-[9px] font-terminal font-bold tracking-widest text-[#EF4444]">
-              TIER 3 — FULL INVESTIGATION
+            <span className="text-[9px] font-mono font-medium tracking-widest text-[#FF3333]">
+              T3 — FULL INVESTIGATION
             </span>
-            <span className="text-[8px] font-terminal text-[#334155]">
+            <span className="text-[9px] font-mono text-[#333333]">
               4-5 deep reasoning cycles · Orchestrator + Investigator + Evidence Packager
             </span>
           </div>
           <span
-            className="text-[7px] font-terminal tracking-wider px-1.5 py-0.5 rounded border"
-            style={{ color: '#EF4444', borderColor: '#EF444440', backgroundColor: '#EF444410' }}
+            className="text-[8px] font-mono tracking-wider px-1.5 py-0.5"
+            style={{ color: '#FF3333', border: '1px solid #FF333340', backgroundColor: '#FF333310' }}
           >
             CORE PRODUCT
           </span>
@@ -48,25 +43,25 @@ export function InvestigationScreen() {
       )}
 
       {/* Three-column grid */}
-      <div className="flex-1 grid overflow-hidden" style={{ gridTemplateColumns: '200px 1fr 280px' }}>
+      <div className="flex-1 grid overflow-hidden" style={{ gridTemplateColumns: '196px 1fr 276px' }}>
         {/* Left: Cycle timeline */}
-        <div className="border-r border-[#1E293B] overflow-hidden">
+        <div className="overflow-hidden" style={{ borderRight: '1px solid #1C1C1C' }}>
           <CycleTimeline />
         </div>
 
         {/* Center: Hypothesis panel */}
-        <div className="overflow-hidden border-r border-[#1E293B]">
+        <div className="overflow-hidden" style={{ borderRight: '1px solid #1C1C1C' }}>
           <HypothesisPanel />
         </div>
 
-        {/* Right: Tabbed panel (Evidence | Tokens | Reasoning) */}
+        {/* Right: Tabbed panel */}
         <div className="overflow-hidden">
           <RightPanel />
         </div>
       </div>
 
       {/* Bottom: Context breathing chart */}
-      <div className="shrink-0" style={{ backgroundColor: '#0A1120' }}>
+      <div className="shrink-0" style={{ borderTop: '1px solid #1C1C1C' }}>
         <ContextBreathingChart />
       </div>
     </div>
