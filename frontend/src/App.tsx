@@ -6,9 +6,9 @@ import { ConvergenceScreen } from './components/screens/Screen3_Convergence/Conv
 import { useStore } from './store'
 
 const screenVariants = {
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 12 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -16 },
+  exit: { opacity: 0, y: -12 },
 }
 
 export function App() {
@@ -16,7 +16,7 @@ export function App() {
   const currentTier = useStore((s) => s.currentTier)
 
   return (
-    <AppShell crisisActive={currentTier === 3}>
+    <AppShell tierActive={currentTier}>
       <AnimatePresence mode="wait">
         {activeScreen === 0 && (
           <motion.div
@@ -25,7 +25,7 @@ export function App() {
             initial="initial"
             animate="animate"
             exit="exit"
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             className="h-full overflow-hidden"
           >
             <SignalIntakeScreen />
@@ -39,7 +39,7 @@ export function App() {
             initial="initial"
             animate="animate"
             exit="exit"
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             className="h-full overflow-hidden"
           >
             <InvestigationScreen />
@@ -53,7 +53,7 @@ export function App() {
             initial="initial"
             animate="animate"
             exit="exit"
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             className="h-full overflow-hidden"
           >
             <ConvergenceScreen />

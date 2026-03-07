@@ -1,21 +1,22 @@
 import { type ReactNode } from 'react'
 import { StatusBar } from './StatusBar/StatusBar'
 import { useStore } from '../../store'
+import type { TierLevel } from '../../types/investigation'
 
 interface AppShellProps {
   children: ReactNode
-  crisisActive?: boolean
+  tierActive?: TierLevel | null
 }
 
-export function AppShell({ children, crisisActive }: AppShellProps) {
+export function AppShell({ children, tierActive }: AppShellProps) {
   const alertFlashActive = useStore((s) => s.alertFlashActive)
 
   return (
     <div
-      className={`flex flex-col h-screen overflow-hidden relative${crisisActive ? ' crisis-active' : ''}`}
-      style={{ backgroundColor: '#0F172A' }}
+      className="flex flex-col h-screen overflow-hidden relative"
+      style={{ backgroundColor: '#000000' }}
     >
-      {/* Alert flash overlay */}
+      {/* Alert flash overlay — functional only */}
       {alertFlashActive && (
         <div
           className="absolute inset-0 pointer-events-none z-40"
@@ -23,16 +24,7 @@ export function AppShell({ children, crisisActive }: AppShellProps) {
         />
       )}
 
-      {/* Scanline overlay — subtle CRT effect */}
-      <div
-        className="absolute inset-0 pointer-events-none z-10"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px)',
-        }}
-      />
-
-      <StatusBar />
+      <StatusBar t3Active={tierActive === 3} />
 
       <main className="flex-1 overflow-hidden relative z-0">
         {children}
