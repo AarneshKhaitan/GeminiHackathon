@@ -18,7 +18,7 @@
 | 06_snb_emergency_liquidity.md | SNB emergency facility terms |
 | 07_gsib_designation.md | G-SIB designation and resolution implications |
 
-## input/ (22 files) — pre-cutoff evidence for the engine
+## empirical/ (22 files) — pre-cutoff evidence for the engine
 
 | File | Period | Counter? |
 |------|--------|----------|
@@ -59,4 +59,4 @@
 | 21_ecb_boe_at1_clarification.md | ECB/BoE: "our AT1 follows normal hierarchy" |
 | 22_market_reaction_mar20.md | Monday market reaction to merger |
 
-## Total: 38 files (7 structural + 22 input + 9 ground truth)
+## Total: 38 files (7 structural + 22 empirical + 9 ground truth)

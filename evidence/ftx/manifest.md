@@ -16,7 +16,7 @@
 | 04_bahamas_regulatory_framework.md | DARE Act, SCB regulatory framework |
 | 05_binance_ftx_relationship.md | Binance as early investor, $2.1B FTT holder |
 
-## input/ (21 files) — pre-cutoff evidence for the engine
+## empirical/ (21 files) — pre-cutoff evidence for the engine
 
 | File | Period | Counter? |
 |------|--------|----------|
@@ -54,4 +54,4 @@
 | 19_criminal_charges_sbf.md | Indictment, trial, conviction on all 7 counts, 25 years |
 | 20_regulatory_responses.md | SEC/CFTC charges, global regulatory acceleration |
 
-## Total: 33 files (5 structural + 21 input + 7 ground truth)
+## Total: 33 files (5 structural + 21 empirical + 7 ground truth)

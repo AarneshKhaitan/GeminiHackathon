@@ -1,92 +1,67 @@
 ---
-source_url: https://www.finma.ch/en/news/2023/03/20230323-mm-at1-kapitalinstrumente/ | https://www.bvger.ch/en/newsroom/media-releases/unlawful-write-off-of-at1-capital-instruments-2385
+source_url: https://www.finma.ch/en/enforcement/recovery-und-resolution-n/gesetzliche-grundlagen/banken/ | https://www.finma.ch/en/news/2023/03/20230323-mm-at1-kapitalinstrumente/
 date: 2023-03-19 (Emergency Ordinance enacted)
-description: FINMA's legal authority under Swiss law to intervene in failing banks — emergency ordinance powers, AT1 write-down authority, merger override
+description: FINMA's legal authority under Swiss law to intervene in failing banks — sourced from FINMA's own published legal basis pages and AT1 press release
 ---
 
 # FINMA Emergency Powers — Swiss Bank Resolution Authority
 
-## What is FINMA?
+## Legislative Framework (from FINMA website: "Legal basis — Banks")
 
-The Swiss Financial Market Supervisory Authority (FINMA) is Switzerland's independent financial regulator. It supervises banks, insurance companies, stock exchanges, and other financial intermediaries. For systemically important banks (CS and UBS), FINMA has enhanced supervisory powers under the "too big to fail" framework.
+The Banking Act (BA) and its implementing ordinances establish the core legal foundation for bank resolution:
 
-## FINMA's Standing Powers (Pre-Crisis)
+- **Systemically Important Banks (Art. 7 ff. BA)**: Sets requirements for institutions performing critical economic functions like maturity transformation and payment transactions.
 
-Under the Swiss Federal Act on Banks and Savings Banks (Banking Act) and the Capital Adequacy Ordinance, FINMA has the following resolution-relevant powers:
+- **Risk of Insolvency Measures (Art. 25 ff. BA)**: Grants FINMA authority to initiate protective actions when banks face destabilization.
 
-### Protective Measures (Art. 26 Banking Act)
-- Appoint an investigator to examine the bank's financial situation
-- Issue instructions to the bank's management
-- Restrict the bank's operations
-- Prohibit payments and asset dispositions
+- **Liquidation of Insolvent Banks (Art. 33 ff. BA)**: Establishes procedures for restructuring or bankruptcy proceedings.
 
-### Restructuring Powers (Art. 28-32 Banking Act)
-- Order restructuring of a bank instead of liquidation
-- Approve restructuring plans that may modify creditor claims
-- Convert or write down capital instruments as part of restructuring
-- Impose a stay on termination rights
+FINMA has "sole responsibility for initiating protective measures as well as restructuring and bankruptcy proceedings."
 
-### Insolvency/Liquidation (Art. 33-37g Banking Act)
-- Order revocation of banking license
-- Initiate bankruptcy proceedings
-- Appoint a liquidator
+## Implementing Regulations (from FINMA website)
 
-### Key Standard Power: PONV Determination
-Under the Capital Adequacy Ordinance, FINMA can determine the "Point of Non-Viability" for a bank, triggering contractual write-down or conversion of AT1 and Tier 2 instruments. The ordinance states AT1 instruments must be written down:
-- When CET1 falls below the contractual trigger (7% for CS)
-- At the latest when FINMA determines the bank is non-viable
-- Before any recourse to public support
+- **Banking Ordinance (BO)**: Specifies operational details for emergency planning, recovery and resolution planning, and resolvability improvements for systemically important institutions (Art. 60 ff.).
 
-## The Emergency Ordinance (March 16-19, 2023)
+- **Capital Adequacy Ordinance (CAO)**: Addresses loss-absorbing capital requirements (Art. 18 ff.), enabling Additional Tier 1 capital and supplementary capital to offset losses during insolvency measures.
 
-When it became clear that normal resolution tools were insufficient for the speed and scale of the Credit Suisse crisis, the **Federal Council** (Swiss executive government) enacted an Emergency Ordinance — bypassing normal parliamentary processes.
+- **Liquidity Ordinance (LiqO)**: Establishes liquidity standards and buffers (Art. 19 ff.), with provisions for institution-specific requirements during restructuring or liquidation scenarios.
+
+- **FINMA Banking Insolvency Ordinance**: Defines restructuring and bankruptcy proceedings under FINMA's exclusive jurisdiction.
+
+## FINMA AT1 Write-Down Press Release (March 23, 2023)
+
+Source: FINMA press release, "FINMA provides information about the basis for writing down AT1 capital instruments"
+
+On March 23, 2023, FINMA explained the basis for the Credit Suisse AT1 write-down:
+
+- Credit Suisse's AT1 instruments contained provisions for complete write-down upon a "Viability Event," specifically when "extraordinary government support is granted."
+- The liquidity assistance loans secured by federal guarantee on March 19 triggered these contractual conditions.
+- The Federal Council's Emergency Ordinance (enacted March 19, 2023) on Additional Liquidity Assistance authorized FINMA to order write-down of Additional Tier 1 capital.
+- All 13 publicly issued AT1 instruments (denominated in USD, CHF, and SGD) were written down to zero.
+- Tier 2 bonds were not affected.
+- Holders were primarily institutional investors.
+- FINMA CEO Urban Angehrn stated: "On Sunday, a solution could be found to protect clients, the financial centre and the markets."
+
+## Emergency Ordinance (March 16-19, 2023)
 
 ### March 16, 2023 — Initial Emergency Ordinance
 "Emergency Ordinance on Additional Liquidity Assistance Loans and the Granting of Federal Default Guarantees"
-
-- Authorized the Swiss National Bank (SNB) to provide additional liquidity assistance beyond normal facilities
+- Authorized the SNB to provide additional liquidity assistance beyond normal facilities
 - Granted federal government guarantees for these loans
-- Provided legal framework for emergency support
 
 ### March 19, 2023 — Critical Amendment
+The Federal Council amended the emergency ordinance:
 
-The Federal Council **amended** the emergency ordinance with two provisions that changed the outcome entirely:
+**Article 5a — AT1 Write-Down Authority:** Authorized FINMA to order a systemically important bank receiving government support to write down its additional core capital (AT1) completely.
 
-**Article 5a — AT1 Write-Down Authority:**
-Authorized FINMA to order a systemically important bank receiving government support to **write down its additional core capital (AT1)** completely. This was the provision that enabled the CHF 16B AT1 wipeout.
-
-**Article 10a — Bypass Shareholder Approval:**
-Removed the requirement for general meeting (shareholder) approval for transactions involving systemically important banks under the emergency ordinance. This allowed the UBS-CS merger to proceed without CS shareholder vote.
-
-## What This Means for the Crisis
-
-These powers define the **space of possible outcomes**:
-
-1. **FINMA can force a merger without shareholder approval** — eliminates the hypothesis that "CS shareholders can block a takeover"
-2. **FINMA can write down AT1 bonds to zero** — enables the outcome where bonds are wiped while equity survives
-3. **The Federal Council can create new legal authority on a weekend** — the emergency ordinance was drafted and enacted in 48 hours, meaning the rules of the game changed during the crisis
-4. **Normal resolution procedures can be bypassed** — the Swiss TBTF framework had formal resolution procedures, but the emergency ordinance operated *outside* them
+**Article 10a — Bypass Shareholder Approval:** Removed the requirement for general meeting (shareholder) approval for transactions involving systemically important banks under the emergency ordinance.
 
 ## Subsequent Legal Challenge
 
-The Swiss Federal Administrative Court later ruled (October 2025) that:
-- Article 5a of the Emergency Ordinance was **unconstitutional** in several respects
-- It violated constitutional requirements for emergency ordinances
-- It improperly delegated expropriation rights
-- It violated the guarantee of ownership
-
-FINMA appealed this ruling. The legal challenge continues, but for the purposes of March 2023, FINMA acted under these powers and the write-down was executed.
-
-## Key Structural Implications
-
-Key facts:
-- FINMA has the *claimed* power to write down AT1 bonds (even if later found unconstitutional)
-- The emergency ordinance created legal authority that didn't exist before the weekend of March 18-19
-- Shareholder blocking power was explicitly removed
-- The combination of these powers made "orderly resolution with bondholder protection" a much less likely outcome than it appeared
+The Swiss Federal Administrative Court ruled (October 2025) that Article 5a of the Emergency Ordinance was unconstitutional in several respects — it violated constitutional requirements for emergency ordinances, improperly delegated expropriation rights, and violated the guarantee of ownership. FINMA appealed. For the purposes of March 2023, FINMA acted under these powers and the write-down was executed.
 
 ## Sources
 
-- FINMA: "FINMA provides information about the basis for writing down AT1 capital instruments" (March 23, 2023)
+- FINMA: Legal basis for bank resolution (https://www.finma.ch/en/enforcement/recovery-und-resolution-n/gesetzliche-grundlagen/banken/)
+- FINMA: AT1 capital instruments press release (March 23, 2023)
 - Federal Administrative Court: "Unlawful write-off of AT1 capital instruments" media release (October 2025)
-- Swiss Federal Council: Emergency Ordinance on Additional Liquidity Assistance (March 16/19, 2023)

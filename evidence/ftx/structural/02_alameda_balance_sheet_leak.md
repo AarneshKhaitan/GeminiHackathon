@@ -1,19 +1,15 @@
 ---
 source_url: https://www.coindesk.com/business/2022/11/02/divisions-in-sam-bankman-frieds-crypto-empire-blur-on-his-trading-titan-alamedas-balance-sheet
 date: 2022-11-02
-description: CoinDesk leak of Alameda Research balance sheet showing $14.6B assets dominated by FTT and illiquid tokens — the trigger document for the FTX collapse
+description: CoinDesk leak of Alameda Research balance sheet — the trigger document for the FTX collapse
 ---
 
 # Alameda Research Balance Sheet (As Leaked by CoinDesk)
 
-## The Article
+Source: Ian Allison, CoinDesk, November 2, 2022
+"Divisions in Sam Bankman-Fried's Crypto Empire Blur on His Trading Titan Alameda's Balance Sheet"
 
-**Title:** "Divisions in Sam Bankman-Fried's Crypto Empire Blur on His Trading Titan Alameda's Balance Sheet"
-**Author:** Ian Allison, CoinDesk
-**Published:** November 2, 2022
-**Updated:** August 16, 2023
-
-This article was the trigger for the entire FTX collapse. Ian Allison obtained a copy of Alameda Research's balance sheet (as of June 30, 2022) and published key details. The article revealed that the "divisions" between FTX (the exchange) and Alameda (the trading firm) were far blurrier than SBF had publicly claimed.
+[GAP: CoinDesk returned 403 when attempting to fetch the full article. Balance sheet figures below are sourced from the article as widely reported and confirmed during the SBF criminal trial.]
 
 ## The Balance Sheet (as of June 30, 2022)
 
@@ -41,38 +37,18 @@ This article was the trigger for the entire FTX collapse. Ian Allison obtained a
 
 ### Net Equity: ~$6.6 Billion (on paper)
 
-## Why This Is Devastating
+## Key Observations from the Article
 
-### 1. FTT Concentration
-FTT-related assets totaled **$5.82 billion** ($3.66B unlocked + $2.16B collateral) — representing **40%** of all assets. But FTT was created by FTX. Alameda's largest asset was a token printed by its sister company. As crypto commentator Cory Klippsten (CEO of Swan Bitcoin) stated: "the majority of the net equity in the Alameda business is actually FTX's own centrally controlled and printed-out-of-thin-air token."
+As crypto commentator Cory Klippsten (CEO of Swan Bitcoin) stated: "the majority of the net equity in the Alameda business is actually FTX's own centrally controlled and printed-out-of-thin-air token."
 
-### 2. Illiquidity
-The "assets" were overwhelmingly illiquid:
-- FTT: thin order book, ~90% held by FTX/Alameda themselves
-- Locked SOL: cannot be sold immediately, subject to vesting
-- Equity investments: venture stakes, not liquid
+Critical details:
+- FTT-related assets totaled **$5.82 billion** ($3.66B unlocked + $2.16B collateral) — **40%** of all assets
 - Only **$134 million in actual cash** out of $14.6B in "assets"
+- $7.4 billion in loans against assets that were mostly illiquid tokens
+- Locked tokens were "conservatively treated at 50% of fair value"
 
-### 3. The Loan Problem
-$7.4 billion in loans against assets that were mostly illiquid tokens. If any lender called their loan, Alameda couldn't pay without selling FTT (which would crash FTT's price, which would crash the value of remaining FTT holdings, triggering more margin calls).
-
-### 4. The Missing Detail: Where Did the Loans Go?
-The balance sheet showed $7.4B in loans on the liability side, but didn't explain what the borrowed money was used for. It later emerged (during the criminal trial) that much of this represented customer funds from FTX that had been secretly transferred to Alameda — the core fraud.
-
-### 5. Valuation Methodology
-The balance sheet noted that locked tokens were "conservatively treated at 50% of fair value." But even this was generous — in a forced liquidation scenario, locked tokens with long vesting periods might be worth far less. And FTT's "fair value" itself was questionable given the thin market.
-
-## Initial Market Reaction
-
-When published on November 2, 2022, the article generated debate but not immediate panic. Many crypto commentators argued:
-- "Alameda's balance sheet doesn't mean FTX is insolvent" (true in theory, devastating in practice)
-- "Trading firms always have concentrated positions" (true, but not in tokens they print themselves)
-- "The balance sheet is from June, things may have changed" (they had — they got worse)
-
-The real panic didn't start until CZ tweeted on November 6 that Binance would liquidate its FTT holdings.
+The article noted that the "divisions" between FTX (the exchange) and Alameda (the trading firm) were far blurrier than SBF had publicly claimed.
 
 ## Sources
 
 - CoinDesk (Ian Allison): "Divisions in Sam Bankman-Fried's Crypto Empire Blur on His Trading Titan Alameda's Balance Sheet" (November 2, 2022)
-- Visual Capitalist: "Visualized: FTX's Leaked Balance Sheet"
-- Unchained Crypto: "Alameda's Balance Sheet Sparks Controversy"

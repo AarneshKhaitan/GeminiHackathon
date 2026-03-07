@@ -1,68 +1,41 @@
 ---
-source_url: https://www.fsb.org/2022/11/2022-list-of-global-systemically-important-banks-g-sibs/
-date: 2022-11-21 (FSB 2022 G-SIB list)
-description: Credit Suisse's G-SIB designation — systemic importance means failure is not an option, constraining resolution to "save it" rather than "let it fail"
+source_url: https://www.fsb.org/uploads/P211122.pdf
+date: 2022-11-21
+description: FSB 2022 List of Global Systemically Important Banks — Credit Suisse in Bucket 1
 ---
 
-# Credit Suisse G-SIB Designation
+# 2022 List of Global Systemically Important Banks (G-SIBs)
 
-## What is a G-SIB?
+Source: Financial Stability Board, 21 November 2022
 
-A Global Systemically Important Bank (G-SIB) is a bank whose failure would pose a significant risk to the global financial system. The Financial Stability Board (FSB) publishes an annual list of G-SIBs, and these banks face enhanced requirements:
+## Preamble (verbatim from FSB document)
 
-- Higher capital buffers (1-3.5% additional CET1)
-- Total Loss-Absorbing Capacity (TLAC) requirements
-- Enhanced supervision by home and host regulators
-- Mandatory recovery and resolution planning
-- More intensive stress testing
+"The Financial Stability Board (FSB), in consultation with Basel Committee on Banking Supervision (BCBS) and national authorities, has identified the 2022 list of global systemically important banks (G-SIBs). The list is based on end-2021 data and the revised assessment methodology published in July 2018, which is applied for the first time this year."
 
-## Credit Suisse's G-SIB Status
+"The 30 G-SIBs included on the 2022 list are unchanged from the 2021 list (see Annex). Within the list, the changes in the allocation of the institutions to buckets largely reflect the effects of changes in underlying activity of banks. The higher loss absorbency requirement established with this list will be effective beginning 1 January 2024."
 
-Credit Suisse was designated as a G-SIB in **Bucket 1** (the lowest tier of systemic importance), requiring an additional 1% CET1 capital buffer above the standard minimum.
+## Requirements for G-SIBs (verbatim)
 
-For the November 2022 FSB G-SIB list:
-- **Bucket 1 (1% surcharge)**: Agricultural Bank of China, Bank of New York Mellon, Credit Suisse, Groupe BPCE, Industrial and Commercial Bank of China, Mizuho Financial Group, Royal Bank of Canada, Standard Chartered, State Street, Sumitomo Mitsui Financial Group, UBS
-- **Bucket 2 (1.5% surcharge)**: Bank of America, Bank of China, Barclays, Deutsche Bank, Goldman Sachs, Industrial and Commercial Bank of China Limited, Mitsubishi UFJ Financial Group, Wells Fargo
-- **Bucket 3 (2% surcharge)**: BNP Paribas, Citigroup, HSBC
-- **Bucket 4 (2.5% surcharge)**: JPMorgan Chase
+FSB member authorities apply the following requirements to G-SIBs:
 
-## Why G-SIB Status Matters
+- **Higher capital buffer**: "Since the November 2012 update, the G-SIBs have been allocated to buckets corresponding to higher capital buffers that they are required to hold by national authorities in accordance with international standards."
 
-### 1. "Too Important to Fail" Dynamic
-G-SIB designation creates a **structural expectation** that authorities will intervene to prevent disorderly failure. This means:
-- A "let it go bankrupt" outcome is structurally much less likely
-- Some form of rescue or arranged resolution is almost certain
-- The question becomes HOW it's resolved, not WHETHER
+- **Total Loss-Absorbing Capacity (TLAC)**: "G-SIBs are required to meet the TLAC standard, alongside the regulatory capital requirements set out in the Basel III framework. The TLAC standard began being phased-in from 1 January 2019."
 
-### 2. Cross-Border Complexity
-As a G-SIB, CS had operations in dozens of jurisdictions. This makes orderly resolution extremely complex:
-- Different regulators in different countries
-- Local ring-fencing requirements
-- Derivatives contracts under different legal jurisdictions
-- Customer deposits in multiple countries
-- This complexity favors a "quick merger" over a "formal resolution"
+- **Resolvability**: "These requirements include group-wide resolution planning and regular resolvability assessments. The resolvability of each G-SIB is reviewed in the FSB Resolvability Assessment Process (RAP) by senior regulators within the firms' Crisis Management Groups."
 
-### 3. Contagion Channel
-CS's G-SIB status means its counterparties include other G-SIBs. A disorderly failure could trigger:
-- Derivatives counterparty losses across the global banking system
-- Funding market disruptions
-- Loss of confidence in other European banks
-- This contagion risk is why Swiss authorities acted over a single weekend
+- **Higher supervisory expectations**: "These requirements include supervisory expectations for risk management functions, risk data aggregation capabilities, risk governance and internal controls."
 
-### 4. Resolution Planning Paradox
-Despite years of resolution planning under the TBTF framework, the actual crisis was resolved through ad hoc political negotiation and emergency legislation — not through the planned resolution framework. This suggests that resolution planning for G-SIBs is more about preparedness than prescription.
+## G-SIB Bucket Allocations (November 2022)
 
-## Additional Capital Requirements
+| Bucket | Additional CET1 Buffer | Banks |
+|--------|----------------------|-------|
+| 5 | 3.5% | (Empty) |
+| 4 | 2.5% | JP Morgan Chase |
+| 3 | 2.0% | Bank of America, Citigroup, HSBC |
+| 2 | 1.5% | Bank of China, Barclays, BNP Paribas, Deutsche Bank, Goldman Sachs, Industrial and Commercial Bank of China, Mitsubishi UFJ FG |
+| 1 | 1.0% | Agricultural Bank of China, Bank of New York Mellon, China Construction Bank, **Credit Suisse**, Groupe BPCE, Groupe Credit Agricole, ING, Mizuho FG, Morgan Stanley, Royal Bank of Canada, Santander, Societe Generale, Standard Chartered, State Street, Sumitomo Mitsui FG, Toronto Dominion, **UBS**, UniCredit, Wells Fargo |
 
-As a G-SIB under Swiss TBTF rules, CS was required to hold:
-- **Going concern capital**: CET1 + AT1 = ~14.3% of RWA
-- **Gone concern capital**: Additional loss-absorbing instruments = ~14.3% of RWA
-- **Total**: ~28.6% of RWA (approximately double what non-systemic banks require)
+Note: "Compared with the list of G-SIBs published in 2021, one bank has moved to a higher bucket and two banks have moved to a lower bucket: Bank of America has moved from bucket 2 to bucket 3, BNP Paribas has moved from bucket 3 to bucket 2 and China Construction Bank has moved from bucket 2 to bucket 1."
 
-This is relevant because the "gone concern" capital (including AT1 bonds) was explicitly designed to absorb losses in resolution — which is exactly what happened, albeit in an unexpected hierarchy.
-
-## Sources
-
-- Financial Stability Board: "2022 list of global systemically important banks (G-SIBs)" (November 21, 2022)
-- BIS: G-SIB framework and assessment methodology
-- FINMA: Too Big To Fail requirements for Swiss G-SIBs
+Credit Suisse and UBS are both in Bucket 1 — the lowest tier of systemic importance, requiring 1.0% additional CET1 buffer.

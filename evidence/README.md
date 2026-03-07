@@ -20,12 +20,12 @@ Evidence for two historical financial crises. The engine receives **structural d
 evidence/
 ├── credit-suisse/
 │   ├── structural/      (contracts, regulations, legal powers — no cutoff)
-│   ├── input/           (pre-March 16 articles, data, video — what the engine sees)
+│   ├── empirical/       (pre-March 16 articles, data, video — what the engine sees)
 │   ├── ground_truth/    (March 18-19 resolution — what actually happened)
 │   └── manifest.md
 ├── ftx/
 │   ├── structural/      (token mechanics, ToS, balance sheet — no cutoff)
-│   ├── input/           (pre-November 9 articles, data, tweets — what the engine sees)
+│   ├── empirical/       (pre-November 9 articles, data, tweets — what the engine sees)
 │   ├── ground_truth/    (bankruptcy, trial, conviction — what actually happened)
 │   └── manifest.md
 └── README.md

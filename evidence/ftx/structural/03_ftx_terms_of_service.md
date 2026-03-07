@@ -1,73 +1,53 @@
 ---
 source_url: https://www.coindesk.com/policy/2023/10/16/sbf-trial-what-did-ftxs-terms-of-service-say-about-customer-funds | https://www.axios.com/2022/11/12/ftx-terms-service-trading-customer-funds
 date: 2022 (ToS in effect at time of collapse)
-description: FTX Terms of Service explicitly promised customer fund segregation — the structural document proving that commingling was contractual fraud, not ambiguity
+description: FTX Terms of Service on customer funds — actual ToS language quoted in trial coverage and reporting
 ---
 
 # FTX Terms of Service — Customer Fund Handling
 
-## What the Terms of Service Actually Said
+## Actual ToS Language (quoted in CoinDesk trial coverage, October 16, 2023)
 
-FTX's Terms of Service contained explicit language about customer fund protection. Key provisions:
+Source: CoinDesk, "SBF Trial: What Did FTX's Terms of Service Say About Customer Funds?"
 
-### Ownership Clause
+### Digital Assets Section (8.2.6)
+
 > "Title to your Digital Assets shall at all times remain with you and shall not transfer to FTX Trading."
 
-### Non-Property Clause
-> "None of the Digital Assets in your Account are the property of, or shall or may be loaned to, FTX Trading; FTX Trading does not represent or treat Digital Assets in User's Accounts as belonging to FTX Trading."
+> "None of the Digital Assets in your Account are the property of, or shall or may be loaned to, FTX Trading."
 
-### Segregation Principle
-FTX stated that it "segregated customer assets from FTX's own assets as a general principle."
+### Fiat Currency Section (8.3)
 
-### Prohibition on Lending
-The ToS explicitly stated that customer digital assets would not be "loaned to" FTX Trading. This directly prohibited the practice of using customer funds for Alameda's trading operations.
+This section was "notably vague, allowing FTX to convert deposits into 'e-money' without clear restrictions on how customer funds could be held or used."
 
-## What Actually Happened
+## SBF Defense Strategy (from CoinDesk trial coverage)
 
-Despite these explicit contractual promises:
+SBF's legal team argued the misappropriation claim "hinges on foreign law interpretation of the terms." Their October 12, 2023 filing contended: "the rights and obligations of parties to a commercial relationship are not established by their expectations and understandings for purposes of the misappropriation theory."
 
-1. **Customer funds were commingled** with FTX corporate funds and Alameda Research funds
-2. **Customer deposits were used** to extend a line of credit to Alameda Research
-3. **Customer funds were invested** in non-permitted investments through Alameda
-4. **Approximately $8 billion** in customer funds were misappropriated
-5. **Alameda had a secret "backdoor"** — an exemption from FTX's auto-liquidation system, allowing it to borrow from customer deposits without limit
+The defense sought to introduce English barrister Lawrence Akka to explain how English law governed FTX's customer relationships. Judge Lewis Kaplan rejected this witness.
 
-## Why This Is Structural (Not Just Empirical)
+## DOJ Counter-Argument (from CoinDesk trial coverage)
 
-The ToS is a structural document because it defines what the system **should** look like. It establishes the contractual framework under which customers deposited funds. This enables several analytical paths:
+Prosecutors emphasized that beyond contractual language, SBF made "material misrepresentations and omissions" through public advertisements — including the Super Bowl commercial with Larry David — claiming FTX was a "safe and trusted way to buy and sell" cryptocurrencies.
 
-### 1. Contract vs. Reality Gap Analysis
-A system that reads the ToS and then observes on-chain evidence of commingling can identify the gap — a strong fraud signal. The ToS says "we don't touch your funds." The blockchain shows funds flowing from customer wallets to Alameda. The contradiction is structural proof of fraud.
+The government also highlighted that affiliate accounts (Alameda) received trading priority despite terms stating no such preference existed.
 
-### 2. Fiduciary Duty Establishment
-Courts subsequently found that the ToS language created a **fiduciary relationship** between FTX and its customers. FTX wasn't just a marketplace — by promising to hold and protect customer assets, it took on a duty of care. This transforms the legal analysis from "caveat emptor" to "breach of trust."
+## Axios Reporting (November 12, 2022)
 
-### 3. The "Exchange vs. Broker" Question
-FTX marketed itself as an exchange (a platform where users trade with each other) but functioned partly as a custodian (holding user assets). The ToS language confirms the custodial function. This matters because exchanges have different legal obligations than custodians.
+Source: Axios, "FTX's terms-of-service forbid trading with customer funds"
 
-## The Alameda Backdoor
+[GAP: Axios returned 403 Forbidden. Article reported that FTX's Terms of Service explicitly prohibited trading with customer funds, contradicting the practice of funneling customer deposits to Alameda Research.]
 
-Perhaps the most damning structural detail (revealed during the criminal trial):
+## The Alameda Backdoor (from trial testimony)
 
-Alameda Research had a special account status on FTX that:
-- Exempted it from the auto-liquidation system (other users would be automatically liquidated if their margin fell below requirements — Alameda would not)
-- Allowed it to maintain a **negative balance** — effectively borrowing from FTX (i.e., from customer deposits) without limit
-- This was coded into FTX's systems, making it a structural feature, not an operational accident
-
-This is why "the exchange and the trading firm were supposed to be separate" was always a fiction — the code itself connected them.
-
-## Regulatory Context
-
-At the time of collapse:
-- FTX.com (international) was regulated by the Securities Commission of The Bahamas — which had limited oversight capacity
-- FTX.US (American) was registered as a money services business
-- Neither jurisdiction required the kind of regular audits that would have caught the commingling
-- The CFTC subsequently obtained a $12.7 billion judgment ($8.7B restitution + $4B disgorgement)
+Revealed during the criminal trial:
+- Alameda Research had a special account status on FTX exempting it from the auto-liquidation system
+- Other users would be automatically liquidated if margin fell below requirements — Alameda would not
+- Alameda could maintain a negative balance, effectively borrowing from customer deposits without limit
+- This was coded into FTX's systems as a structural feature
 
 ## Sources
 
 - CoinDesk: "SBF Trial: What Did FTX's Terms of Service Say About Customer Funds?" (October 16, 2023)
 - Axios: "FTX's terms-of-service forbid trading with customer funds" (November 12, 2022)
-- CoinDesk: "FTX Violated Its Own Terms of Service and Misused User Funds, Lawyers Say" (November 10, 2022)
-- CFTC: "CFTC Obtains $12.7 Billion Judgment Against FTX and Alameda" (August 2024)
-- Alpaca/FTX.US: FTX.US Terms of Service archived document
+- CFTC: Obtained $12.7 billion judgment against FTX and Alameda ($8.7B restitution + $4B disgorgement)
