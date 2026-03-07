@@ -6,9 +6,9 @@ import { CompressedReasoningPanel } from './CompressedReasoningPanel'
 type Tab = 'evidence' | 'tokens' | 'reasoning'
 
 const TABS: { id: Tab; label: string; accent: string }[] = [
-  { id: 'evidence', label: 'EVIDENCE', accent: '#00C27A' },
-  { id: 'tokens', label: 'TOKENS', accent: '#3B82F6' },
-  { id: 'reasoning', label: 'REASONING', accent: '#8B5CF6' },
+  { id: 'evidence', label: 'EVIDENCE', accent: '#2E9E72' },
+  { id: 'tokens', label: 'TOKENS', accent: '#C8912A' },
+  { id: 'reasoning', label: 'REASONING', accent: '#7C6DB8' },
 ]
 
 export function RightPanel() {
@@ -19,11 +19,11 @@ export function RightPanel() {
   const compressedReasoning = useStore((s) => s.compressedReasoning)
 
   return (
-    <div className="flex flex-col h-full" style={{ backgroundColor: '#000000' }}>
+    <div className="flex flex-col h-full" style={{ backgroundColor: '#161310' }}>
       {/* Tab bar — underline style, full-width border at bottom */}
       <div
         className="flex shrink-0"
-        style={{ borderBottom: '1px solid #1C1C1C', backgroundColor: '#000000' }}
+        style={{ borderBottom: '1px solid #2E2820', backgroundColor: '#161310' }}
       >
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id
@@ -40,7 +40,7 @@ export function RightPanel() {
               onClick={() => setTab(tab.id)}
               className="relative flex items-center gap-1.5 px-3 py-2 text-[9px] font-mono tracking-widest transition-colors duration-150"
               style={{
-                color: isActive ? tab.accent : '#333333',
+                color: isActive ? tab.accent : '#4A3D2A',
                 borderBottom: isActive ? `2px solid ${tab.accent}` : '2px solid transparent',
                 marginBottom: '-1px',
                 backgroundColor: 'transparent',
@@ -51,9 +51,9 @@ export function RightPanel() {
                 <span
                   className="text-[7px] font-mono tabular-nums px-1"
                   style={{
-                    backgroundColor: isActive ? `${tab.accent}18` : '#0A0A0A',
-                    color: isActive ? tab.accent : '#333333',
-                    border: `1px solid ${isActive ? `${tab.accent}30` : '#1C1C1C'}`,
+                    backgroundColor: isActive ? `${tab.accent}18` : '#1E1B15',
+                    color: isActive ? tab.accent : '#4A3D2A',
+                    border: `1px solid ${isActive ? `${tab.accent}30` : '#2E2820'}`,
                   }}
                 >
                   {badge}
@@ -62,7 +62,7 @@ export function RightPanel() {
               {tab.id === 'reasoning' && compressedReasoning && (
                 <span
                   className="inline-block w-1.5 h-1.5"
-                  style={{ backgroundColor: isActive ? '#8B5CF6' : '#333333' }}
+                  style={{ backgroundColor: isActive ? '#7C6DB8' : '#4A3D2A' }}
                 />
               )}
             </button>

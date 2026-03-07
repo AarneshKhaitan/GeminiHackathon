@@ -7,15 +7,15 @@ interface TagPillProps {
 }
 
 const styles: Record<TagPillProps['type'], { color: string; bg: string; border: string }> = {
-  supports:    { color: '#00C27A', bg: '#001A0E', border: '#00C27A30' },
-  contradicts: { color: '#FF3333', bg: '#1A0000', border: '#FF333330' },
-  neutral:     { color: '#555555', bg: '#0A0A0A', border: '#1C1C1C' },
-  structural:  { color: '#8B5CF6', bg: '#0D0020', border: '#8B5CF630' },
-  empirical:   { color: '#3B82F6', bg: '#000F2D', border: '#3B82F630' },
-  critical:    { color: '#FF3333', bg: '#1A0000', border: '#FF333350' },
-  high:        { color: '#F59E0B', bg: '#140900', border: '#F59E0B30' },
-  medium:      { color: '#555555', bg: '#0A0A0A', border: '#1C1C1C' },
-  low:         { color: '#333333', bg: '#000000', border: '#1C1C1C' },
+  supports:    { color: '#2E9E72', bg: '#0A2D1E', border: '#2E9E7230' },
+  contradicts: { color: '#D14B35', bg: '#2A0E09', border: '#D14B3530' },
+  neutral:     { color: '#8C7A5E', bg: '#1E1B15', border: '#2E2820' },
+  structural:  { color: '#7C6DB8', bg: '#16103A', border: '#7C6DB830' },
+  empirical:   { color: '#C8912A', bg: '#2D1E07', border: '#C8912A30' },
+  critical:    { color: '#D14B35', bg: '#2A0E09', border: '#D14B3550' },
+  high:        { color: '#D4651A', bg: '#2D1407', border: '#D4651A30' },
+  medium:      { color: '#8C7A5E', bg: '#1E1B15', border: '#2E2820' },
+  low:         { color: '#4A3D2A', bg: '#161310', border: '#2E2820' },
 }
 
 const defaultLabels: Record<TagPillProps['type'], string> = {
@@ -40,7 +40,6 @@ export function TagPill({ type, label, className }: TagPillProps) {
         backgroundColor: s.bg,
         border: `1px solid ${s.border}`,
         padding: '1px 6px',
-        borderRadius: '2px',
       }}
     >
       {label ?? defaultLabels[type]}

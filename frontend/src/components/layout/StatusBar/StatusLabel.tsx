@@ -2,12 +2,12 @@ import { useStore } from '../../../store'
 import type { SystemStatus } from '../../../types/investigation'
 
 const statusConfig: Record<SystemStatus, { label: string; color: string }> = {
-  IDLE:         { label: 'IDLE',         color: '#333333' },
-  EVALUATING:   { label: 'EVALUATING',   color: '#F59E0B' },
-  INVESTIGATING:{ label: 'INVESTIGATING', color: '#3B82F6' },
-  CONVERGING:   { label: 'CONVERGING',   color: '#F59E0B' },
-  ALERT:        { label: 'ALERT',        color: '#FF3333' },
-  ALL_CLEAR:    { label: 'ALL CLEAR',    color: '#00C27A' },
+  IDLE:         { label: 'IDLE',         color: '#4A3D2A' },
+  EVALUATING:   { label: 'EVALUATING',   color: '#D4651A' },
+  INVESTIGATING:{ label: 'INVESTIGATING', color: '#C8912A' },
+  CONVERGING:   { label: 'CONVERGING',   color: '#D4651A' },
+  ALERT:        { label: 'ALERT',        color: '#D14B35' },
+  ALL_CLEAR:    { label: 'ALL CLEAR',    color: '#2E9E72' },
 }
 
 export function StatusLabel() {

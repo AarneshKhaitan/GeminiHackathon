@@ -1,54 +1,39 @@
 ---
 source_url: https://www.coindesk.com/business/2022/11/02/divisions-in-sam-bankman-frieds-crypto-empire-blur-on-his-trading-titan-alamedas-balance-sheet
 date: 2022-11-02
-description: CoinDesk leak of Alameda Research balance sheet — the trigger document for the FTX collapse
+author: Ian Allison, CoinDesk
+description: The CoinDesk article that triggered the FTX collapse — full original text
 ---
 
-# Alameda Research Balance Sheet (As Leaked by CoinDesk)
+# Divisions in Sam Bankman-Fried's Crypto Empire Blur on His Trading Titan Alameda's Balance Sheet
 
-Source: Ian Allison, CoinDesk, November 2, 2022
-"Divisions in Sam Bankman-Fried's Crypto Empire Blur on His Trading Titan Alameda's Balance Sheet"
+By Ian Allison | Edited by Nick Baker
+Published: November 2, 2022 | Updated: August 16, 2023
 
-[GAP: CoinDesk returned 403 when attempting to fetch the full article. Balance sheet figures below are sourced from the article as widely reported and confirmed during the SBF criminal trial.]
+Alameda had $14.6 billion of assets as of June 30, according to a private document CoinDesk reviewed. Much of it is the FTT token issued by FTX, another Bankman-Fried company.
 
-## The Balance Sheet (as of June 30, 2022)
+---
 
-### Assets — $14.6 Billion Total
+Billionaire Sam Bankman-Fried's cryptocurrency empire is officially broken into two main parts: FTX (his exchange) and Alameda Research (his trading firm), both giants in their respective industries.
 
-| Asset | Amount | % of Total |
-|-------|--------|------------|
-| Unlocked FTT | $3.66B | 25.1% |
-| Crypto held | $3.37B | 23.1% |
-| FTT collateral | $2.16B | 14.8% |
-| Equity security investments | $2.00B | 13.7% |
-| Locked SOL | $863M | 5.9% |
-| Unlocked SOL | $292M | 2.0% |
-| Cash and equivalents | $134M | 0.9% |
-| SOL collateral | $41M | 0.3% |
-| Other | ~$2.1B | ~14.2% |
+But even though they are two separate businesses, the division breaks down in a key place: on Alameda's balance sheet, according to a private financial document reviewed by CoinDesk. (It is conceivable the document represents just part of Alameda.)
 
-### Liabilities — $8 Billion Total
+That balance sheet is full of FTX -- specifically, the FTT token issued by the exchange that grants holders a discount on trading fees on its marketplace. While there is nothing per se untoward or wrong about that, it shows Bankman-Fried's trading giant Alameda rests on a foundation largely made up of a coin that a sister company invented, not an independent asset like a fiat currency or another crypto. The situation adds to evidence that the ties between FTX and Alameda are unusually close.
 
-| Liability | Amount |
-|-----------|--------|
-| Loans | $7.4B |
-| Locked FTT | $292M |
-| Other | ~$308M |
+The financials make concrete what industry-watchers already suspect: Alameda is big. As of June 30, the company's assets amounted to $14.6 billion. Its single biggest asset: $3.66 billion of "unlocked FTT." The third-largest entry on the assets side of the accounting ledger? A $2.16 billion pile of "FTT collateral."
 
-### Net Equity: ~$6.6 Billion (on paper)
+There are more FTX tokens among its $8 billion of liabilities: $292 million of "locked FTT." (The liabilities are dominated by $7.4 billion of loans.)
 
-## Key Observations from the Article
+"It's fascinating to see that the majority of the net equity in the Alameda business is actually FTX's own centrally controlled and printed-out-of-thin-air token," said Cory Klippsten, CEO of investment platform Swan Bitcoin, who is known for his critical views of altcoins, which refer to cryptocurrencies other than bitcoin (BTC).
 
-As crypto commentator Cory Klippsten (CEO of Swan Bitcoin) stated: "the majority of the net equity in the Alameda business is actually FTX's own centrally controlled and printed-out-of-thin-air token."
+Alameda CEO Caroline Ellison declined to comment. FTX didn't respond to a request for comment.
 
-Critical details:
-- FTT-related assets totaled **$5.82 billion** ($3.66B unlocked + $2.16B collateral) — **40%** of all assets
-- Only **$134 million in actual cash** out of $14.6B in "assets"
-- $7.4 billion in loans against assets that were mostly illiquid tokens
-- Locked tokens were "conservatively treated at 50% of fair value"
+Other significant assets on the balance sheet include $3.37 billion of "crypto held" and large amounts of the Solana blockchain's native token: $292 million of "unlocked SOL," $863 million of "locked SOL" and $41 million of "SOL collateral." Bankman-Fried was an early investor in Solana. Other tokens mentioned by name are SRM (the token from the Serum decentralized exchange Bankman-Fried co-founded), MAPS, OXY and FIDA. There is also $134 million of cash and equivalents and a $2 billion "investment in equity securities."
 
-The article noted that the "divisions" between FTX (the exchange) and Alameda (the trading firm) were far blurrier than SBF had publicly claimed.
+Also, token values may be low. In a footnote, Alameda says "locked tokens conservatively treated at 50% of fair value marked to FTX/USD order book."
 
-## Sources
+Owners of the FTT token get discounts on FTX trading fees, increased commissions on referrals and earn rewards. The value of FTT is maintained by FTX's rolling program of buying back and burning tokens, a process that eats up a third of the exchange's trading commissions, which will continue until half of all tokens are burned, according to FTX.
 
-- CoinDesk (Ian Allison): "Divisions in Sam Bankman-Fried's Crypto Empire Blur on His Trading Titan Alameda's Balance Sheet" (November 2, 2022)
+There are about 197 million FTT tokens worth $5.1 billion in circulation, according to FTX's website.
+
+UPDATE (Nov. 2, 2022, 15:00 UTC): Adds that Alameda's CEO declined to comment, and a comment from Cory Klippsten.

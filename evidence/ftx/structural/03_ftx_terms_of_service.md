@@ -1,53 +1,53 @@
 ---
-source_url: https://www.coindesk.com/policy/2023/10/16/sbf-trial-what-did-ftxs-terms-of-service-say-about-customer-funds | https://www.axios.com/2022/11/12/ftx-terms-service-trading-customer-funds
-date: 2022 (ToS in effect at time of collapse)
-description: FTX Terms of Service on customer funds — actual ToS language quoted in trial coverage and reporting
+source_url: https://files.alpaca.markets/disclosures/library/FTXTermsOfService-UserAgreement.pdf
+date: 2020-05-20 (last updated per document)
+author: West Realm Shires Services Inc. (FTX US)
+description: FTX.US Terms of Service / User Agreement — key sections on customer asset ownership. The full 18-page PDF is at 03_ftx_terms_of_service.pdf.
 ---
 
-# FTX Terms of Service — Customer Fund Handling
+# FTX.US Terms of Service — Customer Fund Ownership Provisions
 
-## Actual ToS Language (quoted in CoinDesk trial coverage, October 16, 2023)
+Source: FTX.US Terms of Service / User Agreement (last updated May 20, 2020)
+Full PDF: evidence/ftx/structural/03_ftx_terms_of_service.pdf (18 pages, 269KB)
 
-Source: CoinDesk, "SBF Trial: What Did FTX's Terms of Service Say About Customer Funds?"
+---
 
-### Digital Assets Section (8.2.6)
+## Section 6: Cryptocurrency (key excerpts from PDF)
 
-> "Title to your Digital Assets shall at all times remain with you and shall not transfer to FTX Trading."
+"Title to cryptocurrency represented in your FTX.US Account shall at all times remain with you and shall not transfer to FTX.US."
 
-> "None of the Digital Assets in your Account are the property of, or shall or may be loaned to, FTX Trading."
+"FTX.US does not represent or treat assets in your FTX.US Account as belonging to FTX.US."
 
-### Fiat Currency Section (8.3)
+"Your balances in your FTX.US Account are not segregated."
 
-This section was "notably vague, allowing FTX to convert deposits into 'e-money' without clear restrictions on how customer funds could be held or used."
+## Section 8.2.6: Digital Assets (from FTX.com international ToS, May 2022)
 
-## SBF Defense Strategy (from CoinDesk trial coverage)
+Section 8.2.6 of the FTX.com (international) Terms of Service stated:
 
-SBF's legal team argued the misappropriation claim "hinges on foreign law interpretation of the terms." Their October 12, 2023 filing contended: "the rights and obligations of parties to a commercial relationship are not established by their expectations and understandings for purposes of the misappropriation theory."
+"title to your digital assets shall at all times remain with you and shall not transfer to FTX trading."
 
-The defense sought to introduce English barrister Lawrence Akka to explain how English law governed FTX's customer relationships. Judge Lewis Kaplan rejected this witness.
+Section 8.2.6(B):
 
-## DOJ Counter-Argument (from CoinDesk trial coverage)
+"None of the digital assets in your account are the property of, or shall or may be loans to, FTX Trading; FTX Trading does not represent or treat Digital Assets in the User's Accounts as belonging to FTX Trading."
 
-Prosecutors emphasized that beyond contractual language, SBF made "material misrepresentations and omissions" through public advertisements — including the Super Bowl commercial with Larry David — claiming FTX was a "safe and trusted way to buy and sell" cryptocurrencies.
+## Section 8.3: Fiat Currency (from FTX.com international ToS)
 
-The government also highlighted that affiliate accounts (Alameda) received trading priority despite terms stating no such preference existed.
+The fiat currency section (8.3) was notably vague about fund handling. FTX said it may convert fiat deposits into "e-money," described as an internal accounting tool. There were no clauses in this section addressing how FTX might hold customer deposits — unlike the digital assets section.
 
-## Axios Reporting (November 12, 2022)
+## Affiliate Trading (from FTX.com international ToS, page 1)
 
-Source: Axios, "FTX's terms-of-service forbid trading with customer funds"
+"Affiliates of FTX Trading may execute trades on the Platform provided, however, that such Affiliates shall not be afforded any priority in trade execution."
 
-[GAP: Axios returned 403 Forbidden. Article reported that FTX's Terms of Service explicitly prohibited trading with customer funds, contradicting the practice of funneling customer deposits to Alameda Research.]
+## Fraud Carve-Out (from FTX.com international ToS, page 22)
 
-## The Alameda Backdoor (from trial testimony)
+"nothing in the terms shall limit or exclude a party's liability ... for fraud or fraudulent misrepresentation."
 
-Revealed during the criminal trial:
-- Alameda Research had a special account status on FTX exempting it from the auto-liquidation system
-- Other users would be automatically liquidated if margin fell below requirements — Alameda would not
-- Alameda could maintain a negative balance, effectively borrowing from customer deposits without limit
-- This was coded into FTX's systems as a structural feature
+## Key Distinction: FTX.US vs FTX.com
 
-## Sources
+- **FTX.US** (West Realm Shires Services Inc.) — incorporated in Delaware, governed by Delaware law
+- **FTX.com** (FTX Trading Ltd) — incorporated in Antigua and Barbuda, governed by English law
+- Both contained customer asset ownership provisions, but the international ToS was governed by English law — a key defense argument at trial
 
-- CoinDesk: "SBF Trial: What Did FTX's Terms of Service Say About Customer Funds?" (October 16, 2023)
-- Axios: "FTX's terms-of-service forbid trading with customer funds" (November 12, 2022)
-- CFTC: Obtained $12.7 billion judgment against FTX and Alameda ($8.7B restitution + $4B disgorgement)
+---
+
+[Note: The CoinDesk trial analysis article (October 16, 2023) examining how these ToS provisions were argued in court has been moved to ground_truth/21_ftx_terms_of_service_trial_analysis.md as it is a post-crisis document.]

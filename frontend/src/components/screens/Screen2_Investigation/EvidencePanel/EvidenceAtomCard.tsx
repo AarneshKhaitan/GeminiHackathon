@@ -8,10 +8,10 @@ interface EvidenceAtomCardProps {
 }
 
 const noveltyColors: Record<string, string> = {
-  critical: '#FF3333',
-  high: '#F59E0B',
-  medium: '#3B82F6',
-  low: '#333333',
+  critical: '#D14B35',
+  high: '#D4651A',
+  medium: '#C8912A',
+  low: '#3D3529',
 }
 
 export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
@@ -24,9 +24,9 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.22, ease: 'easeOut' }}
       style={{
-        borderBottom: '1px solid #1C1C1C',
+        borderBottom: '1px solid #2E2820',
         borderLeft: `2px solid ${accentColor}`,
-        backgroundColor: '#000000',
+        backgroundColor: '#161310',
       }}
     >
       <div className="px-3 py-2">
@@ -35,11 +35,11 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
           <MonoValue color="#555555" size="xs">{atom.id}</MonoValue>
           <TagPill type={atom.type === 'empirical' ? 'empirical' : 'structural'} />
           <TagPill type={atom.novelty} />
-          <span className="ml-auto text-[8px] font-mono text-[#333333]">C{atom.cycle}</span>
+          <span className="ml-auto text-[8px] font-mono" style={{ color: '#4A3D2A' }}>C{atom.cycle}</span>
         </div>
 
         {/* Observation text */}
-        <p className="text-[9px] font-mono text-[#555555] leading-relaxed">
+        <p className="text-[9px] font-mono leading-relaxed" style={{ color: '#8C7A5E' }}>
           {atom.observation}
         </p>
 
@@ -51,9 +51,9 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
                 key={`s-${id}`}
                 className="text-[8px] font-mono px-1 py-0.5"
                 style={{
-                  border: '1px solid #00C27A20',
-                  backgroundColor: '#001A0E',
-                  color: '#00C27A',
+                  border: '1px solid #2E9E7220',
+                  backgroundColor: '#0A2D1E',
+                  color: '#2E9E72',
                 }}
               >
                 ↑ {id}
@@ -64,9 +64,9 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
                 key={`c-${id}`}
                 className="text-[8px] font-mono px-1 py-0.5"
                 style={{
-                  border: '1px solid #FF333320',
-                  backgroundColor: '#0A0000',
-                  color: '#FF3333',
+                  border: '1px solid #D14B3520',
+                  backgroundColor: '#2A0E09',
+                  color: '#D14B35',
                 }}
               >
                 ↓ {id}
@@ -77,7 +77,7 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
 
         {/* Confidence bar — 1px line */}
         <div className="mt-1.5 flex items-center gap-2">
-          <div className="flex-1 h-px overflow-hidden" style={{ backgroundColor: '#1C1C1C' }}>
+          <div className="flex-1 h-px overflow-hidden" style={{ backgroundColor: '#2E2820' }}>
             <div
               className="h-full"
               style={{

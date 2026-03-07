@@ -7,10 +7,10 @@ interface AgentRowProps {
 }
 
 function statusStyle(s: AgentStatus): { icon: string; color: string } {
-  if (s === 'complete') return { icon: '✓', color: '#00C27A' }
-  if (s === 'fetching') return { icon: '⟳', color: '#F59E0B' }
-  if (s === 'error') return { icon: '✗', color: '#FF3333' }
-  return { icon: '○', color: '#333333' }
+  if (s === 'complete') return { icon: '✓', color: '#2E9E72' }
+  if (s === 'fetching') return { icon: '⟳', color: '#D4651A' }
+  if (s === 'error') return { icon: '✗', color: '#D14B35' }
+  return { icon: '○', color: '#4A3D2A' }
 }
 
 function AgentRow({ label, key_ }: AgentRowProps) {
@@ -19,7 +19,7 @@ function AgentRow({ label, key_ }: AgentRowProps) {
   const isFetching = status === 'fetching'
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5" style={{ borderBottom: '1px solid #1C1C1C' }}>
+    <div className="flex items-center gap-2 px-3 py-1.5" style={{ borderBottom: '1px solid #2E2820' }}>
       <span
         className="text-[9px] font-mono"
         style={{
@@ -30,7 +30,7 @@ function AgentRow({ label, key_ }: AgentRowProps) {
       >
         {icon}
       </span>
-      <span className="text-[9px] font-mono text-[#555555]">{label}</span>
+      <span className="text-[9px] font-mono" style={{ color: '#8C7A5E' }}>{label}</span>
       <span
         className="ml-auto text-[8px] font-mono uppercase tracking-widest"
         style={{ color }}
@@ -44,8 +44,8 @@ function AgentRow({ label, key_ }: AgentRowProps) {
 export function AgentStatusRow() {
   return (
     <div>
-      <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #1C1C1C' }}>
-        <span className="text-[8px] font-mono text-[#333333] tracking-widest">EVIDENCE AGENTS</span>
+      <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #2E2820' }}>
+        <span className="text-[8px] font-mono tracking-widest" style={{ color: '#4A3D2A' }}>EVIDENCE AGENTS</span>
       </div>
       <AgentRow label="STRUCTURAL READER" key_="structural" />
       <AgentRow label="MARKET WATCHER" key_="market" />

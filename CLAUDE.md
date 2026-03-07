@@ -1,19 +1,89 @@
-# CLAUDE.md
+# IHEE — Iterative Hypothesis Elimination Engine
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Gemini 3 Singapore Hackathon, March 2026.
 
-## Project Overview
+## Architecture
 
-This is a hackathon project ("GeminiHackathon") hosted at https://github.com/AarneshKhaitan/GeminiHackathon. The repository is currently in its initial state with no code committed yet.
+**Three-agent pipeline with strict separation:**
 
-## Repository Setup
+```
+ORCHESTRATOR (stateful, QC hub)
+  ↓ case file + evidence package
+INVESTIGATOR (stateless, pure reasoning)
+  ↓ updated case file + evidence requests
+ORCHESTRATOR (validates compression quality, decides next step)
+  ↓ evidence requests (prioritized, filtered)
+EVIDENCE COLLECTOR (stateless, pure fetch)
+  ↓ evidence atoms
+ORCHESTRATOR (packages with case file)
+  → back to INVESTIGATOR
+```
 
-- **Remote:** https://github.com/AarneshKhaitan/GeminiHackathon.git
-- **Main branch:** main
-- **Language:** Python (based on parent directory context)
+The Orchestrator is the only agent with full visibility. It QC-checks every handoff:
+- Rejects bad compressions ("you lost the key structural insight, redo")
+- Prioritizes evidence requests ("get the AT1 prospectus first")
+- Decides early convergence if hypotheses collapse
 
-## Git Commit Rules
+## Case File Format
 
-- **NEVER** include `Co-Authored-By` lines referencing Claude, Anthropic, or any AI assistant in commit messages.
-- All commits must appear as solely authored by the user's own git username and email.
-- Do not add any metadata, tags, or references that indicate AI involvement in commits.
+```
+entity:          "Credit Suisse Group AG"
+status:          "TIER 4 — ACTIVE INVESTIGATION"
+last_updated:    ISO timestamp
+cycle_count:     int
+
+hypotheses:
+  surviving:
+    - id, label, confidence, key_evidence[], key_contradiction[]
+  eliminated:
+    - id, label, eliminated_by, eliminated_at_cycle
+
+structural_knowledge_loaded: string[]
+open_evidence_requests: string[]
+key_insights: string[]
+cross_modal_contradictions: string[]
+forward_simulation:
+  - condition, outcome, confidence
+```
+
+## Tech Stack
+
+**Backend:** Python · FastAPI · LangGraph · Gemini API
+**Frontend:** Vite · React · TypeScript · Tailwind CSS v4
+
+## Frontend Structure
+
+```
+frontend/
+  src/
+    types/investigation.ts   — domain types (includes CaseFile format)
+    types/api.ts             — WebSocket message contract
+    store/index.ts           — Zustand store
+    data/svb-case.json       — Full SVB mock fixture
+    hooks/useMockPlayback.ts — Mock playback ([ / ] = speed)
+    components/
+      layout/StatusBar/      — Persistent status bar + ContextWindowBar
+      screens/
+        Screen1_SignalIntake/
+        Screen2_Investigation/ — 3-col: CycleTimeline | Hypotheses | Evidence
+        Screen3_Convergence/
+```
+
+## WebSocket Contract
+
+Backend fires events over `ws://localhost:8000/ws/{session_id}`:
+- `SESSION_STARTED`, `TIER_ESCALATED`, `CYCLE_STARTED`
+- `TOKENS_UPDATED` — fire ≥ every 500ms during reasoning (drives breathing bar)
+- `HYPOTHESIS_GENERATED`, `HYPOTHESIS_SCORED`, `HYPOTHESIS_ELIMINATED`
+- `EVIDENCE_ATOM_ARRIVED`, `AGENT_STATUS_CHANGED`
+- `CYCLE_COMPLETE`, `COMPRESSION_STARTED`, `COMPRESSION_COMPLETE`
+- `CONVERGENCE_REACHED`, `CONTAGION_DETECTED`
+
+See `src/types/api.ts` for full union type.
+
+## Commits
+
+- Author: `saaiaravindhraja@gmail.com`
+- No AI co-author tags
+- Concise, human commit messages
+- No AI/claude documentation files in commits

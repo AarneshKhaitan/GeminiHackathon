@@ -21,7 +21,7 @@ export function MonoValue({ children, size = 'sm', color, className, dimmed }: M
   return (
     <span
       className={clsx('font-mono tabular-nums', sizeClasses[size], className)}
-      style={{ color: dimmed ? '#333333' : (color ?? '#E8E8E8') }}
+      style={{ color: dimmed ? '#4A3D2A' : (color ?? '#EDE4D4') }}
     >
       {children}
     </span>

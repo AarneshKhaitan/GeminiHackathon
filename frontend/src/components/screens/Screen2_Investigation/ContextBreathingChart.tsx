@@ -1,12 +1,7 @@
 import { useStore } from '../../../store'
 import { ContextWindowBar } from '../../layout/StatusBar/ContextWindowBar'
 import { MonoValue } from '../../shared/MonoValue'
-
-function fmt(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`
-  if (n >= 1000) return `${(n / 1000).toFixed(0)}K`
-  return `${n}`
-}
+import { fmt } from '../../../utils/format'
 
 export function ContextBreathingChart() {
   const cycles = useStore((s) => s.cycles)
@@ -18,24 +13,24 @@ export function ContextBreathingChart() {
   const isLiveActive = status === 'INVESTIGATING' || status === 'CONVERGING'
 
   return (
-    <div className="p-3" style={{ backgroundColor: '#000000' }}>
+    <div className="p-3" style={{ backgroundColor: '#161310' }}>
       {/* Header row */}
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[9px] font-mono text-[#333333] tracking-widest">
+        <span className="text-[9px] font-mono tracking-widest" style={{ color: '#4A3D2A' }}>
           CONTEXT WINDOW — BREATHING PATTERN
         </span>
         <div className="flex items-center gap-3 text-[8px] font-mono">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#3B82F6' }} />
-            <span className="text-[#333333]">REASONING</span>
+            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#C8912A' }} />
+            <span style={{ color: '#4A3D2A' }}>REASONING</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#00C27A' }} />
-            <span className="text-[#333333]">EVIDENCE</span>
+            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#2E9E72' }} />
+            <span style={{ color: '#4A3D2A' }}>EVIDENCE</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#8B5CF6' }} />
-            <span className="text-[#333333]">COMPRESSED</span>
+            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#7C6DB8' }} />
+            <span style={{ color: '#4A3D2A' }}>COMPRESSED</span>
           </span>
         </div>
       </div>
@@ -54,7 +49,7 @@ export function ContextBreathingChart() {
 
             return (
               <div key={cycle.cycleNumber} className="flex items-center gap-2">
-                <span className="text-[8px] font-mono text-[#333333] w-4 shrink-0">
+                <span className="text-[8px] font-mono w-4 shrink-0" style={{ color: '#4A3D2A' }}>
                   C{cycle.cycleNumber}
                 </span>
                 <div className="flex-1">
@@ -70,7 +65,7 @@ export function ContextBreathingChart() {
         {/* Live / active cycle row */}
         {isLiveActive && currentCycle > 0 && (
           <div className="flex items-center gap-2">
-            <span className="text-[8px] font-mono text-[#3B82F6] w-4 shrink-0">
+            <span className="text-[8px] font-mono w-4 shrink-0" style={{ color: '#C8912A' }}>
               C{currentCycle}
             </span>
             <div className="flex-1 relative">
@@ -81,18 +76,18 @@ export function ContextBreathingChart() {
                 style={{
                   width: '4px',
                   height: '4px',
-                  backgroundColor: '#3B82F6',
+                  backgroundColor: '#C8912A',
                   animation: 'pulse-dot 0.8s ease-in-out infinite',
                 }}
               />
             </div>
             <div className="w-7 flex items-center justify-end">
               {isCompressing ? (
-                <span className="text-[8px] font-mono text-[#8B5CF6]" style={{ animation: 'blink 0.5s step-end infinite' }}>
+                <span className="text-[8px] font-mono" style={{ color: '#7C6DB8', animation: 'blink 0.5s step-end infinite' }}>
                   CMPR
                 </span>
               ) : (
-                <span className="text-[8px] font-mono text-[#3B82F6]" style={{ animation: 'blink 1s step-end infinite' }}>
+                <span className="text-[8px] font-mono" style={{ color: '#C8912A', animation: 'blink 1s step-end infinite' }}>
                   LIVE
                 </span>
               )}
@@ -103,7 +98,7 @@ export function ContextBreathingChart() {
         {/* Empty state */}
         {cycles.length === 0 && !isLiveActive && (
           <div className="flex items-center justify-center h-6">
-            <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">
+            <span className="text-[9px] font-mono tracking-wider" style={{ color: '#4A3D2A' }}>
               CONTEXT WINDOW IDLE — 1M TOKENS AVAILABLE
             </span>
           </div>
@@ -114,12 +109,12 @@ export function ContextBreathingChart() {
       {isLiveActive && (
         <div
           className="mt-2 pt-2 flex gap-4 text-[8px] font-mono"
-          style={{ borderTop: '1px solid #1C1C1C' }}
+          style={{ borderTop: '1px solid #2E2820' }}
         >
-          <span className="text-[#333333]">REASONING: <span className="text-[#3B82F6]">{fmt(liveCtx.reasoningTokens)}</span></span>
-          <span className="text-[#333333]">EVIDENCE: <span className="text-[#00C27A]">{fmt(liveCtx.evidenceTokens)}</span></span>
-          <span className="text-[#333333]">COMPRESSED: <span className="text-[#8B5CF6]">{fmt(liveCtx.compressedTokens)}</span></span>
-          <span className="ml-auto text-[#333333]">CAPACITY: <span className="text-[#333333]">{fmt(liveCtx.totalCapacity)}</span></span>
+          <span style={{ color: '#4A3D2A' }}>REASONING: <span style={{ color: '#C8912A' }}>{fmt(liveCtx.reasoningTokens)}</span></span>
+          <span style={{ color: '#4A3D2A' }}>EVIDENCE: <span style={{ color: '#2E9E72' }}>{fmt(liveCtx.evidenceTokens)}</span></span>
+          <span style={{ color: '#4A3D2A' }}>COMPRESSED: <span style={{ color: '#7C6DB8' }}>{fmt(liveCtx.compressedTokens)}</span></span>
+          <span className="ml-auto" style={{ color: '#4A3D2A' }}>CAPACITY: <span style={{ color: '#8C7A5E' }}>{fmt(liveCtx.totalCapacity)}</span></span>
         </div>
       )}
     </div>

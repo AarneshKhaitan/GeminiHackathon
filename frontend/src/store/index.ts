@@ -346,6 +346,8 @@ export const useStore = create<Store>()(
             cycle.durationMs = msg.duration_ms
             cycle.keyInsight = msg.key_insight
             if (msg.evidence_collected) cycle.evidenceCollected = msg.evidence_collected
+            // Snapshot at end of cycle (not start — CYCLE_STARTED was too early)
+            cycle.contextSnapshot = { cycleNumber: msg.cycle_number, ...s.contextWindow }
           }
           s.allCycleSnapshots.push({
             cycleNumber: msg.cycle_number,

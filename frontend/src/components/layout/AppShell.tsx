@@ -14,7 +14,7 @@ export function AppShell({ children, tierActive }: AppShellProps) {
   return (
     <div
       className="flex flex-col h-screen overflow-hidden relative"
-      style={{ backgroundColor: '#000000' }}
+      style={{ backgroundColor: '#0C0A07' }}
     >
       {/* Alert flash overlay — functional only */}
       {alertFlashActive && (
@@ -26,7 +26,10 @@ export function AppShell({ children, tierActive }: AppShellProps) {
 
       <StatusBar t3Active={tierActive === 3} />
 
-      <main className="flex-1 overflow-hidden relative z-0">
+      <main
+        className="flex-1 overflow-hidden relative z-0"
+        style={tierActive === 3 ? { boxShadow: 'inset 0 0 120px rgba(209,75,53,0.06)' } : undefined}
+      >
         {children}
       </main>
     </div>
