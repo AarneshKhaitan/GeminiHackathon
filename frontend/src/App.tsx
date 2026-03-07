@@ -13,9 +13,10 @@ const screenVariants = {
 
 export function App() {
   const activeScreen = useStore((s) => s.activeScreen)
+  const currentTier = useStore((s) => s.currentTier)
 
   return (
-    <AppShell>
+    <AppShell crisisActive={currentTier === 3}>
       <AnimatePresence mode="wait">
         {activeScreen === 0 && (
           <motion.div

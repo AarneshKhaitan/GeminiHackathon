@@ -249,16 +249,10 @@ export const useStore = create<Store>()(
           break
 
         case 'TIER_ESCALATED':
+          // T2 → T3: signal confirmed, begin full investigation
           s.currentTier = msg.to
-          if (msg.to > msg.from) {
-            // Promotion: T2→T3 or T3→T4
-            s.systemStatus = 'INVESTIGATING'
-            if (msg.to >= 3) s.activeScreen = 1
-          } else {
-            // Demotion: T3→T2 (signal dismissed after initial investigation)
-            s.systemStatus = 'EVALUATING'
-            s.activeScreen = 0
-          }
+          s.systemStatus = 'INVESTIGATING'
+          s.activeScreen = 1
           break
 
         case 'CYCLE_STARTED':

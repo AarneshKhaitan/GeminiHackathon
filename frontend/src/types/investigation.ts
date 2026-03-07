@@ -1,4 +1,4 @@
-export type TierLevel = 2 | 3 | 4
+export type TierLevel = 2 | 3
 
 export type SystemStatus =
   | 'IDLE'

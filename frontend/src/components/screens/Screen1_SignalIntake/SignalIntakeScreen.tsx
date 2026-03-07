@@ -54,7 +54,7 @@ export function SignalIntakeScreen() {
       {/* Tier pipeline diagram */}
       <div className="flex items-center gap-1 text-[8px] font-terminal">
         {/* Tier 2 */}
-        <div className="flex flex-col items-center gap-1 px-3 py-2 rounded border border-[#78350F]/40 bg-[#1A0900]">
+        <div className="flex flex-col items-center gap-1 px-3 py-2 rounded border border-[#78350F]/40 bg-[#1A1200]">
           <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" style={{ boxShadow: '0 0 4px #EAB308' }} />
             <span className="text-[#EAB308] font-bold tracking-widest">T2</span>
@@ -63,55 +63,47 @@ export function SignalIntakeScreen() {
           <span className="text-[#473409] tracking-wider">1 GEMINI CALL</span>
         </div>
 
-        {/* Arrow: escalate or dismiss */}
-        <div className="flex flex-col items-center gap-1 px-1">
-          <span className="text-[#059669] tracking-wide">→ ESCALATE</span>
+        {/* Arrow */}
+        <div className="flex flex-col items-center gap-1 px-2">
+          <span className="text-[#EF4444] tracking-wide">→ ESCALATE</span>
           <div className="h-px w-12 bg-[#1E293B]" />
           <span className="text-[#334155] tracking-wide">→ DISMISS</span>
         </div>
 
-        {/* Tier 3 */}
-        <div className="flex flex-col items-center gap-1 px-3 py-2 rounded border border-[#9A3412]/40 bg-[#1A0900]">
-          <div className="flex items-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#F97316]" style={{ boxShadow: '0 0 4px #F97316' }} />
-            <span className="text-[#F97316] font-bold tracking-widest">T3</span>
-          </div>
-          <span className="text-[#9A3412] tracking-wider">INITIAL PASS</span>
-          <span className="text-[#473409] tracking-wider">1-2 CYCLES</span>
-        </div>
-
-        {/* Arrow: promote or demote */}
-        <div className="flex flex-col items-center gap-1 px-1">
-          <span className="text-[#EF4444] tracking-wide">→ PROMOTE</span>
-          <div className="h-px w-12 bg-[#1E293B]" />
-          <span className="text-[#334155] tracking-wide">→ DEMOTE</span>
-        </div>
-
-        {/* Tier 4 */}
+        {/* Tier 3 — THE core product */}
         <div
-          className="flex flex-col items-center gap-1 px-3 py-2 rounded border"
+          className="flex flex-col items-center gap-1 px-4 py-2 rounded border"
           style={{
             borderColor: '#EF444440',
             backgroundColor: '#1A0000',
-            boxShadow: '0 0 8px #EF444420',
+            boxShadow: '0 0 12px #EF444420, inset 0 0 6px #EF444408',
           }}
         >
           <div className="flex items-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" style={{ boxShadow: '0 0 6px #EF4444', animation: 'pulse-dot 1s ease-in-out infinite' }} />
-            <span className="text-[#EF4444] font-bold tracking-widest">T4</span>
+            <div
+              className="w-1.5 h-1.5 rounded-full bg-[#EF4444]"
+              style={{ boxShadow: '0 0 8px #EF4444, 0 0 3px #EF4444', animation: 'pulse-dot 0.8s ease-in-out infinite' }}
+            />
+            <span className="text-[#EF4444] font-bold tracking-widest">T3</span>
+            <span
+              className="text-[6px] font-terminal px-1 py-0.5 rounded"
+              style={{ color: '#EF4444', backgroundColor: '#EF444415', border: '1px solid #EF444430' }}
+            >
+              CORE
+            </span>
           </div>
           <span className="text-[#991B1B] tracking-wider">FULL INVESTIGATION</span>
           <span className="text-[#473409] tracking-wider">4-5 DEEP CYCLES</span>
         </div>
 
         {/* Arrow: outcome */}
-        <div className="flex flex-col items-center gap-1 px-1">
+        <div className="flex flex-col items-center gap-1 px-2">
           <span className="text-[#EF4444] tracking-wide">→ ALERT</span>
           <div className="h-px w-12 bg-[#1E293B]" />
           <span className="text-[#059669] tracking-wide">→ ALL-CLEAR</span>
         </div>
 
-        {/* Agents */}
+        {/* Three-agent architecture */}
         <div className="flex flex-col gap-1">
           <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
             <span className="text-[#3B82F6] tracking-wider">ORCHESTRATOR</span>
@@ -259,13 +251,13 @@ export function SignalIntakeScreen() {
                     <div className="flex items-start gap-3">
                       <div className="flex flex-col gap-1">
                         <span
-                          className="text-[10px] font-terminal font-bold tracking-widest text-[#F97316]"
+                          className="text-[10px] font-terminal font-bold tracking-widest text-[#EF4444]"
                           style={{ animation: 'pulse-tier 0.8s ease-in-out 3' }}
                         >
-                          ▲ ESCALATE → TIER 3: INITIAL INVESTIGATION
+                          ▲ ESCALATE → TIER 3: FULL INVESTIGATION
                         </span>
                         <span className="text-[9px] font-terminal text-[#475569]">
-                          1-2 quick cycles · Promotes to Tier 4 full investigation if warranted
+                          4-5 deep reasoning cycles · Iterative hypothesis elimination
                         </span>
                       </div>
                     </div>

@@ -25,7 +25,7 @@ function buildMessage(event: PlaybackEvent, fixture: typeof svbCase): WSMessage 
       return {
         type: 'SESSION_STARTED',
         entity: event.entity as string,
-        tier: event.tier as 2 | 3 | 4,
+        tier: event.tier as 2 | 3,
       }
 
     case 'TIER2_EVALUATION':
@@ -38,8 +38,8 @@ function buildMessage(event: PlaybackEvent, fixture: typeof svbCase): WSMessage 
     case 'TIER_ESCALATED':
       return {
         type: 'TIER_ESCALATED',
-        from: event.from as 2 | 3,
-        to: event.to as 3 | 4,
+        from: 2,
+        to: 3,
       }
 
     case 'CYCLE_STARTED':

@@ -4,14 +4,15 @@ import { useStore } from '../../store'
 
 interface AppShellProps {
   children: ReactNode
+  crisisActive?: boolean
 }
 
-export function AppShell({ children }: AppShellProps) {
+export function AppShell({ children, crisisActive }: AppShellProps) {
   const alertFlashActive = useStore((s) => s.alertFlashActive)
 
   return (
     <div
-      className="flex flex-col h-screen overflow-hidden relative"
+      className={`flex flex-col h-screen overflow-hidden relative${crisisActive ? ' crisis-active' : ''}`}
       style={{ backgroundColor: '#0F172A' }}
     >
       {/* Alert flash overlay */}

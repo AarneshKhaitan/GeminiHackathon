@@ -16,7 +16,7 @@ import type {
 
 export type WSMessage =
   | { type: 'SESSION_STARTED'; entity: string; tier: TierLevel }
-  | { type: 'TIER_ESCALATED'; from: TierLevel; to: TierLevel }
+  | { type: 'TIER_ESCALATED'; from: 2; to: 3 }
   | { type: 'CYCLE_STARTED'; cycle_number: number }
   | { type: 'TOKENS_UPDATED'; reasoning: number; evidence: number; compressed: number }
   | { type: 'HYPOTHESIS_GENERATED'; hypothesis: Hypothesis }
