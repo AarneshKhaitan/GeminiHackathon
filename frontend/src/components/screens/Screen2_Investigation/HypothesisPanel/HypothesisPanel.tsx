@@ -52,7 +52,7 @@ export function HypothesisPanel() {
         {/* Empty state */}
         {hypotheses.length === 0 && (
           <div className="flex flex-col items-center justify-center h-32 gap-2">
-            <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">
+            <span className="text-[9px] font-mono text-[#333333] tracking-wider">
               AWAITING INVESTIGATION START
             </span>
           </div>

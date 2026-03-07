@@ -44,7 +44,7 @@ export function CycleNode({ cycle, isActive }: CycleNodeProps) {
             </span>
           )}
           {isPending && (
-            <span className="text-[8px] font-mono text-[#1C1C1C]">PENDING</span>
+            <span className="text-[8px] font-mono text-[#333333]">PENDING</span>
           )}
         </div>
 

@@ -32,7 +32,7 @@ export function EvidencePanel() {
 
         {atoms.length === 0 && (
           <div className="flex flex-col items-center justify-center h-24 gap-1">
-            <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">NO EVIDENCE GATHERED</span>
+            <span className="text-[9px] font-mono text-[#333333] tracking-wider">NO EVIDENCE GATHERED</span>
           </div>
         )}
       </div>

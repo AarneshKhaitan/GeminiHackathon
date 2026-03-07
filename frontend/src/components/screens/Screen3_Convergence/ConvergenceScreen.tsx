@@ -93,7 +93,7 @@ export function ConvergenceScreen() {
                   <p className="text-[9px] font-mono text-[#333333] leading-relaxed italic">
                     "{alertDiagnosis.singlePassSummary}"
                   </p>
-                  <div className="mt-1.5 text-[7px] font-mono text-[#1C1C1C]">
+                  <div className="mt-1.5 text-[7px] font-mono text-[#333333]">
                     Generic pattern-matching output
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export function ConvergenceScreen() {
                               {h.label}
                             </span>
                             {h.killAtomId && (
-                              <span className="ml-1 text-[7px] font-mono text-[#1C1C1C]">
+                              <span className="ml-1 text-[7px] font-mono text-[#333333]">
                                 → {h.killAtomId}
                               </span>
                             )}
