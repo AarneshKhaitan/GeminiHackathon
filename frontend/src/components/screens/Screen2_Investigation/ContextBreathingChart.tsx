@@ -18,24 +18,24 @@ export function ContextBreathingChart() {
   const isLiveActive = status === 'INVESTIGATING' || status === 'CONVERGING'
 
   return (
-    <div className="border-t border-[#1E293B] p-3">
+    <div className="p-3" style={{ backgroundColor: '#000000' }}>
       {/* Header row */}
       <div className="flex items-center justify-between mb-2">
-        <div className="text-[9px] font-terminal text-[#273548] tracking-widest">
+        <span className="text-[9px] font-mono text-[#333333] tracking-widest">
           CONTEXT WINDOW — BREATHING PATTERN
-        </div>
-        <div className="flex items-center gap-3 text-[8px] font-terminal">
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-1.5 rounded-sm inline-block bg-[#2563EB]" />
-            <span className="text-[#475569]">REASONING</span>
+        </span>
+        <div className="flex items-center gap-3 text-[8px] font-mono">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#3B82F6' }} />
+            <span className="text-[#333333]">REASONING</span>
           </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-1.5 rounded-sm inline-block bg-[#10B981]" />
-            <span className="text-[#475569]">EVIDENCE</span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#00C27A' }} />
+            <span className="text-[#333333]">EVIDENCE</span>
           </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-1.5 rounded-sm inline-block bg-[#7C3AED]" />
-            <span className="text-[#475569]">COMPRESSED</span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-2 h-1" style={{ backgroundColor: '#8B5CF6' }} />
+            <span className="text-[#333333]">COMPRESSED</span>
           </span>
         </div>
       </div>
@@ -54,13 +54,13 @@ export function ContextBreathingChart() {
 
             return (
               <div key={cycle.cycleNumber} className="flex items-center gap-2">
-                <span className="text-[8px] font-terminal text-[#334155] w-4 shrink-0">
+                <span className="text-[8px] font-mono text-[#333333] w-4 shrink-0">
                   C{cycle.cycleNumber}
                 </span>
                 <div className="flex-1">
                   <ContextWindowBar height={6} snapshot={cycle.contextSnapshot} />
                 </div>
-                <MonoValue color="#273548" size="xs" className="w-7 text-right">
+                <MonoValue color="#333333" size="xs" className="w-7 text-right">
                   {usedPct}%
                 </MonoValue>
               </div>
@@ -70,26 +70,29 @@ export function ContextBreathingChart() {
         {/* Live / active cycle row */}
         {isLiveActive && currentCycle > 0 && (
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 w-4 shrink-0">
-              <span className="text-[8px] font-terminal text-[#3B82F6]">
-                C{currentCycle}
-              </span>
-            </div>
+            <span className="text-[8px] font-mono text-[#3B82F6] w-4 shrink-0">
+              C{currentCycle}
+            </span>
             <div className="flex-1 relative">
               <ContextWindowBar height={8} />
-              {/* Live indicator */}
+              {/* Live pulse dot */}
               <div
-                className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#3B82F6]"
-                style={{ animation: 'pulse-dot 0.8s ease-in-out infinite' }}
+                className="absolute right-0 top-1/2 -translate-y-1/2"
+                style={{
+                  width: '4px',
+                  height: '4px',
+                  backgroundColor: '#3B82F6',
+                  animation: 'pulse-dot 0.8s ease-in-out infinite',
+                }}
               />
             </div>
             <div className="w-7 flex items-center justify-end">
               {isCompressing ? (
-                <span className="text-[8px] font-terminal text-[#7C3AED] animate-[blink_0.5s_step-end_infinite]">
+                <span className="text-[8px] font-mono text-[#8B5CF6]" style={{ animation: 'blink 0.5s step-end infinite' }}>
                   CMPR
                 </span>
               ) : (
-                <span className="text-[8px] font-terminal text-[#3B82F6] animate-[blink_1s_step-end_infinite]">
+                <span className="text-[8px] font-mono text-[#3B82F6]" style={{ animation: 'blink 1s step-end infinite' }}>
                   LIVE
                 </span>
               )}
@@ -99,8 +102,8 @@ export function ContextBreathingChart() {
 
         {/* Empty state */}
         {cycles.length === 0 && !isLiveActive && (
-          <div className="flex items-center justify-center h-8">
-            <span className="text-[9px] font-terminal text-[#1E293B] tracking-wider">
+          <div className="flex items-center justify-center h-6">
+            <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">
               CONTEXT WINDOW IDLE — 1M TOKENS AVAILABLE
             </span>
           </div>
@@ -109,11 +112,14 @@ export function ContextBreathingChart() {
 
       {/* Token summary */}
       {isLiveActive && (
-        <div className="mt-2 pt-2 border-t border-[#1E293B] flex gap-4 text-[8px] font-terminal text-[#273548]">
-          <span>REASONING: <span className="text-[#2563EB]">{fmt(liveCtx.reasoningTokens)}</span></span>
-          <span>EVIDENCE: <span className="text-[#10B981]">{fmt(liveCtx.evidenceTokens)}</span></span>
-          <span>COMPRESSED: <span className="text-[#7C3AED]">{fmt(liveCtx.compressedTokens)}</span></span>
-          <span className="ml-auto">CAPACITY: <span className="text-[#334155]">{fmt(liveCtx.totalCapacity)}</span></span>
+        <div
+          className="mt-2 pt-2 flex gap-4 text-[8px] font-mono"
+          style={{ borderTop: '1px solid #1C1C1C' }}
+        >
+          <span className="text-[#333333]">REASONING: <span className="text-[#3B82F6]">{fmt(liveCtx.reasoningTokens)}</span></span>
+          <span className="text-[#333333]">EVIDENCE: <span className="text-[#00C27A]">{fmt(liveCtx.evidenceTokens)}</span></span>
+          <span className="text-[#333333]">COMPRESSED: <span className="text-[#8B5CF6]">{fmt(liveCtx.compressedTokens)}</span></span>
+          <span className="ml-auto text-[#333333]">CAPACITY: <span className="text-[#333333]">{fmt(liveCtx.totalCapacity)}</span></span>
         </div>
       )}
     </div>
