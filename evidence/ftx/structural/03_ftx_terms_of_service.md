@@ -1,67 +1,53 @@
 ---
-source_url: https://www.coindesk.com/policy/2023/10/16/sbf-trial-what-did-ftxs-terms-of-service-say-about-customer-funds
-date: 2023-10-16 (trial coverage) | 2022-05 (ToS document itself)
-author: Nikhilesh De, CoinDesk
-description: Full CoinDesk trial coverage article analyzing FTX Terms of Service — includes actual ToS section quotes
+source_url: https://files.alpaca.markets/disclosures/library/FTXTermsOfService-UserAgreement.pdf
+date: 2020-05-20 (last updated per document)
+author: West Realm Shires Services Inc. (FTX US)
+description: FTX.US Terms of Service / User Agreement — key sections on customer asset ownership. The full 18-page PDF is at 03_ftx_terms_of_service.pdf.
 ---
 
-# SBF Trial: What Did FTX's Terms of Service Say About Customer Funds?
+# FTX.US Terms of Service — Customer Fund Ownership Provisions
 
-By Nikhilesh De | Edited by Marc Hochstein
-Published: October 16, 2023
-
-Sam Bankman-Fried's lawyers say FTX didn't misuse customer funds under its terms of service. We dug into the agreement to see exactly what it says.
+Source: FTX.US Terms of Service / User Agreement (last updated May 20, 2020)
+Full PDF: evidence/ftx/structural/03_ftx_terms_of_service.pdf (18 pages, 269KB)
 
 ---
 
-Phase one of the trial was exciting. Former FTX exchange insiders told a jury that Sam Bankman-Fried had directed them to let his hedge fund Alameda "borrow" billions of dollars from exchange customers in a secret arrangement facilitated through internal backdoors and hidden behind falsified documents.
+## Section 6: Cryptocurrency (key excerpts from PDF)
 
-We seem to be moving into phase two now, with witnesses who played secondary roles in this massive alleged fraud. Friday's testimony from BlockFi CEO Zac Prince was important but dare I say almost boring. He and other upcoming witnesses are not likely privy to salacious details like "Sam told me to commit crimes." There are two exceptions, which I'll get to below, but our next few witnesses are customers, an FBI agent and an Alameda employee who may or may have also been an FTX US human resources employee(?).
+"Title to cryptocurrency represented in your FTX.US Account shall at all times remain with you and shall not transfer to FTX.US."
 
-So let's talk about the defense again instead. We're still waiting for the defense's strategy to become clear. We've gotten hints, as Axios' Crystal Kim points out.
+"FTX.US does not represent or treat assets in your FTX.US Account as belonging to FTX.US."
 
-A filing last week suggests the defense wants to get back to the argument that Bankman-Fried did not technically commit wire fraud because FTX's terms of service were worded in such a way that there's no case to argue funds were misappropriated.
+"Your balances in your FTX.US Account are not segregated."
 
-We've heard this argument a few times already from the defense team, so I dug into what the terms of service actually said.
+## Section 8.2.6: Digital Assets (from FTX.com international ToS, May 2022)
 
-First off: Judge Lewis Kaplan, who's overseeing the case, has already rejected one proposed defense witness, English barrister (basically British for "lawyer") Lawrence Akka, from offering testimony because the defense wanted this individual to explain the English laws governing FTX's terms to the jury, and explaining the law to the jury is the judge's job.
+Section 8.2.6 of the FTX.com (international) Terms of Service stated:
 
-In its new filing, the defense team continues to argue that FTX's relationship with its customers "was governed by [its] terms of service," and so "the question of whether Alameda's use of customer fiat deposits was permissible within the scope of that relationship -- and, thus, whether a theft of property occurred -- is governed by foreign law," at least with regard to counts one and three of the indictment (referring to the actual wire fraud, i.e. substantive, charges).
+"title to your digital assets shall at all times remain with you and shall not transfer to FTX trading."
 
-"It is the defense's position that the rights and obligations of parties to a commercial relationship are not established by their expectations and understandings for purposes of the misappropriation theory of the federal fraud statutes," the defense's Oct. 12 went on to say.
+Section 8.2.6(B):
 
-So I dug up a PDF of FTX's terms of service from May 2022.
+"None of the digital assets in your account are the property of, or shall or may be loans to, FTX Trading; FTX Trading does not represent or treat Digital Assets in the User's Accounts as belonging to FTX Trading."
 
-According to that document, section 8.2.6, which governs FTX customers' digital assets, holds that the "title to your digital assets shall at all times remain with you and shall not transfer to FTX trading." While customers can't blame FTX for loss in value due to price fluctuations, that's not what the DOJ is alleging here.
+## Section 8.3: Fiat Currency (from FTX.com international ToS)
 
-"None of the digital assets in your account are the property of, or shall or may be loans to, FTX Trading; FTX Trading does not represent or treat Digital Assets in the User's Accounts as belonging to FTX Trading," section 8.2.6 (B) said.
+The fiat currency section (8.3) was notably vague about fund handling. FTX said it may convert fiat deposits into "e-money," described as an internal accounting tool. There were no clauses in this section addressing how FTX might hold customer deposits — unlike the digital assets section.
 
-I didn't see the part of the DOJ filing which highlighted this section, but this section seems to contradict what the defense team is claiming in its Oct. 12 letter.
+## Affiliate Trading (from FTX.com international ToS, page 1)
 
-Then I took a look at the defense's Sept. 11 letter arguing it should be able to call up Akka to explain the meaning of the terms under English law.
+"Affiliates of FTX Trading may execute trades on the Platform provided, however, that such Affiliates shall not be afforded any priority in trade execution."
 
-That letter made it clear that in the defense's view, the DOJ is "relying on certain provisions in FTX's terms of service," suggesting there are other provisions that do undermine the misappropriation claim.
+## Fraud Carve-Out (from FTX.com international ToS, page 22)
 
-The Sept. 11 letter referenced a Sept. 1 filing asking for permission to introduce the entire terms as an exhibit (as opposed to just section 8.2), which in turn seemed to suggest that the question of misappropriation goes strictly to how FTX used customer fiat currency (emphasis mine).
+"nothing in the terms shall limit or exclude a party's liability ... for fraud or fraudulent misrepresentation."
 
-"Among other things, the Terms of Service are relevant to whether FTX's or Alameda's use of customer fiat currency was inconsistent with representations to customers in the document itself and rights and obligations it sets forth regarding customer assets -- and thus to whether there was any actual fraud or 'misappropriation' of customer funds," the Sept. 1 filing said.
+## Key Distinction: FTX.US vs FTX.com
 
-And sure enough, the "fiat currency" section of the terms of service, 8.3, is much more vague about how FTX held customer funds. FTX said it may convert fiat deposits into "e-money," which the terms describe as a sort of internal accounting tool.
+- **FTX.US** (West Realm Shires Services Inc.) — incorporated in Delaware, governed by Delaware law
+- **FTX.com** (FTX Trading Ltd) — incorporated in Antigua and Barbuda, governed by English law
+- Both contained customer asset ownership provisions, but the international ToS was governed by English law — a key defense argument at trial
 
-There are no clauses in this section addressing how FTX might hold customer deposits, unlike the digital assets section.
+---
 
-But is the DOJ only alleging that FTX stole customers' fiat funds? No. It's not. Assistant U.S. Attorney Thane Rehn, in his opening statement, told the jury that Bankman-Fried let Alameda withdraw FTX customers' crypto (emphasis still mine).
-
-"Using Alameda, the defendant withdrew billions of dollars worth of customer crypto out of the FTX digital wallet and into Alameda's digital wallet that he owned and controlled," he alleged.
-
-Unsurprisingly, the DOJ disagrees with the defense's Oct. 12 argument. In its own filing, which seems to have dropped late Friday (Oct. 13), prosecutors say that "misappropriation occurs when a party breaches a 'fiduciary duty.'" Prosecutors have already spent the early days of the trial pointing out that Bankman-Fried, through advertisements (including the infamous Super Bowl ad with Larry David) and other public appearances, said FTX was a safe and "trusted way to buy and sell" cryptocurrencies.
-
-The DOJ filing also said "the defendant is simply wrong" that prosecutors are just arguing misappropriation. They're also alleging Bankman-Fried made "material misrepresentations and omissions."
-
-The DOJ's Oct. 13 filing, interestingly, did not bring up the whole English law question, though prosecutors did express their opposition to that argument in a late August filing. At the time, the DOJ said that "framing the issue as a dichotomy" between the terms of service and other legal structures may be misleading for the jury.
-
-Speaking of FTX's terms of service, it's maybe worth highlighting that on page one, the document said, "Affiliates of FTX Trading may execute trades on the Platform provided, however, that such Affiliates shall not be afforded any priority in trade execution."
-
-Former FTX Chief Technology Officer Gary Wang told the court that Alameda Research "had the ability to place orders slightly faster than other accounts."
-
-There is also a section on page 22 where the terms say "nothing in the terms shall limit or exclude a party's liability ... for fraud or fraudulent misrepresentation."
+[Note: The CoinDesk trial analysis article (October 16, 2023) examining how these ToS provisions were argued in court has been moved to ground_truth/21_ftx_terms_of_service_trial_analysis.md as it is a post-crisis document.]
