@@ -1,0 +1,42 @@
+{
+  "reasoning_trace": "Mock fallback for SVB investigation cycle 1",
+  "surviving_hypotheses": [
+    {
+      "id": "H01",
+      "name": "Duration mismatch + rising rates",
+      "description": "SVB held long-duration HTM securities funded by short-term deposits, exposing the bank to interest rate risk",
+      "score": 0.85,
+      "evidence_chain": [],
+      "status": "active",
+      "reasoning": "CDS spike and stock price collapse consistent with balance sheet stress from rate environment"
+    },
+    {
+      "id": "H02",
+      "name": "Unrealized loss disclosure failure",
+      "description": "HTM accounting masked significant unrealized losses from rising interest rates",
+      "score": 0.80,
+      "evidence_chain": [],
+      "status": "active",
+      "reasoning": "Regulatory loophole allowed hidden balance sheet deterioration"
+    }
+  ],
+  "eliminated_hypotheses": [],
+  "cross_modal_flags": [],
+  "evidence_requests": [
+    {
+      "type": "structural",
+      "description": "HTM securities portfolio composition and duration",
+      "reason": "Would confirm duration mismatch hypothesis"
+    },
+    {
+      "type": "market",
+      "description": "Recent deposit flow data",
+      "reason": "Would assess liquidity stress severity"
+    }
+  ],
+  "key_insights": [
+    "CDS spike indicates market pricing significant credit risk",
+    "Stock price collapse suggests fundamental solvency concerns"
+  ],
+  "compressed_state": "INITIAL STATE: Generated 2 hypotheses for SVB. Trigger: CDS spike to 450bps, 60% stock decline. Priority: Duration mismatch (H01, score 0.85) and HTM disclosure failure (H02, score 0.80). Need structural evidence on securities portfolio and deposit data."
+}
