@@ -19,254 +19,224 @@ export function SignalIntakeScreen() {
     resetInvestigation()
     setSelectedTrigger(trigger)
     setEvalPhase('evaluating')
-
     applyWebSocketMessage({ type: 'SESSION_STARTED', entity: trigger.entity, tier: 2 })
     useStore.getState().setEntity(trigger.entity, trigger.ticker)
     startMock()
     setEvalPhase('done')
   }
 
-  const sigmaColor =
-    !selectedTrigger ? '#475569'
-    : selectedTrigger.magnitudeSigma >= 4 ? '#DC2626'
-    : selectedTrigger.magnitudeSigma >= 3 ? '#D97706'
-    : '#059669'
+  const sigmaColor = (s: number) => s >= 4 ? '#FF3333' : s >= 3 ? '#F59E0B' : '#00C27A'
 
   return (
     <div
-      className="h-full flex flex-col items-center justify-center p-8 gap-6"
-      style={{ backgroundColor: '#0F172A' }}
+      className="h-full flex flex-col items-center justify-center p-10 gap-8"
+      style={{ backgroundColor: '#000000' }}
     >
-      {/* Title block */}
-      <div className="text-center max-w-2xl">
-        <div className="text-[10px] font-terminal text-[#273548] tracking-[0.3em] mb-2">
+      {/* Header */}
+      <div className="text-center max-w-xl">
+        <div className="text-[9px] font-mono text-[#333333] tracking-[0.35em] mb-3">
           ITERATIVE HYPOTHESIS ELIMINATION ENGINE
         </div>
-        <h1 className="text-2xl font-display font-bold text-[#E2E8F0] mb-1">
+        <h1 className="text-xl font-mono font-medium text-[#E8E8E8] mb-2 tracking-tight">
           Signal Intake
         </h1>
-        <p className="text-sm font-evidence text-[#475569] leading-relaxed">
-          Trigger events are evaluated for severity before initiating investigation.
-          Most signals are dismissed at Tier 2. Only credible crises escalate.
+        <p className="text-[11px] font-mono text-[#555555] leading-relaxed">
+          Events are evaluated for severity before initiating investigation.
+          Most signals are dismissed at T2. Only credible crises escalate to T3.
         </p>
       </div>
 
-      {/* Tier pipeline diagram */}
-      <div className="flex items-center gap-1 text-[8px] font-terminal">
-        {/* Tier 2 */}
-        <div className="flex flex-col items-center gap-1 px-3 py-2 rounded border border-[#78350F]/40 bg-[#1A1200]">
-          <div className="flex items-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" style={{ boxShadow: '0 0 4px #EAB308' }} />
-            <span className="text-[#EAB308] font-bold tracking-widest">T2</span>
-          </div>
-          <span className="text-[#A16207] tracking-wider">SEMANTIC EVAL</span>
-          <span className="text-[#473409] tracking-wider">1 GEMINI CALL</span>
-        </div>
-
-        {/* Arrow */}
-        <div className="flex flex-col items-center gap-1 px-2">
-          <span className="text-[#EF4444] tracking-wide">→ ESCALATE</span>
-          <div className="h-px w-12 bg-[#1E293B]" />
-          <span className="text-[#334155] tracking-wide">→ DISMISS</span>
-        </div>
-
-        {/* Tier 3 — THE core product */}
+      {/* Pipeline — clean text diagram */}
+      <div className="flex items-center gap-0 text-[9px] font-mono">
         <div
-          className="flex flex-col items-center gap-1 px-4 py-2 rounded border"
-          style={{
-            borderColor: '#EF444440',
-            backgroundColor: '#1A0000',
-            boxShadow: '0 0 12px #EF444420, inset 0 0 6px #EF444408',
-          }}
+          className="flex flex-col items-center gap-1 px-4 py-2"
+          style={{ border: '1px solid #2D2D2D', backgroundColor: '#0A0A0A' }}
         >
-          <div className="flex items-center gap-1.5">
-            <div
-              className="w-1.5 h-1.5 rounded-full bg-[#EF4444]"
-              style={{ boxShadow: '0 0 8px #EF4444, 0 0 3px #EF4444', animation: 'pulse-dot 0.8s ease-in-out infinite' }}
-            />
-            <span className="text-[#EF4444] font-bold tracking-widest">T3</span>
+          <span className="text-[#F59E0B] font-medium tracking-wider">T2</span>
+          <span className="text-[#555555]">SEMANTIC EVAL</span>
+          <span className="text-[#333333]">1 CALL</span>
+        </div>
+
+        <div className="flex flex-col items-center gap-1 px-3">
+          <span className="text-[#00C27A]">→ ESCALATE</span>
+          <span className="text-[#333333]">→ DISMISS</span>
+        </div>
+
+        <div
+          className="flex flex-col items-center gap-1 px-4 py-2"
+          style={{ border: '1px solid #FF3333', backgroundColor: '#050000' }}
+        >
+          <div className="flex items-center gap-2">
             <span
-              className="text-[6px] font-terminal px-1 py-0.5 rounded"
-              style={{ color: '#EF4444', backgroundColor: '#EF444415', border: '1px solid #EF444430' }}
-            >
-              CORE
-            </span>
+              className="inline-block w-1.5 h-1.5"
+              style={{ backgroundColor: '#FF3333', animation: 'pulse-dot 0.9s ease-in-out infinite' }}
+            />
+            <span className="text-[#FF3333] font-medium tracking-wider">T3</span>
+            <span className="text-[8px] text-[#FF3333] border border-[#FF333340] px-1" style={{ backgroundColor: '#FF333410' }}>CORE</span>
           </div>
-          <span className="text-[#991B1B] tracking-wider">FULL INVESTIGATION</span>
-          <span className="text-[#473409] tracking-wider">4-5 DEEP CYCLES</span>
+          <span className="text-[#555555]">FULL INVESTIGATION</span>
+          <span className="text-[#333333]">4-5 DEEP CYCLES</span>
         </div>
 
-        {/* Arrow: outcome */}
-        <div className="flex flex-col items-center gap-1 px-2">
-          <span className="text-[#EF4444] tracking-wide">→ ALERT</span>
-          <div className="h-px w-12 bg-[#1E293B]" />
-          <span className="text-[#059669] tracking-wide">→ ALL-CLEAR</span>
+        <div className="flex flex-col items-center gap-1 px-3">
+          <span className="text-[#FF3333]">→ ALERT</span>
+          <span className="text-[#00C27A]">→ ALL-CLEAR</span>
         </div>
 
-        {/* Three-agent architecture */}
         <div className="flex flex-col gap-1">
-          <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
-            <span className="text-[#3B82F6] tracking-wider">ORCHESTRATOR</span>
-            <span className="text-[#334155] ml-1">STATEFUL</span>
-          </div>
-          <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
-            <span className="text-[#10B981] tracking-wider">INVESTIGATOR</span>
-            <span className="text-[#334155] ml-1">FRESH/CYCLE</span>
-          </div>
-          <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
-            <span className="text-[#8B5CF6] tracking-wider">PKG + 3 AGENTS</span>
-            <span className="text-[#334155] ml-1">FRESH/RUN</span>
-          </div>
+          {[
+            { label: 'ORCHESTRATOR', color: '#3B82F6', note: 'STATEFUL' },
+            { label: 'INVESTIGATOR', color: '#00C27A', note: 'FRESH/CYCLE' },
+            { label: 'PKG + 3 AGENTS', color: '#8B5CF6', note: 'FRESH/RUN' },
+          ].map(({ label, color, note }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 px-2.5 py-1"
+              style={{ border: '1px solid #1C1C1C', backgroundColor: '#0A0A0A' }}
+            >
+              <span className="font-mono" style={{ color }}>{label}</span>
+              <span className="text-[#333333]">{note}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Trigger buttons */}
-      <div className="flex flex-col gap-3 w-full max-w-2xl">
-        <div className="text-[9px] font-terminal text-[#273548] tracking-widest mb-1">
+      {/* Trigger selection */}
+      <div className="w-full max-w-2xl">
+        <div className="text-[9px] font-mono text-[#333333] tracking-[0.25em] mb-2 pb-2" style={{ borderBottom: '1px solid #1C1C1C' }}>
           SELECT TRIGGER EVENT
         </div>
-        {TRIGGERS.map((trigger) => (
-          <motion.button
-            key={trigger.id}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            disabled={evalPhase !== 'idle'}
-            onClick={() => handleTrigger(trigger)}
-            className="relative text-left rounded border overflow-hidden group"
-            style={{
-              borderColor: selectedTrigger?.id === trigger.id ? '#2563EB' : '#1E293B',
-              backgroundColor: selectedTrigger?.id === trigger.id ? '#0C1A3A' : '#0D1526',
-              opacity: evalPhase !== 'idle' && selectedTrigger?.id !== trigger.id ? 0.4 : 1,
-            }}
-          >
-            <div
-              className="absolute left-0 top-0 bottom-0 w-0.5"
+
+        {TRIGGERS.map((trigger) => {
+          const isSelected = selectedTrigger?.id === trigger.id
+          const isDisabled = evalPhase !== 'idle' && !isSelected
+
+          return (
+            <motion.button
+              key={trigger.id}
+              whileTap={{ scale: 0.995 }}
+              disabled={evalPhase !== 'idle'}
+              onClick={() => handleTrigger(trigger)}
+              className="relative w-full text-left"
               style={{
-                backgroundColor:
-                  trigger.magnitudeSigma >= 4 ? '#DC2626'
-                  : trigger.magnitudeSigma >= 3.5 ? '#D97706'
-                  : '#2563EB',
+                borderBottom: '1px solid #1C1C1C',
+                borderLeft: isSelected ? `2px solid #3B82F6` : '2px solid transparent',
+                backgroundColor: isSelected ? '#050A14' : 'transparent',
+                opacity: isDisabled ? 0.35 : 1,
+                padding: '10px 12px',
+                cursor: evalPhase !== 'idle' ? 'default' : 'pointer',
               }}
-            />
-            <div className="pl-4 pr-4 py-3">
-              <div className="flex items-start gap-3">
+            >
+              <div className="flex items-start gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-terminal font-bold text-[#E2E8F0]">
+                    <span className="text-[10px] font-mono font-medium text-[#E8E8E8]">
                       {trigger.ticker}
                     </span>
-                    <span className="text-[10px] font-terminal text-[#475569]">·</span>
-                    <span className="text-xs font-display text-[#94A3B8]">{trigger.entity}</span>
-                    <span className="text-[9px] font-terminal text-[#334155]">{trigger.date}</span>
+                    <span className="text-[#333333]">·</span>
+                    <span className="text-[10px] font-mono text-[#555555]">{trigger.entity}</span>
+                    <span className="text-[9px] font-mono text-[#333333]">{trigger.date}</span>
                   </div>
-                  <p className="text-xs font-evidence text-[#64748B] leading-relaxed">
+                  <p className="text-[10px] font-mono text-[#555555] leading-relaxed">
                     {trigger.event}
                   </p>
                 </div>
                 <div className="shrink-0 text-right">
-                  <div className="text-xl font-terminal font-bold" style={{ color: sigmaColor }}>
+                  <div
+                    className="text-lg font-mono font-medium tabular-nums"
+                    style={{ color: sigmaColor(trigger.magnitudeSigma) }}
+                  >
                     {trigger.magnitudeSigma}σ
                   </div>
-                  <div className="text-[8px] font-terminal text-[#334155]">MAGNITUDE</div>
                 </div>
               </div>
-            </div>
-          </motion.button>
-        ))}
+            </motion.button>
+          )
+        })}
       </div>
 
-      {/* Tier 2 evaluation panel */}
+      {/* T2 evaluation panel */}
       <AnimatePresence>
         {selectedTrigger && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="w-full max-w-2xl rounded border border-[#1E293B] overflow-hidden"
-            style={{ backgroundColor: '#0A1120' }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="w-full max-w-2xl"
+            style={{ border: '1px solid #1C1C1C', backgroundColor: '#000000' }}
           >
             {/* Panel header */}
-            <div className="px-4 py-2 border-b border-[#1E293B] flex items-center justify-between">
+            <div
+              className="px-4 py-2 flex items-center justify-between"
+              style={{ borderBottom: '1px solid #1C1C1C' }}
+            >
               <div className="flex items-center gap-2">
-                <div
-                  className="w-1.5 h-1.5 rounded-full bg-[#EAB308]"
-                  style={{ animation: 'pulse-dot 0.8s ease-in-out infinite' }}
+                <span
+                  className="inline-block w-1.5 h-1.5"
+                  style={{ backgroundColor: '#F59E0B', animation: 'pulse-dot 0.8s ease-in-out infinite' }}
                 />
-                <span className="text-[9px] font-terminal text-[#EAB308] tracking-widest">
-                  TIER 2 — SEMANTIC EVALUATION — ORCHESTRATOR
+                <span className="text-[9px] font-mono text-[#F59E0B] tracking-wider">
+                  T2 — SEMANTIC EVALUATION
                 </span>
               </div>
-              <span className="text-[8px] font-terminal text-[#334155] tracking-wider">
+              <span className="text-[9px] font-mono text-[#333333]">
                 1 GEMINI CALL · ~5K TOKENS
               </span>
             </div>
 
-            {/* Signal card */}
-            <div className="px-4 py-3 border-b border-[#1E293B] grid grid-cols-3 gap-4">
-              <div>
-                <div className="text-[8px] font-terminal text-[#273548] tracking-wider">ENTITY</div>
-                <div className="text-sm font-terminal font-bold text-[#E2E8F0]">{selectedTrigger.ticker}</div>
-              </div>
-              <div>
-                <div className="text-[8px] font-terminal text-[#273548] tracking-wider">DATE</div>
-                <div className="text-sm font-terminal text-[#94A3B8]">{selectedTrigger.date}</div>
-              </div>
-              <div>
-                <div className="text-[8px] font-terminal text-[#273548] tracking-wider">MAGNITUDE</div>
-                <div className="text-sm font-terminal font-bold" style={{ color: sigmaColor }}>
-                  {selectedTrigger.magnitudeSigma}σ
+            {/* Signal details */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4" style={{ borderBottom: '1px solid #1C1C1C' }}>
+              {[
+                { label: 'ENTITY', value: selectedTrigger.ticker },
+                { label: 'DATE', value: selectedTrigger.date },
+                { label: 'MAGNITUDE', value: `${selectedTrigger.magnitudeSigma}σ`, color: sigmaColor(selectedTrigger.magnitudeSigma) },
+              ].map(({ label, value, color }) => (
+                <div key={label}>
+                  <div className="text-[8px] font-mono text-[#333333] tracking-wider mb-1">{label}</div>
+                  <div className="text-[11px] font-mono font-medium" style={{ color: color ?? '#E8E8E8' }}>{value}</div>
                 </div>
-              </div>
+              ))}
             </div>
 
-            {/* Streaming evaluation text */}
-            <div className="px-4 py-3 min-h-[80px]">
-              <div className="text-[9px] font-terminal text-[#334155] tracking-wider mb-2">
-                ASSESSMENT
-              </div>
-              <p className="text-xs font-evidence text-[#64748B] leading-relaxed">
+            {/* Streaming text */}
+            <div className="px-4 py-3 min-h-[72px]">
+              <div className="text-[8px] font-mono text-[#333333] tracking-wider mb-2">ASSESSMENT</div>
+              <p className="text-[10px] font-mono text-[#555555] leading-relaxed">
                 {tier2EvalText}
                 {!tier2EvalDone && tier2EvalText.length > 0 && (
                   <span
-                    className="inline-block w-[6px] h-3 bg-[#EAB308] ml-0.5 align-text-bottom"
-                    style={{ animation: 'blink 0.7s step-end infinite' }}
+                    className="inline-block w-[5px] h-[11px] ml-0.5 align-text-bottom"
+                    style={{ backgroundColor: '#F59E0B', animation: 'blink 0.7s step-end infinite' }}
                   />
                 )}
               </p>
             </div>
 
-            {/* Decision */}
+            {/* Escalation decision */}
             <AnimatePresence>
               {tier2EvalDone && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
+                  transition={{ duration: 0.25, delay: 0.15 }}
                   className="overflow-hidden"
                 >
                   <div
-                    className="px-4 py-3 border-t"
-                    style={{ borderColor: '#F9731630', backgroundColor: '#100500' }}
+                    className="px-4 py-3 flex items-center justify-between"
+                    style={{ borderTop: '1px solid #FF333330', backgroundColor: '#040000' }}
                   >
-                    <div className="flex items-start gap-3">
-                      <div className="flex flex-col gap-1">
-                        <span
-                          className="text-[10px] font-terminal font-bold tracking-widest text-[#EF4444]"
-                          style={{ animation: 'pulse-tier 0.8s ease-in-out 3' }}
-                        >
-                          ▲ ESCALATE → TIER 3: FULL INVESTIGATION
-                        </span>
-                        <span className="text-[9px] font-terminal text-[#475569]">
-                          4-5 deep reasoning cycles · Iterative hypothesis elimination
-                        </span>
-                      </div>
-                    </div>
-                    <div className="mt-2 flex gap-2 items-center">
-                      <TagPill type="critical" label="T2 → T3" />
-                      <span className="text-[8px] font-terminal text-[#334155]">
-                        Transitioning to investigation dashboard...
+                    <div className="flex flex-col gap-1">
+                      <span
+                        className="text-[10px] font-mono font-medium tracking-wider text-[#FF3333]"
+                        style={{ animation: 'pulse-tier 0.8s ease-in-out 3' }}
+                      >
+                        ↑ ESCALATE → T3 FULL INVESTIGATION
+                      </span>
+                      <span className="text-[9px] font-mono text-[#555555]">
+                        4-5 deep reasoning cycles · Iterative hypothesis elimination
                       </span>
                     </div>
+                    <TagPill type="critical" label="T2 → T3" />
                   </div>
                 </motion.div>
               )}
