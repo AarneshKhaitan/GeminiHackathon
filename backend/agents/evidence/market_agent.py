@@ -17,7 +17,7 @@ async def search_market(evidence_requests: list[dict], entity: str) -> list[dict
     """
     Search empirical corpus for market data atoms.
 
-    Only processes requests where type == "market".
+    Processes requests where type == "market" OR "empirical".
     Filters results to observations classified as market type.
 
     Args:
@@ -27,7 +27,7 @@ async def search_market(evidence_requests: list[dict], entity: str) -> list[dict
     Returns:
         List of raw market observations (untagged)
     """
-    market_requests = [r for r in evidence_requests if r.get("type") == "market"]
+    market_requests = [r for r in evidence_requests if r.get("type") in ("market", "empirical")]
     if not market_requests:
         return []
 
@@ -38,9 +38,8 @@ async def search_market(evidence_requests: list[dict], entity: str) -> list[dict
         query = req.get("description", "")
         atoms = search_corpus(query, entity, corpus_type="empirical", limit=4)
         for atom in atoms:
-            if atom["observation_id"] not in seen_ids and atom["type"] in ("market", "filing"):
+            if atom["observation_id"] not in seen_ids:
                 seen_ids.add(atom["observation_id"])
-                atom["type"] = "market"
                 results.append(atom)
 
     return results

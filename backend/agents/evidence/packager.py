@@ -32,44 +32,35 @@ async def gather_evidence(
     """
     Execute full evidence retrieval and tagging pipeline for one cycle.
 
+    Simplified approach: Load ALL structural and empirical evidence,
+    let Gemini tag it against active hypotheses.
+
     Args:
-        evidence_requests: Evidence requests from investigator Phase 4 output
-            Each has: type, description, reason
+        evidence_requests: Evidence requests from investigator (not used - we load all)
         active_hypotheses: Current surviving hypotheses (for tagging reference)
-            Each has: id, name, score
         entity: Full entity name (e.g. "Credit Suisse")
 
     Returns:
         List of tagged observations, each with supports/contradicts/neutral lists.
-        Returns [] if no evidence found (no Gemini call made).
     """
+    from utils.corpus_loader import load_all_corpus
 
-    # Dispatch all three retrieval agents in parallel
-    structural_results, market_results, news_results = await asyncio.gather(
-        search_structural(evidence_requests, entity),
-        search_market(evidence_requests, entity),
-        search_news(evidence_requests, entity),
-    )
+    # Load ALL evidence (no filtering)
+    structural_obs = load_all_corpus(entity, "structural")
+    empirical_obs = load_all_corpus(entity, "empirical")
 
-    # Combine and deduplicate by observation_id
-    seen: set[str] = set()
-    raw_evidence: list[dict] = []
-
-    for obs in structural_results + market_results + news_results:
-        if obs["observation_id"] not in seen:
-            seen.add(obs["observation_id"])
-            raw_evidence.append(obs)
+    raw_evidence = structural_obs + empirical_obs
 
     if not raw_evidence:
-        print("  [packager] No evidence found for requests — skipping Gemini tagging call")
+        print("  [packager] No evidence found in corpus")
         return []
 
-    print(f"  [packager] Retrieved {len(raw_evidence)} unique atoms "
-          f"({len(structural_results)} structural, {len(market_results)} market, "
-          f"{len(news_results)} news) — tagging via Gemini...")
+    print(f"  [packager] Loaded {len(raw_evidence)} total observations "
+          f"({len(structural_obs)} structural, {len(empirical_obs)} empirical)")
 
     # If no active hypotheses yet, return atoms untagged (cycle 1 edge case)
     if not active_hypotheses:
+        print("  [packager] No active hypotheses - returning untagged evidence")
         return raw_evidence
 
     # ONE Gemini call to tag all atoms against active hypotheses

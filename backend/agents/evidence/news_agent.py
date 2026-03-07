@@ -17,8 +17,7 @@ async def search_news(evidence_requests: list[dict], entity: str) -> list[dict]:
     """
     Search empirical corpus for news and filing atoms.
 
-    Only processes requests where type in ["news", "filing"].
-    Falls back to any empirical atom if no news-specific match found.
+    Processes requests where type in ["news", "filing", "empirical"].
 
     Args:
         evidence_requests: List of dicts with type, description, reason
@@ -27,7 +26,7 @@ async def search_news(evidence_requests: list[dict], entity: str) -> list[dict]:
     Returns:
         List of raw news/filing observations (untagged)
     """
-    news_requests = [r for r in evidence_requests if r.get("type") in ("news", "filing")]
+    news_requests = [r for r in evidence_requests if r.get("type") in ("news", "filing", "empirical")]
     if not news_requests:
         return []
 
@@ -38,7 +37,7 @@ async def search_news(evidence_requests: list[dict], entity: str) -> list[dict]:
         query = req.get("description", "")
         atoms = search_corpus(query, entity, corpus_type="empirical", limit=4)
         for atom in atoms:
-            if atom["observation_id"] not in seen_ids and atom["type"] in ("news", "filing"):
+            if atom["observation_id"] not in seen_ids:
                 seen_ids.add(atom["observation_id"])
                 results.append(atom)
 
