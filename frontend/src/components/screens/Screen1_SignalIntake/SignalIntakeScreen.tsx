@@ -4,6 +4,7 @@ import { useStore } from '../../../store'
 import { TRIGGERS } from '../../../data/triggers'
 import { useMockPlayback } from '../../../hooks/useMockPlayback'
 import { useWebSocket } from '../../../hooks/useWebSocket'
+import { useSSEInvestigation } from '../../../hooks/useSSEInvestigation'
 import { TagPill } from '../../shared/TagPill'
 import type { TriggerEvent } from '../../../types/api'
 
@@ -16,6 +17,7 @@ export function SignalIntakeScreen() {
   const setMockMode = useStore((s) => s.setMockMode)
   const { start: startMock } = useMockPlayback()
   const { startInvestigation } = useWebSocket()
+  const { startCachedInvestigation } = useSSEInvestigation()
   const resetInvestigation = useStore((s) => s.resetInvestigation)
   const applyWebSocketMessage = useStore((s) => s.applyWebSocketMessage)
 
@@ -26,7 +28,8 @@ export function SignalIntakeScreen() {
     useStore.getState().setEntity(trigger.entity, trigger.ticker)
     if (mockMode) {
       applyWebSocketMessage({ type: 'SESSION_STARTED', entity: trigger.entity, tier: 2 })
-      startMock()
+      // Use cached SSE endpoint instead of mock data
+      startCachedInvestigation(trigger.entity)
       setEvalPhase('done')
     } else {
       startInvestigation(trigger)
