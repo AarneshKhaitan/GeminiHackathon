@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "WebSearch",
+      "WebFetch(domain:www.finma.ch)",
+      "WebFetch(domain:www.coindesk.com)",
+      "WebFetch(domain:blogs.law.ox.ac.uk)",
+      "WebFetch(domain:www.bis.org)",
+      "WebFetch(domain:www.cnn.com)",
+      "WebFetch(domain:www.cnbc.com)",
+      "WebFetch(domain:www.swissinfo.ch)",
+      "WebFetch(domain:www.axios.com)",
+      "WebFetch(domain:techcrunch.com)",
+      "WebFetch(domain:fortune.com)",
+      "WebFetch(domain:decrypt.co)",
+      "WebFetch(domain:www.bankingdive.com)",
+      "WebFetch(domain:www.bbc.com)",
+      "WebFetch(domain:www.jurist.org)",
+      "WebFetch(domain:www.bankingsupervision.europa.eu)",
+      "WebFetch(domain:www.admin.ch)",
+      "WebFetch(domain:www.sec.gov)",
+      "Bash(xargs sed:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "Bash(git:*)"
+    ]
+  }
+}
