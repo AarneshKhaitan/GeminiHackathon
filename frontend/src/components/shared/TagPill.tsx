@@ -6,38 +6,42 @@ interface TagPillProps {
   className?: string
 }
 
-const styles = {
-  supports: 'bg-[#064E3B] text-[#6EE7B7] border border-[#059669]/30',
-  contradicts: 'bg-[#7F1D1D] text-[#FCA5A5] border border-[#DC2626]/30',
-  neutral: 'bg-[#1E293B] text-[#94A3B8] border border-[#334155]',
-  structural: 'bg-[#1E1B4B] text-[#A5B4FC] border border-[#4F46E5]/30',
-  empirical: 'bg-[#0C2340] text-[#7DD3FC] border border-[#0369A1]/30',
-  critical: 'bg-[#7F1D1D] text-[#FCA5A5] border border-[#DC2626]/50',
-  high: 'bg-[#78350F] text-[#FCD34D] border border-[#D97706]/30',
-  medium: 'bg-[#1E293B] text-[#94A3B8] border border-[#334155]',
-  low: 'bg-[#1E293B] text-[#475569] border border-[#273548]',
+const styles: Record<TagPillProps['type'], { color: string; bg: string; border: string }> = {
+  supports:    { color: '#00C27A', bg: '#001A0E', border: '#00C27A30' },
+  contradicts: { color: '#FF3333', bg: '#1A0000', border: '#FF333330' },
+  neutral:     { color: '#555555', bg: '#0A0A0A', border: '#1C1C1C' },
+  structural:  { color: '#8B5CF6', bg: '#0D0020', border: '#8B5CF630' },
+  empirical:   { color: '#3B82F6', bg: '#000F2D', border: '#3B82F630' },
+  critical:    { color: '#FF3333', bg: '#1A0000', border: '#FF333350' },
+  high:        { color: '#F59E0B', bg: '#140900', border: '#F59E0B30' },
+  medium:      { color: '#555555', bg: '#0A0A0A', border: '#1C1C1C' },
+  low:         { color: '#333333', bg: '#000000', border: '#1C1C1C' },
 }
 
-const defaultLabels = {
-  supports: 'SUPPORTS',
+const defaultLabels: Record<TagPillProps['type'], string> = {
+  supports:    'SUPPORTS',
   contradicts: 'CONTRADICTS',
-  neutral: 'NEUTRAL',
-  structural: 'STRUCTURAL',
-  empirical: 'EMPIRICAL',
-  critical: 'CRITICAL',
-  high: 'HIGH',
-  medium: 'MEDIUM',
-  low: 'LOW',
+  neutral:     'NEUTRAL',
+  structural:  'STRUCTURAL',
+  empirical:   'EMPIRICAL',
+  critical:    'CRITICAL',
+  high:        'HIGH',
+  medium:      'MEDIUM',
+  low:         'LOW',
 }
 
 export function TagPill({ type, label, className }: TagPillProps) {
+  const s = styles[type]
   return (
     <span
-      className={clsx(
-        'inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-terminal font-medium tracking-wider uppercase',
-        styles[type],
-        className
-      )}
+      className={clsx('inline-flex items-center text-[8px] font-mono tracking-wider uppercase', className)}
+      style={{
+        color: s.color,
+        backgroundColor: s.bg,
+        border: `1px solid ${s.border}`,
+        padding: '1px 6px',
+        borderRadius: '2px',
+      }}
     >
       {label ?? defaultLabels[type]}
     </span>

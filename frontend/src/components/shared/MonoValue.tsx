@@ -20,12 +20,8 @@ const sizeClasses = {
 export function MonoValue({ children, size = 'sm', color, className, dimmed }: MonoValueProps) {
   return (
     <span
-      className={clsx(
-        'font-terminal tabular-nums tracking-tight',
-        sizeClasses[size],
-        dimmed ? 'text-[#475569]' : (color ?? 'text-[#E2E8F0]'),
-        className
-      )}
+      className={clsx('font-mono tabular-nums', sizeClasses[size], className)}
+      style={{ color: dimmed ? '#333333' : (color ?? '#E8E8E8') }}
     >
       {children}
     </span>

@@ -6,29 +6,29 @@ interface PulseDotProps {
   className?: string
 }
 
-const colorClasses = {
-  green: 'bg-[#059669]',
-  red: 'bg-[#DC2626]',
-  amber: 'bg-[#D97706]',
-  blue: 'bg-[#2563EB]',
-  gray: 'bg-[#475569]',
+const colorMap = {
+  green: '#00C27A',
+  red:   '#FF3333',
+  amber: '#F59E0B',
+  blue:  '#3B82F6',
+  gray:  '#333333',
 }
 
-const sizeClasses = {
-  sm: 'w-1.5 h-1.5',
-  md: 'w-2 h-2',
+const sizeMap = {
+  sm: '6px',
+  md: '8px',
 }
 
 export function PulseDot({ color = 'green', size = 'sm', className }: PulseDotProps) {
   return (
     <span
-      className={clsx(
-        'inline-block rounded-full',
-        colorClasses[color],
-        sizeClasses[size],
-        'animate-[pulse-dot_1.5s_ease-in-out_infinite]',
-        className
-      )}
+      className={clsx('inline-block', className)}
+      style={{
+        width: sizeMap[size],
+        height: sizeMap[size],
+        backgroundColor: colorMap[color],
+        animation: 'pulse-dot 1.5s ease-in-out infinite',
+      }}
     />
   )
 }

@@ -10,8 +10,10 @@ interface SectionLabelProps {
 export function SectionLabel({ children, className, accent }: SectionLabelProps) {
   return (
     <div className={clsx('flex items-center gap-2', className)}>
-      {accent && <div className="w-0.5 h-3" style={{ backgroundColor: accent }} />}
-      <span className="text-[10px] font-terminal font-medium tracking-[0.2em] uppercase text-[#475569]">
+      {accent && (
+        <div style={{ width: '2px', height: '12px', backgroundColor: accent }} />
+      )}
+      <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#555555]">
         {children}
       </span>
     </div>
