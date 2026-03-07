@@ -40,7 +40,6 @@ export function TagPill({ type, label, className }: TagPillProps) {
         backgroundColor: s.bg,
         border: `1px solid ${s.border}`,
         padding: '1px 6px',
-        borderRadius: '2px',
       }}
     >
       {label ?? defaultLabels[type]}
