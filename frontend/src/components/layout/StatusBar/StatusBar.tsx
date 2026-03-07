@@ -1,15 +1,32 @@
+import { useState, useEffect } from 'react'
 import { EntityBadge } from './EntityBadge'
 import { TierIndicator } from './TierIndicator'
 import { CycleCounter } from './CycleCounter'
 import { StatusLabel } from './StatusLabel'
 import { BudgetMeter } from './BudgetMeter'
 import { ContextWindowBar } from './ContextWindowBar'
+import { useStore } from '../../../store'
 
 interface StatusBarProps {
   t3Active?: boolean
 }
 
 export function StatusBar({ t3Active }: StatusBarProps) {
+  const mockMode = useStore((s) => s.mockMode)
+  const mockPlaybackSpeed = useStore((s) => s.mockPlaybackSpeed)
+  const setMockPlaybackSpeed = useStore((s) => s.setMockPlaybackSpeed)
+
+  const [time, setTime] = useState(() =>
+    new Date().toLocaleTimeString('en-US', { hour12: false })
+  )
+  useEffect(() => {
+    const id = setInterval(
+      () => setTime(new Date().toLocaleTimeString('en-US', { hour12: false })),
+      1000
+    )
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <header
       className="sticky top-0 z-50 w-full"
@@ -68,9 +85,32 @@ export function StatusBar({ t3Active }: StatusBarProps) {
           </div>
         </div>
 
-        {/* Timestamp */}
+        {/* Playback speed control — visible only in mock mode */}
+        {mockMode && (
+          <div className="flex items-center gap-1 shrink-0">
+            <button
+              onClick={() => setMockPlaybackSpeed(Math.max(0.25, mockPlaybackSpeed / 1.5))}
+              className="text-[9px] font-mono text-[#333333] hover:text-[#555555] transition-colors px-0.5"
+              style={{ cursor: 'pointer' }}
+            >
+              ◀
+            </button>
+            <span className="text-[9px] font-mono text-[#555555] tabular-nums w-8 text-center">
+              {mockPlaybackSpeed.toFixed(1)}×
+            </span>
+            <button
+              onClick={() => setMockPlaybackSpeed(Math.min(10, mockPlaybackSpeed * 1.5))}
+              className="text-[9px] font-mono text-[#333333] hover:text-[#555555] transition-colors px-0.5"
+              style={{ cursor: 'pointer' }}
+            >
+              ▶
+            </button>
+          </div>
+        )}
+
+        {/* Live timestamp */}
         <div className="shrink-0 text-[9px] font-mono text-[#333333] tabular-nums">
-          {new Date().toLocaleTimeString('en-US', { hour12: false })}
+          {time}
         </div>
       </div>
     </header>

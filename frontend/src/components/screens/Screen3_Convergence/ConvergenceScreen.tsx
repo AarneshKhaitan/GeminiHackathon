@@ -6,6 +6,7 @@ import { ContextWindowBar } from '../../layout/StatusBar/ContextWindowBar'
 import { SurvivingCard } from '../Screen2_Investigation/HypothesisPanel/SurvivingCard'
 
 export function ConvergenceScreen() {
+  const resetInvestigation = useStore((s) => s.resetInvestigation)
   const alertDiagnosis = useStore((s) => s.alertDiagnosis)
   const contagionTargets = useStore((s) => s.contagionTargets)
   const hypotheses = useStore((s) => s.hypotheses)
@@ -55,8 +56,22 @@ export function ConvergenceScreen() {
             {alertDiagnosis.headline}
           </p>
         </div>
-        <div className="shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           <TagPill type="critical" label="T3 ALERT" />
+          <button
+            onClick={resetInvestigation}
+            className="text-[8px] font-mono tracking-wider px-2 py-0.5 transition-colors"
+            style={{
+              color: '#555555',
+              border: '1px solid #1C1C1C',
+              backgroundColor: '#000000',
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = '#E8E8E8'; e.currentTarget.style.borderColor = '#333333' }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = '#555555'; e.currentTarget.style.borderColor = '#1C1C1C' }}
+          >
+            NEW INVESTIGATION
+          </button>
         </div>
       </motion.div>
 
