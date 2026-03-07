@@ -20,11 +20,8 @@ export function SignalIntakeScreen() {
     setSelectedTrigger(trigger)
     setEvalPhase('evaluating')
 
-    // Set entity immediately
     applyWebSocketMessage({ type: 'SESSION_STARTED', entity: trigger.entity, tier: 2 })
     useStore.getState().setEntity(trigger.entity, trigger.ticker)
-
-    // Start mock playback (which drives all subsequent events)
     startMock()
     setEvalPhase('done')
   }
@@ -37,11 +34,11 @@ export function SignalIntakeScreen() {
 
   return (
     <div
-      className="h-full flex flex-col items-center justify-center p-8 gap-8"
+      className="h-full flex flex-col items-center justify-center p-8 gap-6"
       style={{ backgroundColor: '#0F172A' }}
     >
       {/* Title block */}
-      <div className="text-center max-w-xl">
+      <div className="text-center max-w-2xl">
         <div className="text-[10px] font-terminal text-[#273548] tracking-[0.3em] mb-2">
           ITERATIVE HYPOTHESIS ELIMINATION ENGINE
         </div>
@@ -49,18 +46,86 @@ export function SignalIntakeScreen() {
           Signal Intake
         </h1>
         <p className="text-sm font-evidence text-[#475569] leading-relaxed">
-          Select a trigger event to begin Tier 2 semantic evaluation.
-          The Orchestrator will assess severity and escalate to full investigation if warranted.
+          Trigger events are evaluated for severity before initiating investigation.
+          Most signals are dismissed at Tier 2. Only credible crises escalate.
         </p>
       </div>
 
-      {/* Architecture note */}
-      <div className="flex items-center gap-2 text-[9px] font-terminal text-[#273548]">
-        <span className="px-1.5 py-0.5 rounded border border-[#1E293B] bg-[#0D1526] text-[#334155]">ORCHESTRATOR</span>
-        <span>→</span>
-        <span className="px-1.5 py-0.5 rounded border border-[#1E293B] bg-[#0D1526] text-[#334155]">INVESTIGATOR</span>
-        <span>→</span>
-        <span className="px-1.5 py-0.5 rounded border border-[#1E293B] bg-[#0D1526] text-[#334155]">EVIDENCE COLLECTOR</span>
+      {/* Tier pipeline diagram */}
+      <div className="flex items-center gap-1 text-[8px] font-terminal">
+        {/* Tier 2 */}
+        <div className="flex flex-col items-center gap-1 px-3 py-2 rounded border border-[#78350F]/40 bg-[#1A0900]">
+          <div className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" style={{ boxShadow: '0 0 4px #EAB308' }} />
+            <span className="text-[#EAB308] font-bold tracking-widest">T2</span>
+          </div>
+          <span className="text-[#A16207] tracking-wider">SEMANTIC EVAL</span>
+          <span className="text-[#473409] tracking-wider">1 GEMINI CALL</span>
+        </div>
+
+        {/* Arrow: escalate or dismiss */}
+        <div className="flex flex-col items-center gap-1 px-1">
+          <span className="text-[#059669] tracking-wide">→ ESCALATE</span>
+          <div className="h-px w-12 bg-[#1E293B]" />
+          <span className="text-[#334155] tracking-wide">→ DISMISS</span>
+        </div>
+
+        {/* Tier 3 */}
+        <div className="flex flex-col items-center gap-1 px-3 py-2 rounded border border-[#9A3412]/40 bg-[#1A0900]">
+          <div className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#F97316]" style={{ boxShadow: '0 0 4px #F97316' }} />
+            <span className="text-[#F97316] font-bold tracking-widest">T3</span>
+          </div>
+          <span className="text-[#9A3412] tracking-wider">INITIAL PASS</span>
+          <span className="text-[#473409] tracking-wider">1-2 CYCLES</span>
+        </div>
+
+        {/* Arrow: promote or demote */}
+        <div className="flex flex-col items-center gap-1 px-1">
+          <span className="text-[#EF4444] tracking-wide">→ PROMOTE</span>
+          <div className="h-px w-12 bg-[#1E293B]" />
+          <span className="text-[#334155] tracking-wide">→ DEMOTE</span>
+        </div>
+
+        {/* Tier 4 */}
+        <div
+          className="flex flex-col items-center gap-1 px-3 py-2 rounded border"
+          style={{
+            borderColor: '#EF444440',
+            backgroundColor: '#1A0000',
+            boxShadow: '0 0 8px #EF444420',
+          }}
+        >
+          <div className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" style={{ boxShadow: '0 0 6px #EF4444', animation: 'pulse-dot 1s ease-in-out infinite' }} />
+            <span className="text-[#EF4444] font-bold tracking-widest">T4</span>
+          </div>
+          <span className="text-[#991B1B] tracking-wider">FULL INVESTIGATION</span>
+          <span className="text-[#473409] tracking-wider">4-5 DEEP CYCLES</span>
+        </div>
+
+        {/* Arrow: outcome */}
+        <div className="flex flex-col items-center gap-1 px-1">
+          <span className="text-[#EF4444] tracking-wide">→ ALERT</span>
+          <div className="h-px w-12 bg-[#1E293B]" />
+          <span className="text-[#059669] tracking-wide">→ ALL-CLEAR</span>
+        </div>
+
+        {/* Agents */}
+        <div className="flex flex-col gap-1">
+          <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
+            <span className="text-[#3B82F6] tracking-wider">ORCHESTRATOR</span>
+            <span className="text-[#334155] ml-1">STATEFUL</span>
+          </div>
+          <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
+            <span className="text-[#10B981] tracking-wider">INVESTIGATOR</span>
+            <span className="text-[#334155] ml-1">FRESH/CYCLE</span>
+          </div>
+          <div className="px-2.5 py-1 rounded border border-[#1E293B] bg-[#0D1526]">
+            <span className="text-[#8B5CF6] tracking-wider">PKG + 3 AGENTS</span>
+            <span className="text-[#334155] ml-1">FRESH/RUN</span>
+          </div>
+        </div>
       </div>
 
       {/* Trigger buttons */}
@@ -82,9 +147,8 @@ export function SignalIntakeScreen() {
               opacity: evalPhase !== 'idle' && selectedTrigger?.id !== trigger.id ? 0.4 : 1,
             }}
           >
-            {/* Left accent bar */}
             <div
-              className="absolute left-0 top-0 bottom-0 w-0.5 transition-all duration-300"
+              className="absolute left-0 top-0 bottom-0 w-0.5"
               style={{
                 backgroundColor:
                   trigger.magnitudeSigma >= 4 ? '#DC2626'
@@ -108,10 +172,7 @@ export function SignalIntakeScreen() {
                   </p>
                 </div>
                 <div className="shrink-0 text-right">
-                  <div
-                    className="text-xl font-terminal font-bold"
-                    style={{ color: sigmaColor }}
-                  >
+                  <div className="text-xl font-terminal font-bold" style={{ color: sigmaColor }}>
                     {trigger.magnitudeSigma}σ
                   </div>
                   <div className="text-[8px] font-terminal text-[#334155]">MAGNITUDE</div>
@@ -133,13 +194,18 @@ export function SignalIntakeScreen() {
             style={{ backgroundColor: '#0A1120' }}
           >
             {/* Panel header */}
-            <div className="px-4 py-2 border-b border-[#1E293B] flex items-center gap-2">
-              <div
-                className="w-1.5 h-1.5 rounded-full bg-[#D97706]"
-                style={{ animation: 'pulse-dot 0.8s ease-in-out infinite' }}
-              />
-              <span className="text-[9px] font-terminal text-[#D97706] tracking-widest">
-                TIER 2 SEMANTIC EVALUATION — ORCHESTRATOR
+            <div className="px-4 py-2 border-b border-[#1E293B] flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-1.5 h-1.5 rounded-full bg-[#EAB308]"
+                  style={{ animation: 'pulse-dot 0.8s ease-in-out infinite' }}
+                />
+                <span className="text-[9px] font-terminal text-[#EAB308] tracking-widest">
+                  TIER 2 — SEMANTIC EVALUATION — ORCHESTRATOR
+                </span>
+              </div>
+              <span className="text-[8px] font-terminal text-[#334155] tracking-wider">
+                1 GEMINI CALL · ~5K TOKENS
               </span>
             </div>
 
@@ -170,7 +236,7 @@ export function SignalIntakeScreen() {
                 {tier2EvalText}
                 {!tier2EvalDone && tier2EvalText.length > 0 && (
                   <span
-                    className="inline-block w-[6px] h-3 bg-[#10B981] ml-0.5 align-text-bottom"
+                    className="inline-block w-[6px] h-3 bg-[#EAB308] ml-0.5 align-text-bottom"
                     style={{ animation: 'blink 0.7s step-end infinite' }}
                   />
                 )}
@@ -188,21 +254,23 @@ export function SignalIntakeScreen() {
                 >
                   <div
                     className="px-4 py-3 border-t"
-                    style={{ borderColor: '#DC262630', backgroundColor: '#100808' }}
+                    style={{ borderColor: '#F9731630', backgroundColor: '#100500' }}
                   >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="text-[10px] font-terminal font-bold tracking-widest text-[#DC2626]"
-                        style={{ animation: 'pulse-tier 0.8s ease-in-out 3' }}
-                      >
-                        ▲ ESCALATE TO TIER 3
-                      </span>
-                      <span className="text-[9px] font-terminal text-[#475569]">
-                        Full hypothesis elimination cycle initiated
-                      </span>
+                    <div className="flex items-start gap-3">
+                      <div className="flex flex-col gap-1">
+                        <span
+                          className="text-[10px] font-terminal font-bold tracking-widest text-[#F97316]"
+                          style={{ animation: 'pulse-tier 0.8s ease-in-out 3' }}
+                        >
+                          ▲ ESCALATE → TIER 3: INITIAL INVESTIGATION
+                        </span>
+                        <span className="text-[9px] font-terminal text-[#475569]">
+                          1-2 quick cycles · Promotes to Tier 4 full investigation if warranted
+                        </span>
+                      </div>
                     </div>
-                    <div className="mt-2 flex gap-2">
-                      <TagPill type="critical" label="TIER 2 → TIER 3" />
+                    <div className="mt-2 flex gap-2 items-center">
+                      <TagPill type="critical" label="T2 → T3" />
                       <span className="text-[8px] font-terminal text-[#334155]">
                         Transitioning to investigation dashboard...
                       </span>

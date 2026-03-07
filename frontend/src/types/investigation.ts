@@ -14,7 +14,20 @@ export type AgentStatus = 'idle' | 'fetching' | 'complete' | 'error'
 
 export type EvidenceModality = 'text' | 'visual' | 'audio'
 
+export type EvidenceType = 'structural' | 'market' | 'news' | 'filing'
+
 export type Novelty = 'low' | 'medium' | 'high' | 'critical'
+
+// ─── Hypothesis ─────────────────────────────────────────────────────────────
+
+export interface CrossModalConflict {
+  structuralAtom: string
+  empiricalAtom: string
+  structuralObservation: string
+  empiricalObservation: string
+  conflictSummary: string
+  detectedInCycle: number
+}
 
 export interface Hypothesis {
   id: string
@@ -30,44 +43,18 @@ export interface Hypothesis {
   supportingAtoms: string[]
   contradictingAtoms: string[]
   crossModalConflict?: CrossModalConflict
-  // Case file format fields
-  keyEvidence?: string[]       // Human-readable evidence snippets e.g. ["CDS 800bps", "CHF 110B outflow"]
-  keyContradiction?: string[]  // Human-readable contradictions e.g. ["SNB says meets requirements"]
+  keyEvidence?: string[]
+  keyContradiction?: string[]
 }
 
-export interface CaseFileKeyInsight {
-  text: string
-  cycle: number
-}
-
-export interface ForwardSimulation {
-  condition: string
-  outcome: string
-  confidence: number
-}
-
-export interface CaseFile {
-  entity: string
-  status: string
-  lastUpdated: string
-  cycleCount: number
-  structuralKnowledgeLoaded: string[]
-  openEvidenceRequests: string[]
-  keyInsights: CaseFileKeyInsight[]
-  crossModalContradictions: string[]
-  forwardSimulations: ForwardSimulation[]
-}
-
-export interface CrossModalConflict {
-  structuralObservation: string
-  empiricalObservation: string
-  conflictSummary: string
-}
+// ─── Evidence ────────────────────────────────────────────────────────────────
 
 export interface EvidenceAtom {
   id: string
   type: 'empirical' | 'structural'
+  evidenceType?: EvidenceType
   observation: string
+  brief?: string
   timestamp: string | null
   source: string
   modality: EvidenceModality
@@ -75,9 +62,17 @@ export interface EvidenceAtom {
   supports: string[]
   contradicts: string[]
   neutral: string[]
+  usedToEliminate?: string[]
   novelty: Novelty
   quoteOrVisualAnchor?: string
   cycle: number
+}
+
+export interface EvidencePending {
+  type: EvidenceType
+  description: string
+  requestedInCycle: number
+  requestedBecause: string
 }
 
 export interface EvidenceRequest {
@@ -86,6 +81,114 @@ export interface EvidenceRequest {
   targetHypotheses: string[]
   agentType: 'structural' | 'market' | 'news'
   status: 'pending' | 'fulfilled'
+}
+
+// ─── Context Window Tracking ─────────────────────────────────────────────────
+
+export interface OrchestratorCycleWindow {
+  cycle: number
+  systemInstructions: number
+  caseFileState: number
+  decisionLog: number
+  totalUsed: number
+  utilizationPercent: number
+  geminiCalls: number
+  callTypes: string[]
+}
+
+export interface InvestigatorCycleWindow {
+  cycle: number
+  loaded: {
+    compressedState: number
+    structuralEvidence: number
+    empiricalEvidence: number
+    newTaggedEvidence: number
+    activeHypotheses: number
+    instructions: number
+    totalLoaded: number
+  }
+  generated: {
+    reasoningTokens: number
+  }
+  availableAfterReasoning: number
+  utilizationPercent: number
+  windowStatus: 'DISCARDED' | 'ACTIVE'
+}
+
+export interface PackagerCycleWindow {
+  cycle: number
+  loaded: {
+    evidenceRequests: number
+    rawEvidenceRetrieved: number
+    activeHypotheses: number
+    taggingInstructions: number
+    totalLoaded: number
+  }
+  generated: {
+    taggingReasoning: number
+  }
+  utilizationPercent: number
+  windowStatus: 'DISCARDED' | 'ACTIVE'
+}
+
+export interface ContextWindowTracking {
+  orchestrator: {
+    type: 'FIXED'
+    totalContext: number
+    perCycleSnapshot: OrchestratorCycleWindow[]
+  }
+  investigator: {
+    type: 'FRESH_PER_CYCLE'
+    totalContext: number
+    perCycle: InvestigatorCycleWindow[]
+  }
+  evidencePackager: {
+    type: 'FRESH_PER_RUN'
+    totalContext: number
+    perCycle: PackagerCycleWindow[]
+  }
+}
+
+// ─── Token Usage ─────────────────────────────────────────────────────────────
+
+export interface AgentTokenUsage {
+  totalInput: number
+  totalOutput: number
+  totalReasoning: number
+  geminiCalls: number
+}
+
+export interface TokenUsageByCycle {
+  cycle: number
+  investigatorInput: number
+  investigatorReasoning: number
+  packagerInput: number
+  packagerTagging: number
+  orchestratorGemini: boolean
+}
+
+export interface TokenUsage {
+  totalInput: number
+  totalOutput: number
+  totalReasoning: number
+  byAgent: {
+    orchestrator: AgentTokenUsage
+    investigator: AgentTokenUsage
+    evidencePackager: AgentTokenUsage
+  }
+  byCycle: TokenUsageByCycle[]
+}
+
+// ─── Cycle ───────────────────────────────────────────────────────────────────
+
+export interface CycleHistoryEntry {
+  cycle: number
+  startCount: number
+  endCount: number
+  eliminated: string[]
+  evidenceCollected: string[]
+  crossModalDetected: string[]
+  keyInsight: string
 }
 
 export interface CycleSnapshot {
@@ -106,17 +209,34 @@ export interface Cycle {
   durationMs: number
   contextSnapshot: CycleSnapshot
   compressionRatio?: number
+  keyInsight?: string
+  evidenceCollected?: string[]
 }
 
+// ─── Forward Simulation ──────────────────────────────────────────────────────
+
+export interface ForwardSimulation {
+  scenario: string
+  prediction: string
+  confidence: number
+  pendingEvidence: string
+  structuralBasis: string[]
+}
+
+// ─── Alert & Convergence ─────────────────────────────────────────────────────
+
 export interface AlertDiagnosis {
+  level: 'CRITICAL' | 'WARNING' | 'ALL-CLEAR'
   severity: 'critical' | 'high' | 'medium'
   headline: string
   detail: string
+  diagnosis: string
   survivingHypotheses: string[]
   earliestSignalTimestamp: string
   earliestSignalAtomId: string
   singlePassSummary: string
   iterativeDiagnosis: string
+  groundTruthMatch?: string
 }
 
 export interface ContagionTarget {
@@ -125,11 +245,21 @@ export interface ContagionTarget {
   sharedRiskFactor: string
   riskScore: number
   promotedToTier: 2 | 3
+  inheritedContext?: string
 }
+
+// ─── Context Window (live) ───────────────────────────────────────────────────
 
 export interface ContextWindow {
   reasoningTokens: number
   evidenceTokens: number
   compressedTokens: number
   totalCapacity: number
+}
+
+// ─── Key Insight ─────────────────────────────────────────────────────────────
+
+export interface KeyInsight {
+  cycle: number
+  insight: string
 }
