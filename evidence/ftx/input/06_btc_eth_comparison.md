@@ -1,10 +1,10 @@
 ---
 source_url: https://www.coingecko.com/en/coins/bitcoin | https://www.coingecko.com/en/coins/ethereum
-date: 2022-11-01 to 2022-11-15
-description: BTC and ETH price data November 2022 — declined 20-25% vs FTT's 95%
+date: 2022-11-01 to 2022-11-08
+description: BTC and ETH price data through November 8 — modest decline vs FTT's 80% crash
 ---
 
-# BTC and ETH Price Comparison — November 2022
+# BTC and ETH Price Comparison — November 1-8, 2022
 
 ## Bitcoin (BTC)
 
@@ -16,13 +16,6 @@ description: BTC and ETH price data November 2022 — declined 20-25% vs FTT's 9
 | Nov 6 | $21,010 | +2.5% |
 | Nov 7 | $20,600 | +0.5% |
 | Nov 8 | $18,560 | -9.4% |
-| Nov 9 | $15,730 | -23.2% |
-| Nov 10 | $17,050 | -16.8% |
-| Nov 11 | $16,810 | -18.0% |
-| Nov 12 | $16,840 | -17.8% |
-| Nov 14 | $16,280 | -20.5% |
-
-BTC low: ~$15,500 on November 9. Peak-to-trough: ~27%.
 
 ## Ethereum (ETH)
 
@@ -34,18 +27,13 @@ BTC low: ~$15,500 on November 9. Peak-to-trough: ~27%.
 | Nov 6 | $1,630 | +3.6% |
 | Nov 7 | $1,578 | +0.3% |
 | Nov 8 | $1,340 | -14.8% |
-| Nov 9 | $1,098 | -30.2% |
-| Nov 10 | $1,273 | -19.1% |
-| Nov 11 | $1,268 | -19.4% |
-| Nov 14 | $1,225 | -22.1% |
 
-ETH low: ~$1,075 on November 9. Peak-to-trough: ~35%.
+## Comparison as of Nov 8:
 
-## Comparison
+| Asset | Nov 1 | Nov 8 | Decline |
+|-------|-------|-------|---------|
+| FTT | $25.56 | $5.09 | -80.1% |
+| BTC | $20,490 | $18,560 | -9.4% |
+| ETH | $1,573 | $1,340 | -14.8% |
 
-| Asset | Nov 1 | Nov 9 (low) | Decline | Recovery by Nov 14 |
-|-------|-------|-------------|---------|-------------------|
-| FTT | $25.56 | $2.80 | -89% | No recovery ($1.28) |
-| BTC | $20,490 | $15,730 | -23% | Partial ($16,280) |
-| ETH | $1,573 | $1,098 | -30% | Partial ($1,225) |
-| SOL | $35.30 | $12.50 | -65% | Partial ($13.80) |
+FTT declining 5-8x faster than major crypto assets.

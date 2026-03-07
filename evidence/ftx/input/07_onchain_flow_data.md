@@ -1,10 +1,10 @@
 ---
 source_url: https://www.nansen.ai/research/blockchain-analysis-the-collapse-of-alameda-and-ftx
-date: 2022-11-06 to 2022-11-12
-description: On-chain flow data — FTX wallet depletion, Alameda-FTX fund movements, $600M unauthorized drain
+date: 2022-11-06 to 2022-11-08
+description: On-chain flow data — FTX wallet depletion, Alameda-FTX fund movements through Nov 8
 ---
 
-# On-Chain Flow Data — FTX Collapse
+# On-Chain Flow Data — FTX (Nov 6-8, 2022)
 
 Primary source: Nansen Research — "Blockchain Analysis: The Collapse of Alameda and FTX"
 Additional: Etherscan, Arkham Intelligence, on-chain analysts on Twitter
@@ -30,18 +30,6 @@ On-chain analysts observed bidirectional flows between known Alameda and FTX wal
 Funds flowing FROM Alameda TO FTX — suggesting FTX was pulling Alameda's reserves to cover customer withdrawals. Real-time evidence that the two entities were connected, contradicting years of claims that they were separate.
 
 Funds flowing FROM FTX TO unknown wallets — some identified as Alameda's wallets, others were new addresses.
-
-## The $600M Unauthorized Transactions (Nov 11-12)
-
-Within hours of the Chapter 11 filing on November 11:
-
-- Over $600 million in crypto moved out of FTX wallets to previously unknown addresses
-- Movements on Ethereum, BSC, and other chains
-- Mix of ETH, stablecoins, and other tokens
-- Some tokens immediately swapped on DEXes (Uniswap, 1inch)
-- Etherscan labeled the draining address as "FTX Accounts Drainer"
-
-Some transfers looked like theft (swapping to ETH through DEXes, common laundering pattern). Some were later attributed to the Bahamas Securities Commission ordering assets moved to government custody. Full accounting took months.
 
 ## Tools for verification:
 
