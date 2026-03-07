@@ -6,20 +6,23 @@ export function EntityBadge() {
 
   if (!entity) {
     return (
-      <div className="flex items-center gap-1.5">
-        <span className="text-[11px] font-terminal text-[#273548] tracking-widest">— NO ENTITY —</span>
-      </div>
+      <span className="text-[10px] font-mono text-[#333333] tracking-wider">
+        — NO ENTITY —
+      </span>
     )
   }
 
   return (
     <div className="flex items-center gap-2">
-      <div className="px-2 py-0.5 rounded border border-[#334155] bg-[#1E293B]">
-        <span className="text-[10px] font-terminal font-bold text-[#E2E8F0] tracking-widest">
+      <div
+        className="px-2 py-0.5"
+        style={{ border: '1px solid #2D2D2D', backgroundColor: '#0A0A0A' }}
+      >
+        <span className="text-[10px] font-mono font-medium text-[#E8E8E8] tracking-wider">
           {ticker}
         </span>
       </div>
-      <span className="text-[11px] font-display font-medium text-[#94A3B8] truncate max-w-[140px]">
+      <span className="text-[10px] font-mono text-[#555555] truncate max-w-[140px]">
         {entity}
       </span>
     </div>

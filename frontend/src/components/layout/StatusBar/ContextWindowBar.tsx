@@ -18,7 +18,7 @@ function fmt(n: number): string {
 }
 
 export function ContextWindowBar({
-  height = 8,
+  height = 6,
   showLabels = false,
   showPercent = false,
   snapshot,
@@ -35,82 +35,70 @@ export function ContextWindowBar({
   const rPct = (reasoningTokens / totalCapacity) * 100
   const ePct = (evidenceTokens / totalCapacity) * 100
   const cPct = (compressedTokens / totalCapacity) * 100
-
   const usedPct = Math.round((totalUsed / totalCapacity) * 100)
 
   return (
     <div className="flex flex-col gap-1 w-full">
       {showLabels && (
-        <div className="flex items-center gap-3 text-[9px] font-terminal text-[#475569]">
+        <div className="flex items-center gap-3 text-[9px] font-mono text-[#555555]">
           <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm inline-block" style={{ backgroundColor: '#2563EB' }} />
-            REASONING {fmt(reasoningTokens)}
+            <span className="w-2 h-px inline-block" style={{ backgroundColor: '#3B82F6' }} />
+            R {fmt(reasoningTokens)}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm inline-block" style={{ backgroundColor: '#10B981' }} />
-            EVIDENCE {fmt(evidenceTokens)}
+            <span className="w-2 h-px inline-block" style={{ backgroundColor: '#00C27A' }} />
+            E {fmt(evidenceTokens)}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-sm inline-block" style={{ backgroundColor: '#7C3AED' }} />
-            COMPRESSED {fmt(compressedTokens)}
+            <span className="w-2 h-px inline-block" style={{ backgroundColor: '#8B5CF6' }} />
+            C {fmt(compressedTokens)}
           </span>
           {showPercent && (
-            <span className="ml-auto text-[#334155]">{usedPct}% used</span>
+            <span className="ml-auto text-[#333333]">{usedPct}%</span>
           )}
         </div>
       )}
 
-      {/* The bar itself */}
+      {/* Bar */}
       <div
-        className="relative w-full overflow-hidden rounded-full"
-        style={{
-          height: `${height}px`,
-          backgroundColor: '#1E293B',
-        }}
+        className="relative w-full overflow-hidden"
+        style={{ height: `${height}px`, backgroundColor: '#111111' }}
       >
-        {/* Compressed (left-most, persistent across cycles) */}
+        {/* Compressed */}
         <div
-          className="absolute top-0 left-0 h-full context-segment transition-all duration-700 ease-out"
+          className="absolute top-0 left-0 h-full context-segment"
           style={{
             width: `${cPct}%`,
-            backgroundColor: isCompressing ? '#9F7AEA' : '#7C3AED',
+            backgroundColor: isCompressing ? '#A78BFA' : '#8B5CF6',
+            transition: 'width 0.7s ease-out',
           }}
         />
-        {/* Evidence (stacked after compressed) */}
-        <div
-          className="absolute top-0 h-full context-segment transition-all duration-500 ease-out"
-          style={{
-            left: `${cPct}%`,
-            width: `${ePct}%`,
-            backgroundColor: '#10B981',
-          }}
-        />
-        {/* Reasoning (grows during active cycle) */}
+        {/* Evidence */}
         <div
           className="absolute top-0 h-full context-segment"
           style={{
-            left: `${cPct + ePct}%`,
-            width: `${rPct}%`,
-            backgroundColor: '#2563EB',
-            transition: 'width 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            left: `${cPct}%`,
+            width: `${ePct}%`,
+            backgroundColor: '#00C27A',
+            transition: 'width 0.5s ease-out, left 0.7s ease-out',
           }}
         />
-        {/* Available (implicit — background shows through) */}
-        {/* Subtle grid lines every 10% */}
-        {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((tick) => (
-          <div
-            key={tick}
-            className="absolute top-0 h-full w-px opacity-20"
-            style={{ left: `${tick}%`, backgroundColor: '#475569' }}
-          />
-        ))}
+        {/* Reasoning — grows live */}
+        <div
+          className="absolute top-0 h-full"
+          style={{
+            left: `${cPct + ePct}%`,
+            width: `${rPct}%`,
+            backgroundColor: '#3B82F6',
+            transition: 'width 0.4s cubic-bezier(0.4, 0, 0.2, 1), left 0.5s ease-out',
+          }}
+        />
       </div>
 
-      {/* Available space label */}
       {showLabels && (
-        <div className="flex justify-between text-[9px] font-terminal text-[#273548]">
+        <div className="flex justify-between text-[9px] font-mono text-[#333333]">
           <span>0</span>
-          <span className="text-[#334155]">{fmt(available)} available</span>
+          <span>{fmt(available)} avail</span>
           <span>1M</span>
         </div>
       )}

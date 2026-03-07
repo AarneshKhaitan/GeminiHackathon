@@ -2,29 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../../store'
 
-const tierConfig = {
-  2: {
-    color: '#EAB308',
-    dimColor: '#A16207',
-    bg: '#1A1200',
-    borderColor: '#78350F50',
-    label: 'T2',
-    sublabel: 'EVAL',
-    glow: false,
-    pulse: 'pulse-dot 2s ease-in-out infinite',
-  },
-  3: {
-    color: '#EF4444',
-    dimColor: '#DC2626',
-    bg: '#1A0000',
-    borderColor: '#EF444440',
-    label: 'T3',
-    sublabel: 'INVESTIGATION',
-    glow: true,
-    pulse: 'pulse-dot 0.8s ease-in-out infinite',
-  },
-}
-
 export function TierIndicator() {
   const tier = useStore((s) => s.currentTier)
   const [isEscalating, setIsEscalating] = useState(false)
@@ -33,7 +10,7 @@ export function TierIndicator() {
   useEffect(() => {
     if (tier !== null && prevTierRef.current !== null && tier !== prevTierRef.current) {
       setIsEscalating(true)
-      const t = setTimeout(() => setIsEscalating(false), 3000)
+      const t = setTimeout(() => setIsEscalating(false), 2500)
       prevTierRef.current = tier
       return () => clearTimeout(t)
     }
@@ -42,94 +19,63 @@ export function TierIndicator() {
 
   if (!tier) {
     return (
-      <div className="flex items-center gap-2 px-2.5 py-1.5 rounded border border-[#1E293B] bg-[#0A1120]">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#273548]" />
-        <div className="flex flex-col leading-none">
-          <span className="text-[9px] font-terminal font-bold text-[#334155] tracking-widest">T—</span>
-          <span className="text-[7px] font-terminal text-[#273548] tracking-wider">DORMANT</span>
-        </div>
-      </div>
+      <span className="text-[9px] font-mono text-[#333333] tracking-wider">T—</span>
     )
   }
 
-  const cfg = tierConfig[tier as 2 | 3]
+  const isT3 = tier === 3
 
   return (
-    <div className="relative flex items-center gap-1.5">
-      {/* Escalation flash label */}
+    <div className="relative">
       <AnimatePresence>
         {isEscalating && (
-          <motion.div
+          <motion.span
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: -4 }}
             exit={{ opacity: 0 }}
-            className="absolute -top-5 left-0 text-[8px] font-terminal tracking-wider whitespace-nowrap"
-            style={{ color: cfg.color }}
+            className="absolute -top-5 left-0 text-[8px] font-mono whitespace-nowrap"
+            style={{ color: isT3 ? '#FF3333' : '#F59E0B' }}
           >
-            ▲ ESCALATED
-          </motion.div>
+            ↑ ESCALATED
+          </motion.span>
         )}
       </AnimatePresence>
 
       <motion.div
-        layout
-        className="flex items-center gap-2 px-2.5 py-1.5 rounded border"
-        animate={isEscalating ? { scale: [1, 1.08, 1, 1.05, 1] } : { scale: 1 }}
-        transition={{ duration: 0.6, ease: 'easeInOut' }}
+        animate={isEscalating ? { scale: [1, 1.06, 1] } : { scale: 1 }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-2 px-2 py-0.5"
         style={{
-          borderColor: isEscalating ? cfg.color : cfg.borderColor,
-          backgroundColor: cfg.bg,
-          boxShadow: cfg.glow
-            ? isEscalating
-              ? `0 0 24px ${cfg.color}70, inset 0 0 16px ${cfg.color}15`
-              : `0 0 10px ${cfg.color}40, inset 0 0 6px ${cfg.color}10`
-            : isEscalating
-            ? `0 0 14px ${cfg.color}60`
-            : 'none',
-          transition: 'box-shadow 0.5s ease, border-color 0.3s ease',
+          border: `1px solid ${isT3 ? '#FF3333' : '#2D2D2D'}`,
+          backgroundColor: isT3 ? '#0A0000' : '#0A0A0A',
+          transition: 'border-color 0.3s ease, background-color 0.3s ease',
         }}
       >
-        {/* Status dot */}
-        <div
-          className="w-1.5 h-1.5 rounded-full shrink-0"
+        <span
+          className="inline-block w-1.5 h-1.5"
           style={{
-            backgroundColor: cfg.color,
-            boxShadow: cfg.glow ? `0 0 8px ${cfg.color}, 0 0 3px ${cfg.color}` : `0 0 4px ${cfg.color}`,
-            animation: cfg.pulse,
+            backgroundColor: isT3 ? '#FF3333' : '#F59E0B',
+            animation: `pulse-dot ${isT3 ? '0.9s' : '2s'} ease-in-out infinite`,
           }}
         />
-
-        {/* Labels */}
-        <div className="flex flex-col leading-none">
-          <div className="flex items-baseline gap-1.5">
-            <span
-              className="text-[10px] font-terminal font-bold tracking-widest"
-              style={{ color: cfg.color }}
-            >
-              {cfg.label}
-            </span>
-            <span
-              className="text-[8px] font-terminal tracking-wider"
-              style={{ color: cfg.dimColor }}
-            >
-              {cfg.sublabel}
-            </span>
-          </div>
-        </div>
-
-        {/* T3 is the CORE product — mark it */}
-        {tier === 3 && (
-          <div
-            className="ml-0.5 px-1 py-0.5 rounded text-[6px] font-terminal tracking-wider"
+        <span
+          className="text-[9px] font-mono font-medium tracking-wider"
+          style={{ color: isT3 ? '#FF3333' : '#F59E0B' }}
+        >
+          T{tier} {isT3 ? 'INVESTIGATION' : 'EVAL'}
+        </span>
+        {isT3 && (
+          <span
+            className="text-[7px] font-mono tracking-wider"
             style={{
-              color: '#EF4444',
-              backgroundColor: '#EF444415',
-              border: '1px solid #EF444440',
-              animation: 'blink 2s step-end infinite',
+              color: '#FF3333',
+              borderLeft: '1px solid #FF333330',
+              paddingLeft: '6px',
+              marginLeft: '2px',
             }}
           >
             CORE
-          </div>
+          </span>
         )}
       </motion.div>
     </div>
