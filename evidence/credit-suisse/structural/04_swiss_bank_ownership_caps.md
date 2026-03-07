@@ -1,12 +1,10 @@
 ---
-source_url: synthesized from Swiss banking regulation, SAMA regulation, EU CRD IV
+source_url: synthesized from Swiss Banking Act, SAMA regulation, EU CRD IV
 date: ongoing (permanent regulatory framework)
-description: Regulatory ownership thresholds for bank shareholdings — the structural caps that constrain who can invest how much in a bank
+description: Regulatory ownership thresholds for bank shareholdings across jurisdictions
 ---
 
 # Bank Ownership Regulatory Thresholds
-
-These are the regulatory thresholds that apply to ownership of bank shares across jurisdictions. They are invariant — they define the rules of the game regardless of market conditions.
 
 ---
 
@@ -37,10 +35,3 @@ Saudi Arabian Monetary Authority (SAMA) imposes:
 - Enhanced scrutiny for Saudi financial institutions taking stakes above 10% in foreign banks
 - Cross-border investment limits for Saudi banks
 - Board approval requirements for significant foreign exposures
-
-## Structural Implication
-
-The 9.9% ownership ceiling is not arbitrary — it is the maximum stake a bank shareholder can take without triggering multi-jurisdictional regulatory cascades. This structural constraint means:
-- No single shareholder can easily become a "white knight" for a distressed bank by simply buying more shares
-- Emergency capital raises require new shareholders rather than top-ups from existing ones
-- The regulatory framework effectively prevents the market's preferred solution (largest shareholder injects more capital) from being executed quickly
