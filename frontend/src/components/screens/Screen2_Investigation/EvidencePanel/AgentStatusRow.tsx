@@ -6,22 +6,22 @@ interface AgentRowProps {
   key_: 'structural' | 'market' | 'news'
 }
 
-function statusIcon(s: AgentStatus) {
-  if (s === 'complete') return { icon: '✓', color: '#059669' }
-  if (s === 'fetching') return { icon: '⟳', color: '#D97706' }
-  if (s === 'error') return { icon: '✗', color: '#DC2626' }
-  return { icon: '○', color: '#334155' }
+function statusStyle(s: AgentStatus): { icon: string; color: string } {
+  if (s === 'complete') return { icon: '✓', color: '#00C27A' }
+  if (s === 'fetching') return { icon: '⟳', color: '#F59E0B' }
+  if (s === 'error') return { icon: '✗', color: '#FF3333' }
+  return { icon: '○', color: '#333333' }
 }
 
 function AgentRow({ label, key_ }: AgentRowProps) {
   const status = useStore((s) => s.agentStatuses[key_])
-  const { icon, color } = statusIcon(status)
+  const { icon, color } = statusStyle(status)
   const isFetching = status === 'fetching'
 
   return (
-    <div className="flex items-center gap-2 py-1">
+    <div className="flex items-center gap-2 px-3 py-1.5" style={{ borderBottom: '1px solid #1C1C1C' }}>
       <span
-        className="text-[11px] font-terminal"
+        className="text-[9px] font-mono"
         style={{
           color,
           animation: isFetching ? 'spin 1s linear infinite' : 'none',
@@ -30,9 +30,9 @@ function AgentRow({ label, key_ }: AgentRowProps) {
       >
         {icon}
       </span>
-      <span className="text-[10px] font-terminal text-[#475569] tracking-wider">{label}</span>
+      <span className="text-[9px] font-mono text-[#555555]">{label}</span>
       <span
-        className="ml-auto text-[9px] font-terminal uppercase tracking-widest"
+        className="ml-auto text-[8px] font-mono uppercase tracking-widest"
         style={{ color }}
       >
         {status}
@@ -43,14 +43,12 @@ function AgentRow({ label, key_ }: AgentRowProps) {
 
 export function AgentStatusRow() {
   return (
-    <div className="rounded border border-[#1E293B] bg-[#0D1526] p-2">
-      <div className="text-[9px] font-terminal text-[#273548] tracking-widest mb-2">
-        EVIDENCE AGENTS
+    <div>
+      <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #1C1C1C' }}>
+        <span className="text-[8px] font-mono text-[#333333] tracking-widest">EVIDENCE AGENTS</span>
       </div>
       <AgentRow label="STRUCTURAL READER" key_="structural" />
-      <div className="h-px bg-[#1E293B]" />
       <AgentRow label="MARKET WATCHER" key_="market" />
-      <div className="h-px bg-[#1E293B]" />
       <AgentRow label="NEWS LISTENER" key_="news" />
     </div>
   )

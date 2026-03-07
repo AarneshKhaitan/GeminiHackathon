@@ -7,56 +7,54 @@ interface EvidenceAtomCardProps {
   atom: EvidenceAtom
 }
 
-const noveltyColors = {
-  critical: '#DC2626',
-  high: '#D97706',
+const noveltyColors: Record<string, string> = {
+  critical: '#FF3333',
+  high: '#F59E0B',
   medium: '#3B82F6',
-  low: '#475569',
+  low: '#333333',
 }
 
 export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
+  const accentColor = noveltyColors[atom.novelty] ?? '#333333'
+
   return (
     <motion.div
       layout
-      initial={{ x: 40, opacity: 0 }}
+      initial={{ x: 24, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="rounded border overflow-hidden"
+      transition={{ duration: 0.22, ease: 'easeOut' }}
       style={{
-        borderLeftWidth: 3,
-        borderLeftColor: noveltyColors[atom.novelty],
-        borderTopColor: '#1E293B',
-        borderRightColor: '#1E293B',
-        borderBottomColor: '#1E293B',
-        borderTopWidth: 1,
-        borderRightWidth: 1,
-        borderBottomWidth: 1,
-        backgroundColor: '#0D1526',
+        borderBottom: '1px solid #1C1C1C',
+        borderLeft: `2px solid ${accentColor}`,
+        backgroundColor: '#000000',
       }}
     >
-      <div className="p-2.5">
+      <div className="px-3 py-2">
         {/* Header */}
         <div className="flex items-center gap-2 mb-1.5">
-          <MonoValue color="#94A3B8" size="xs">{atom.id}</MonoValue>
+          <MonoValue color="#555555" size="xs">{atom.id}</MonoValue>
           <TagPill type={atom.type === 'empirical' ? 'empirical' : 'structural'} />
           <TagPill type={atom.novelty} />
-          <span className="ml-auto text-[8px] font-terminal text-[#273548]">
-            C{atom.cycle}
-          </span>
+          <span className="ml-auto text-[8px] font-mono text-[#333333]">C{atom.cycle}</span>
         </div>
 
         {/* Observation text */}
-        <p className="text-[10px] font-evidence text-[#64748B] leading-relaxed">
+        <p className="text-[9px] font-mono text-[#555555] leading-relaxed">
           {atom.observation}
         </p>
 
         {/* Hypothesis tags */}
         {(atom.supports.length > 0 || atom.contradicts.length > 0) && (
-          <div className="mt-2 flex flex-wrap gap-1">
+          <div className="mt-1.5 flex flex-wrap gap-1">
             {atom.supports.map((id) => (
               <span
                 key={`s-${id}`}
-                className="text-[8px] font-terminal px-1 py-0.5 rounded border border-[#059669]/20 bg-[#064E3B]/30 text-[#6EE7B7]"
+                className="text-[8px] font-mono px-1 py-0.5"
+                style={{
+                  border: '1px solid #00C27A20',
+                  backgroundColor: '#001A0E',
+                  color: '#00C27A',
+                }}
               >
                 ↑ {id}
               </span>
@@ -64,7 +62,12 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
             {atom.contradicts.map((id) => (
               <span
                 key={`c-${id}`}
-                className="text-[8px] font-terminal px-1 py-0.5 rounded border border-[#DC2626]/20 bg-[#7F1D1D]/30 text-[#FCA5A5]"
+                className="text-[8px] font-mono px-1 py-0.5"
+                style={{
+                  border: '1px solid #FF333320',
+                  backgroundColor: '#0A0000',
+                  color: '#FF3333',
+                }}
               >
                 ↓ {id}
               </span>
@@ -72,18 +75,19 @@ export function EvidenceAtomCard({ atom }: EvidenceAtomCardProps) {
           </div>
         )}
 
-        {/* Confidence */}
+        {/* Confidence bar — 1px line */}
         <div className="mt-1.5 flex items-center gap-2">
-          <div className="flex-1 h-0.5 bg-[#1E293B] rounded-full overflow-hidden">
+          <div className="flex-1 h-px overflow-hidden" style={{ backgroundColor: '#1C1C1C' }}>
             <div
-              className="h-full rounded-full"
+              className="h-full"
               style={{
                 width: `${Math.round(atom.confidence * 100)}%`,
-                backgroundColor: noveltyColors[atom.novelty],
+                backgroundColor: accentColor,
+                transition: 'width 0.4s ease-out',
               }}
             />
           </div>
-          <MonoValue color="#334155" size="xs">
+          <MonoValue color="#333333" size="xs">
             {Math.round(atom.confidence * 100)}%
           </MonoValue>
         </div>
