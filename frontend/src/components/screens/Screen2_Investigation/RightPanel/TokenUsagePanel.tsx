@@ -1,6 +1,5 @@
 import { useStore } from '../../../../store'
 import { MonoValue } from '../../../shared/MonoValue'
-import { SectionLabel } from '../../../shared/SectionLabel'
 
 function fmt(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`
@@ -12,7 +11,6 @@ interface AgentBarProps {
   label: string
   abbrev: string
   color: string
-  dimColor: string
   input: number
   reasoning: number
   output: number
@@ -20,34 +18,30 @@ interface AgentBarProps {
   maxTotal: number
 }
 
-function AgentBar({ label, abbrev, color, dimColor, input, reasoning, output, calls, maxTotal }: AgentBarProps) {
+function AgentBar({ label, abbrev, color, input, reasoning, output, calls, maxTotal }: AgentBarProps) {
   const total = input + reasoning + output
   const pct = maxTotal > 0 ? (total / maxTotal) * 100 : 0
 
   return (
-    <div className="space-y-1.5 p-2.5 rounded border border-[#1E293B]" style={{ backgroundColor: '#0A1120' }}>
+    <div
+      className="p-2.5"
+      style={{ borderBottom: '1px solid #1C1C1C' }}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-1.5">
         <div className="flex items-center gap-2">
-          <div
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ backgroundColor: color }}
-          />
-          <span className="text-[9px] font-terminal tracking-widest" style={{ color }}>
-            {abbrev}
-          </span>
-          <span className="text-[9px] font-terminal text-[#475569] tracking-wider">
-            {label}
-          </span>
+          <div className="inline-block w-1.5 h-1.5" style={{ backgroundColor: color }} />
+          <span className="text-[9px] font-mono tracking-widest" style={{ color }}>{abbrev}</span>
+          <span className="text-[9px] font-mono text-[#555555]">{label}</span>
         </div>
-        <div className="flex items-center gap-1.5">
-          <MonoValue color="#475569" size="xs">{calls}</MonoValue>
-          <span className="text-[8px] font-terminal text-[#334155]">CALLS</span>
+        <div className="flex items-center gap-1">
+          <MonoValue color="#555555" size="xs">{calls}</MonoValue>
+          <span className="text-[7px] font-mono text-[#333333]">CALLS</span>
         </div>
       </div>
 
       {/* Fill bar */}
-      <div className="relative h-1.5 w-full rounded-full overflow-hidden bg-[#1E293B]">
+      <div className="relative h-px w-full overflow-hidden" style={{ backgroundColor: '#1C1C1C' }}>
         <div
           className="absolute top-0 left-0 h-full transition-all duration-700 ease-out"
           style={{ width: `${pct}%`, backgroundColor: color }}
@@ -55,28 +49,28 @@ function AgentBar({ label, abbrev, color, dimColor, input, reasoning, output, ca
       </div>
 
       {/* Token breakdown */}
-      <div className="grid grid-cols-3 gap-1">
+      <div className="mt-1.5 flex gap-4">
         {input > 0 && (
-          <div className="flex flex-col">
-            <MonoValue color={dimColor} size="xs">{fmt(input)}</MonoValue>
-            <span className="text-[7px] font-terminal text-[#334155]">INPUT</span>
+          <div>
+            <MonoValue color="#555555" size="xs">{fmt(input)}</MonoValue>
+            <div className="text-[7px] font-mono text-[#333333]">INPUT</div>
           </div>
         )}
         {reasoning > 0 && (
-          <div className="flex flex-col">
+          <div>
             <MonoValue color={color} size="xs">{fmt(reasoning)}</MonoValue>
-            <span className="text-[7px] font-terminal text-[#334155]">REASONING</span>
+            <div className="text-[7px] font-mono text-[#333333]">REASONING</div>
           </div>
         )}
         {output > 0 && (
-          <div className="flex flex-col">
-            <MonoValue color={dimColor} size="xs">{fmt(output)}</MonoValue>
-            <span className="text-[7px] font-terminal text-[#334155]">OUTPUT</span>
+          <div>
+            <MonoValue color="#555555" size="xs">{fmt(output)}</MonoValue>
+            <div className="text-[7px] font-mono text-[#333333]">OUTPUT</div>
           </div>
         )}
-        <div className="flex flex-col">
-          <MonoValue color="#E2E8F0" size="xs">{fmt(total)}</MonoValue>
-          <span className="text-[7px] font-terminal text-[#334155]">TOTAL</span>
+        <div>
+          <MonoValue color="#E8E8E8" size="xs">{fmt(total)}</MonoValue>
+          <div className="text-[7px] font-mono text-[#333333]">TOTAL</div>
         </div>
       </div>
     </div>
@@ -96,68 +90,75 @@ export function TokenUsagePanel() {
   )
 
   return (
-    <div className="flex flex-col h-full p-3 gap-3 overflow-y-auto">
-      <SectionLabel accent="#2563EB">TOKEN USAGE</SectionLabel>
+    <div className="flex flex-col h-full overflow-y-auto" style={{ backgroundColor: '#000000' }}>
+      {/* Header */}
+      <div
+        className="shrink-0 px-3 py-2 flex items-center gap-2"
+        style={{ borderBottom: '1px solid #1C1C1C' }}
+      >
+        <div style={{ width: '2px', height: '12px', backgroundColor: '#3B82F6' }} />
+        <span className="text-[9px] font-mono tracking-[0.2em] text-[#555555]">TOKEN USAGE</span>
+      </div>
 
       {/* Grand totals */}
-      <div className="grid grid-cols-3 gap-1 p-2 rounded border border-[#1E293B] bg-[#0A1120]">
-        <div className="flex flex-col items-center">
-          <MonoValue color="#60A5FA" size="sm">{fmt(usage.totalInput)}</MonoValue>
-          <span className="text-[7px] font-terminal text-[#334155] tracking-wider">INPUT</span>
+      <div className="grid grid-cols-3" style={{ borderBottom: '1px solid #1C1C1C' }}>
+        <div className="px-3 py-2 flex flex-col" style={{ borderRight: '1px solid #1C1C1C' }}>
+          <MonoValue color="#3B82F6" size="sm">{fmt(usage.totalInput)}</MonoValue>
+          <span className="text-[7px] font-mono text-[#333333] tracking-wider">INPUT</span>
         </div>
-        <div className="flex flex-col items-center">
-          <MonoValue color="#A78BFA" size="sm">{fmt(usage.totalReasoning)}</MonoValue>
-          <span className="text-[7px] font-terminal text-[#334155] tracking-wider">REASONING</span>
+        <div className="px-3 py-2 flex flex-col" style={{ borderRight: '1px solid #1C1C1C' }}>
+          <MonoValue color="#8B5CF6" size="sm">{fmt(usage.totalReasoning)}</MonoValue>
+          <span className="text-[7px] font-mono text-[#333333] tracking-wider">REASONING</span>
         </div>
-        <div className="flex flex-col items-center">
-          <MonoValue color="#E2E8F0" size="sm">{fmt(usage.totalInput + usage.totalReasoning + usage.totalOutput)}</MonoValue>
-          <span className="text-[7px] font-terminal text-[#334155] tracking-wider">TOTAL</span>
+        <div className="px-3 py-2 flex flex-col">
+          <MonoValue color="#E8E8E8" size="sm">{fmt(usage.totalInput + usage.totalReasoning + usage.totalOutput)}</MonoValue>
+          <span className="text-[7px] font-mono text-[#333333] tracking-wider">TOTAL</span>
         </div>
+      </div>
+
+      {/* By-agent label */}
+      <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #1C1C1C' }}>
+        <span className="text-[8px] font-mono text-[#333333] tracking-widest">BY AGENT</span>
       </div>
 
       {/* Per-agent breakdown */}
-      <div className="space-y-2">
-        <span className="text-[8px] font-terminal text-[#334155] tracking-widest">BY AGENT</span>
-
-        <AgentBar
-          label="ORCHESTRATOR"
-          abbrev="ORC"
-          color="#3B82F6"
-          dimColor="#60A5FA"
-          input={orchestrator.totalInput}
-          reasoning={orchestrator.totalReasoning}
-          output={orchestrator.totalOutput}
-          calls={orchestrator.geminiCalls}
-          maxTotal={maxAgentTotal}
-        />
-        <AgentBar
-          label="INVESTIGATOR"
-          abbrev="INV"
-          color="#10B981"
-          dimColor="#6EE7B7"
-          input={investigator.totalInput}
-          reasoning={investigator.totalReasoning}
-          output={investigator.totalOutput}
-          calls={investigator.geminiCalls}
-          maxTotal={maxAgentTotal}
-        />
-        <AgentBar
-          label="PACKAGER"
-          abbrev="PKG"
-          color="#8B5CF6"
-          dimColor="#C4B5FD"
-          input={evidencePackager.totalInput}
-          reasoning={evidencePackager.totalReasoning}
-          output={evidencePackager.totalOutput}
-          calls={evidencePackager.geminiCalls}
-          maxTotal={maxAgentTotal}
-        />
-      </div>
+      <AgentBar
+        label="ORCHESTRATOR"
+        abbrev="ORC"
+        color="#3B82F6"
+        input={orchestrator.totalInput}
+        reasoning={orchestrator.totalReasoning}
+        output={orchestrator.totalOutput}
+        calls={orchestrator.geminiCalls}
+        maxTotal={maxAgentTotal}
+      />
+      <AgentBar
+        label="INVESTIGATOR"
+        abbrev="INV"
+        color="#00C27A"
+        input={investigator.totalInput}
+        reasoning={investigator.totalReasoning}
+        output={investigator.totalOutput}
+        calls={investigator.geminiCalls}
+        maxTotal={maxAgentTotal}
+      />
+      <AgentBar
+        label="PACKAGER"
+        abbrev="PKG"
+        color="#8B5CF6"
+        input={evidencePackager.totalInput}
+        reasoning={evidencePackager.totalReasoning}
+        output={evidencePackager.totalOutput}
+        calls={evidencePackager.geminiCalls}
+        maxTotal={maxAgentTotal}
+      />
 
       {/* Per-cycle breakdown */}
       {byCycle.length > 0 && (
-        <div className="space-y-1.5">
-          <span className="text-[8px] font-terminal text-[#334155] tracking-widest">BY CYCLE</span>
+        <>
+          <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #1C1C1C' }}>
+            <span className="text-[8px] font-mono text-[#333333] tracking-widest">BY CYCLE</span>
+          </div>
 
           {byCycle.map((c) => {
             const cycleMax = Math.max(
@@ -166,34 +167,35 @@ export function TokenUsagePanel() {
               1
             )
             return (
-              <div key={c.cycle} className="p-2 rounded border border-[#1E293B]" style={{ backgroundColor: '#0A1120' }}>
+              <div key={c.cycle} className="px-3 py-2" style={{ borderBottom: '1px solid #1C1C1C' }}>
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-[8px] font-terminal text-[#475569] tracking-wider">
+                  <span className="text-[8px] font-mono text-[#555555] tracking-wider">
                     CYCLE {c.cycle}
                   </span>
                   {c.orchestratorGemini && (
-                    <span className="text-[7px] font-terminal text-[#3B82F6]">ORC ●</span>
+                    <span className="text-[7px] font-mono text-[#3B82F6]">ORC ●</span>
                   )}
                 </div>
 
                 {/* Investigator row */}
-                <div className="mb-1">
+                <div className="mb-1.5">
                   <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[7px] font-terminal text-[#10B981]">INV</span>
-                    <span className="text-[7px] font-terminal text-[#334155]">
+                    <span className="text-[7px] font-mono text-[#00C27A]">INV</span>
+                    <span className="text-[7px] font-mono text-[#333333]">
                       {fmt(c.investigatorInput + c.investigatorReasoning)}
                     </span>
                   </div>
-                  <div className="relative h-1 w-full rounded-full overflow-hidden bg-[#1E293B]">
+                  <div className="relative h-px w-full overflow-hidden" style={{ backgroundColor: '#1C1C1C' }}>
                     <div
-                      className="absolute top-0 left-0 h-full bg-[#10B981]/40"
-                      style={{ width: `${(c.investigatorInput / cycleMax) * 100}%` }}
+                      className="absolute top-0 left-0 h-full"
+                      style={{ width: `${(c.investigatorInput / cycleMax) * 100}%`, backgroundColor: '#00C27A40' }}
                     />
                     <div
-                      className="absolute top-0 h-full bg-[#10B981]"
+                      className="absolute top-0 h-full"
                       style={{
                         left: `${(c.investigatorInput / cycleMax) * 100}%`,
                         width: `${(c.investigatorReasoning / cycleMax) * 100}%`,
+                        backgroundColor: '#00C27A',
                       }}
                     />
                   </div>
@@ -202,21 +204,22 @@ export function TokenUsagePanel() {
                 {/* Packager row */}
                 <div>
                   <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[7px] font-terminal text-[#8B5CF6]">PKG</span>
-                    <span className="text-[7px] font-terminal text-[#334155]">
+                    <span className="text-[7px] font-mono text-[#8B5CF6]">PKG</span>
+                    <span className="text-[7px] font-mono text-[#333333]">
                       {fmt(c.packagerInput + c.packagerTagging)}
                     </span>
                   </div>
-                  <div className="relative h-1 w-full rounded-full overflow-hidden bg-[#1E293B]">
+                  <div className="relative h-px w-full overflow-hidden" style={{ backgroundColor: '#1C1C1C' }}>
                     <div
-                      className="absolute top-0 left-0 h-full bg-[#8B5CF6]/40"
-                      style={{ width: `${(c.packagerInput / cycleMax) * 100}%` }}
+                      className="absolute top-0 left-0 h-full"
+                      style={{ width: `${(c.packagerInput / cycleMax) * 100}%`, backgroundColor: '#8B5CF640' }}
                     />
                     <div
-                      className="absolute top-0 h-full bg-[#8B5CF6]"
+                      className="absolute top-0 h-full"
                       style={{
                         left: `${(c.packagerInput / cycleMax) * 100}%`,
                         width: `${(c.packagerTagging / cycleMax) * 100}%`,
+                        backgroundColor: '#8B5CF6',
                       }}
                     />
                   </div>
@@ -224,15 +227,12 @@ export function TokenUsagePanel() {
               </div>
             )
           })}
-        </div>
+        </>
       )}
 
       {byCycle.length === 0 && (
         <div className="flex flex-col items-center justify-center h-24 gap-1">
-          <span className="text-[#1E293B] text-xl">▒</span>
-          <span className="text-[9px] font-terminal text-[#1E293B] tracking-wider">
-            NO CYCLE DATA
-          </span>
+          <span className="text-[9px] font-mono text-[#1C1C1C] tracking-wider">NO CYCLE DATA</span>
         </div>
       )}
     </div>
