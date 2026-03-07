@@ -12,7 +12,7 @@ Returns dicts matching the Evidence model schema with empty tag lists
 from pathlib import Path
 from typing import Literal
 
-EVIDENCE_DIR = Path(__file__).parent.parent.parent / "evidence"
+CORPUS_DIR = Path(__file__).parent.parent / "corpus"  # backend/corpus/
 
 ENTITY_SLUG: dict[str, str] = {
     "Silicon Valley Bank": "svb",
@@ -25,8 +25,12 @@ _TEXT_EXTENSIONS = {".md", ".txt"}
 
 
 def _entity_dir(entity: str, corpus_type: Literal["structural", "empirical"]) -> Path:
-    slug = ENTITY_SLUG.get(entity, entity.lower().replace(" ", "-"))
-    return EVIDENCE_DIR / slug / corpus_type
+    """
+    Get evidence directory for corpus type.
+
+    All evidence is in backend/corpus/{structural|empirical}/
+    """
+    return CORPUS_DIR / corpus_type
 
 
 def _extract_date(filename: str) -> str | None:
