@@ -1,34 +1,53 @@
 @import "tailwindcss";
 
 @theme {
-  /* Surfaces */
-  --color-black: #000000;
-  --color-surface: #0A0A0A;
-  --color-surface-raised: #111111;
+  /* Backgrounds — warm dark, not cold */
+  --color-bg-base:    #0C0A07;
+  --color-bg-surface: #161310;
+  --color-bg-raised:  #1E1B15;
+  --color-bg-overlay: #2A2619;
 
-  /* Borders */
-  --color-border: #1C1C1C;
-  --color-border-strong: #2D2D2D;
+  /* Borders — warm dark */
+  --color-border-subtle:  #2E2820;
+  --color-border-default: #3D3529;
+  --color-border-strong:  #524835;
 
-  /* Text */
-  --color-text: #E8E8E8;
-  --color-text-secondary: #555555;
-  --color-text-muted: #333333;
+  /* Text — warm cream, not clinical */
+  --color-text-primary:   #EDE4D4;
+  --color-text-secondary: #8C7A5E;
+  --color-text-muted:     #4A3D2A;
 
-  /* Semantic — only used for meaning, never decoration */
-  --color-red: #FF3333;
-  --color-red-dim: #1A0000;
-  --color-green: #00C27A;
-  --color-green-dim: #001A0E;
-  --color-blue: #3B82F6;
-  --color-blue-dim: #000F2D;
-  --color-purple: #8B5CF6;
-  --color-purple-dim: #0D0020;
-  --color-amber: #F59E0B;
-  --color-amber-dim: #140900;
+  /* Legacy aliases for components still using old names */
+  --color-black: #0C0A07;
+  --color-surface: #161310;
+  --color-surface-raised: #1E1B15;
+  --color-border: #2E2820;
+  --color-border-strong: #3D3529;
+  --color-text: #EDE4D4;
+  --color-text-secondary: #8C7A5E;
+  --color-text-muted: #4A3D2A;
 
-  /* Typography — one font, intentional */
-  --font-mono: "IBM Plex Mono", monospace;
+  /* Semantic accents — mature, not neon */
+  --color-red:    #D14B35;
+  --color-red-dim:    #2A0E09;
+  --color-green:  #2E9E72;
+  --color-green-dim:  #0A2D1E;
+  --color-gold:   #C8912A;
+  --color-gold-dim:   #2D1E07;
+  --color-amber:  #D4651A;
+  --color-amber-dim:  #2D1407;
+  --color-indigo: #7C6DB8;
+  --color-indigo-dim: #16103A;
+
+  /* Legacy blue/purple for any component not yet updated */
+  --color-blue: #C8912A;
+  --color-blue-dim: #2D1E07;
+  --color-purple: #7C6DB8;
+  --color-purple-dim: #16103A;
+
+  /* Typography — two fonts, intentional */
+  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Syne", sans-serif;
 
   /* Animations */
   --animate-pulse-dot: pulse-dot 1.5s ease-in-out infinite;
@@ -36,6 +55,7 @@
   --animate-slide-in-right: slide-in-right 0.3s ease-out forwards;
   --animate-flash-alert: flash-alert 0.8s ease-out;
   --animate-glow-contradiction: glow-contradiction 2s ease-in-out infinite;
+  --animate-glow-gold: glow-gold 2s ease-in-out infinite;
   --animate-blink: blink 1s step-end infinite;
   --animate-drain-bar: drain-bar 0.8s ease-in forwards;
 }
@@ -56,14 +76,19 @@
 }
 
 @keyframes flash-alert {
-  0% { background-color: transparent; }
-  12% { background-color: rgba(255, 51, 51, 0.35); }
+  0%   { background-color: transparent; }
+  12%  { background-color: rgba(209, 75, 53, 0.12); }
   100% { background-color: transparent; }
 }
 
 @keyframes glow-contradiction {
-  0%, 100% { background-color: #000000; }
-  50% { background-color: #140900; }
+  0%, 100% { background-color: #161310; }
+  50%       { background-color: #2D1407; }
+}
+
+@keyframes glow-gold {
+  0%, 100% { box-shadow: 0 0 0 1px #C8912A20; }
+  50%       { box-shadow: 0 0 12px 2px #C8912A30; }
 }
 
 @keyframes blink {
@@ -87,31 +112,43 @@ html, body, #root {
 }
 
 body {
-  background-color: #000000;
-  color: #E8E8E8;
-  font-family: "IBM Plex Mono", monospace;
+  background-color: #0C0A07;
+  color: #EDE4D4;
+  font-family: "JetBrains Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
 
-/* Custom scrollbar — minimal */
+/* Subtle grain overlay — adds tactile depth without gimmickry */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* Custom scrollbar — warm minimal */
 ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #161310;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2D2D2D;
+  background: #3D3529;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3D3D3D;
+  background: #524835;
 }
 
 /* Context bar segment transitions */
 .context-segment {
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-

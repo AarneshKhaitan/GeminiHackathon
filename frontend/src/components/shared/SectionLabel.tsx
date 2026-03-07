@@ -13,7 +13,7 @@ export function SectionLabel({ children, className, accent }: SectionLabelProps)
       {accent && (
         <div style={{ width: '2px', height: '12px', backgroundColor: accent }} />
       )}
-      <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#555555]">
+      <span className="text-[9px] font-mono tracking-[0.2em] uppercase" style={{ color: '#8C7A5E' }}>
         {children}
       </span>
     </div>

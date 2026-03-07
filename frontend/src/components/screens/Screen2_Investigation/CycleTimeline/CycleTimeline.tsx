@@ -36,21 +36,24 @@ export function CycleTimeline() {
       {/* Header */}
       <div
         className="shrink-0 px-3 py-2 flex items-center gap-2"
-        style={{ borderBottom: '1px solid #1C1C1C' }}
+        style={{ borderBottom: '1px solid #2E2820', backgroundColor: '#161310' }}
       >
-        <div style={{ width: '2px', height: '12px', backgroundColor: '#333333' }} />
-        <span className="text-[9px] font-mono tracking-[0.2em] text-[#555555]">CYCLE TIMELINE</span>
+        <div style={{ width: '2px', height: '12px', backgroundColor: '#C8912A' }} />
+        <span
+          className="text-[9px] tracking-[0.2em]"
+          style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, color: '#8C7A5E' }}
+        >CYCLE TIMELINE</span>
       </div>
 
       {/* Summary stats */}
-      <div className="shrink-0 grid grid-cols-2" style={{ borderBottom: '1px solid #1C1C1C' }}>
+      <div className="shrink-0 grid grid-cols-2" style={{ borderBottom: '1px solid #2E2820' }}>
         <div className="px-3 py-2" style={{ borderRight: '1px solid #1C1C1C' }}>
-          <div className="text-[8px] font-mono text-[#333333] tracking-wider">ELIMINATED</div>
-          <div className="text-base font-mono font-medium text-[#FF3333]">{totalEliminated}</div>
+          <div className="text-[8px] font-mono tracking-wider" style={{ color: '#4A3D2A' }}>ELIMINATED</div>
+          <div className="text-base font-mono font-medium" style={{ color: '#D14B35' }}>{totalEliminated}</div>
         </div>
         <div className="px-3 py-2">
-          <div className="text-[8px] font-mono text-[#333333] tracking-wider">SURVIVING</div>
-          <div className="text-base font-mono font-medium text-[#00C27A]">{totalSurviving}</div>
+          <div className="text-[8px] font-mono tracking-wider" style={{ color: '#4A3D2A' }}>SURVIVING</div>
+          <div className="text-base font-mono font-medium" style={{ color: '#2E9E72' }}>{totalSurviving}</div>
         </div>
       </div>
 
@@ -74,8 +77,8 @@ export function CycleTimeline() {
           className="shrink-0 px-3 py-2"
           style={{ borderTop: '1px solid #1C1C1C' }}
         >
-          <div className="text-[8px] font-mono text-[#8B5CF6] tracking-wider">CONTEXT COMPRESSION</div>
-          <div className="text-[8px] font-mono text-[#333333] mt-0.5">
+          <div className="text-[8px] font-mono tracking-wider" style={{ color: '#7C6DB8' }}>CONTEXT COMPRESSION</div>
+          <div className="text-[8px] font-mono mt-0.5" style={{ color: '#4A3D2A' }}>
             Prior cycles compressed to reasoning traces
           </div>
         </div>

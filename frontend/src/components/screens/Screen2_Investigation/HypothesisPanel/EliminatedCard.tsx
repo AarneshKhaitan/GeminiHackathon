@@ -25,9 +25,9 @@ export function EliminatedCard({ hypothesis }: EliminatedCardProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
       style={{
-        borderBottom: '1px solid #1C1C1C',
-        borderLeft: '2px solid #FF3333',
-        backgroundColor: flashBg ? '#0D0000' : '#000000',
+        borderBottom: '1px solid #2E2820',
+        borderLeft: '2px solid #D14B35',
+        backgroundColor: flashBg ? '#2A0E09' : '#161310',
         transition: 'background-color 0.4s ease',
         cursor: 'pointer',
       }}
@@ -35,19 +35,19 @@ export function EliminatedCard({ hypothesis }: EliminatedCardProps) {
     >
       <div className="px-3 py-2">
         <div className="flex items-center gap-2">
-          <span className="text-[9px] font-mono text-[#333333]">{hypothesis.id}</span>
-          <span className="text-[9px] font-mono text-[#FF3333]">✗</span>
+          <span className="text-[9px] font-mono" style={{ color: '#4A3D2A' }}>{hypothesis.id}</span>
+          <span className="text-[9px] font-mono" style={{ color: '#D14B35' }}>✗</span>
           {/* Strikethrough label */}
           <span
-            className="text-[10px] font-mono text-[#333333] leading-tight"
-            style={{ textDecoration: 'line-through', textDecorationColor: '#FF333350' }}
+            className="text-[10px] font-mono leading-tight"
+            style={{ color: '#4A3D2A', textDecoration: 'line-through', textDecorationColor: '#D14B3550' }}
           >
             {hypothesis.label}
           </span>
-          <span className="ml-auto text-[9px] font-mono text-[#333333]">
+          <span className="ml-auto text-[9px] font-mono" style={{ color: '#4A3D2A' }}>
             ELIM C{hypothesis.eliminatedInCycle}
           </span>
-          <span className="text-[8px] font-mono text-[#333333]">{isExpanded ? '▲' : '▼'}</span>
+          <span className="text-[8px] font-mono" style={{ color: '#4A3D2A' }}>{isExpanded ? '▲' : '▼'}</span>
         </div>
 
         <AnimatePresence>
@@ -64,12 +64,12 @@ export function EliminatedCard({ hypothesis }: EliminatedCardProps) {
                 {hypothesis.killReason && (
                   <div
                     className="p-2"
-                    style={{ border: '1px solid #FF333315', backgroundColor: '#050000' }}
+                    style={{ border: '1px solid #D14B3515', backgroundColor: '#2A0E09' }}
                   >
-                    <div className="text-[8px] font-mono text-[#FF3333] tracking-wider mb-0.5">
+                    <div className="text-[8px] font-mono tracking-wider mb-0.5" style={{ color: '#D14B35' }}>
                       ELIMINATION REASON
                     </div>
-                    <p className="text-[9px] font-mono text-[#555555] leading-relaxed">
+                    <p className="text-[9px] font-mono leading-relaxed" style={{ color: '#8C7A5E' }}>
                       {hypothesis.killReason}
                     </p>
                   </div>
@@ -77,13 +77,13 @@ export function EliminatedCard({ hypothesis }: EliminatedCardProps) {
                 {/* Kill atom */}
                 {hypothesis.killAtomId && (
                   <div className="flex items-center gap-2">
-                    <span className="text-[8px] font-mono text-[#333333]">KILLED BY:</span>
+                    <span className="text-[8px] font-mono" style={{ color: '#4A3D2A' }}>KILLED BY:</span>
                     <span
                       className="text-[8px] font-mono px-1.5 py-0.5"
                       style={{
-                        border: '1px solid #FF333320',
-                        backgroundColor: '#0A0000',
-                        color: '#FF3333',
+                        border: '1px solid #D14B3520',
+                        backgroundColor: '#2A0E09',
+                        color: '#D14B35',
                       }}
                     >
                       {hypothesis.killAtomId}
@@ -92,7 +92,7 @@ export function EliminatedCard({ hypothesis }: EliminatedCardProps) {
                 )}
                 {/* Final confidence */}
                 <div className="flex items-center gap-2">
-                  <span className="text-[8px] font-mono text-[#333333]">FINAL CONF:</span>
+                  <span className="text-[8px] font-mono" style={{ color: '#4A3D2A' }}>FINAL CONF:</span>
                   <MonoValue color="#333333" size="xs">{finalConf}%</MonoValue>
                 </div>
               </div>
