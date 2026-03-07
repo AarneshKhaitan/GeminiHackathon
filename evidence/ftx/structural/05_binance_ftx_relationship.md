@@ -1,62 +1,48 @@
 ---
-source_url: https://decrypt.co/113674/binance-moves-to-liquidate-its-entire-position-in-ftx-tokens | https://beincrypto.com/binance-ftx-cz-early-partnership-exit/
-date: 2019-2022 (relationship timeline)
-description: Binance-FTX relationship and CZ's FTT position — sourced from Decrypt and BeInCrypto reporting
+source_url: https://decrypt.co/113674/binance-moves-to-liquidate-its-entire-position-in-ftx-tokens
+date: 2022-11-06
+author: Decrypt
+description: Full article on Binance liquidating FTT — the tweet that triggered the death spiral
 ---
 
-# Binance-FTX Relationship History
+# Binance Moves to Liquidate Its Entire Position in FTX Tokens
 
-## The Early Partnership (2019)
+By Decrypt
+Published: November 6, 2022
 
-Binance was an early investor in FTX, backing the exchange at launch in 2019.
+---
 
-## The Equity Exit (2021) — from Decrypt and BeInCrypto
+Binance CEO Changpeng "CZ" Zhao said on Sunday that his cryptocurrency exchange is liquidating its holdings of FTT, the native token of rival exchange FTX.
 
-Binance exited its equity position in FTX in 2021. Terms of the exit:
+Zhao referenced "recent revelations that have came to light," but did not elaborate publicly nor respond to a request for clarification from Decrypt.
 
-- Binance received approximately **$2.1 billion** worth of assets
-- Payment included **~$500 million in FTT tokens** and **~$400 million in BNB** that FTX had held
-- This left Binance with a massive FTT position
+The decision follows weeks of criticism directed at FTX's founder and Chief Executive Sam Bankman-Fried for regulatory proposals he put forth in a blog post which recommended restrictions regarding DeFi. He has since committed to revising his regulatory position.
 
-Source (Decrypt, November 6, 2022): "Binance had been an early FTX investor since 2019. When exiting its equity stake in 2021, FTX compensated Binance with approximately $2.1 billion in combined BUSD stablecoins and FTT tokens."
+Binance received the funds in FTT as part of its exit last year from an early equity position in FTX it had had since 2019. FTX had bought out Binance's stake in the company through a $2.1 billion mix of FTT and BUSD--the stablecoin native to Binance's exchange--according to a statement from Zhao.
 
-## CZ's November 6 Tweet (verbatim, from CZ's Twitter/X)
+CZ tweeted:
 
-> "As part of Binance's exit from FTX equity last year, Binance received roughly $2.1 billion USD equivalent in cash (BUSD and FTT). Due to recent revelations that have came to light, we have decided to liquidate any remaining FTT on our books."
+> "As part of Binance's exit from FTX equity last year, Binance received roughly $2.1 billion USD equivalent in cash (BUSD and FTT). Due to recent revelations that have came to light, we have decided to liquidate any remaining FTT on our books. 1/4"
+> -- @cz_binance, November 6, 2022
 
-> "We will try to do so in a way that minimizes market impact. Due to market conditions and limited liquidity, we expect this will take a few months to complete."
+CZ said the liquidation is expected to take a few months to complete due to market conditions and limited liquidity. It will also be done in a way that tries to minimize the market impact on FTT, he said.
 
-## The FTT Transfer (from Decrypt)
+Regardless, FTT has dipped 9.5% over the past day to $23.03 from $25.55, according to CoinGecko, bouncing off of a low of around $22 on Sunday.
 
-On Saturday before the announcement (November 5), "22,999,999 FTT tokens (valued at $584 million) were transferred to Binance's exchange — representing 17% of FTT's circulating supply."
+On Saturday, 22,999,999 FTT, worth $584 million at the time, was transferred from a wallet to Binance's exchange, according to Etherscan. That is the equivalent of 17% of the circulating supply of FTT, according to CoinGecko. CZ confirmed the shifted funds were part of the exchange's move to liquidate its position in FTT.
 
-## Immediate Market Impact (from Decrypt)
+Zhao stated in a Twitter thread Sunday that the decision to liquidate its position in FTT was not a shot at its competitor. However, one user on Twitter suggested that the selling could have an impact on loans backed in the token.
 
-- FTT declined 9.5% following the announcement, dropping from $25.55 to $23.03
-- Alameda Research CEO Caroline Ellison subsequently offered to purchase Binance's remaining position at $22 per token
+> "Looks like CZ is slowly dumping $500M worth of FTT on the market, if he continues many of Alameda's FTT backed loans will be liquidated causing a death spiral. Let the party begin!"
+> -- @VersusBtc, November 6, 2022
 
-## Strategic Context — from Fortune (October 5, 2023)
+Caroline Ellison, chief executive of Bankman-Fried's crypto trading firm Alameda Research, offered to buy Binance's remaining FTT for a set price of $22 if Zhao was looking to "minimize the market impact" of the move as well.
 
-Source: Fortune, "'Going Infinite' has new details on how CZ sank FTX"
+> "@cz_binance if you're looking to minimize the market impact on your FTT sales, Alameda will happily buy it all from you today at $22!"
+> -- @carolinecapital, November 6, 2022
 
-As analyzed by Michael Lewis in *Going Infinite*:
-- CZ demanded payment heavily weighted toward FTT tokens in the equity exit
-- This gave CZ a strategic weapon — a large enough FTT position to crash the token's price if sold
-- CZ required SBF to return BNB tokens that SBF could have used against Binance
-- The exit terms "trapped" SBF — Binance could threaten FTX's stability, but FTX couldn't reciprocate
+Binance has been the leading exchange in terms of FTT's volume in the past day. Over the past 24 hours, Binance accounted for 6.3% of FTT's trading volume or $95.4 million, according to CoinGecko.
 
-## Personal Rivalry Catalyst (from BeInCrypto)
+Binance was an early investor in FTX and while the sum of the initial investment has not been disclosed, Zhao had told Forbes around the time of Binances exit, "We've seen tremendous growth from them, we're very happy with that, but we've exited completely."
 
-The personal friction escalated in late October 2022:
-- SBF made public comments about whether CZ "is allowed to go to DC" to represent crypto
-- CZ had been hearing reports about SBF lobbying against Binance in Washington
-- CZ stated: "I won't support people who lobby against other industry players behind their backs"
-
-This personal friction combined with the CoinDesk Alameda balance sheet article (November 2) to trigger CZ's decision.
-
-## Sources
-
-- Decrypt: "Binance Moves to Liquidate Its Entire Position in FTX Tokens" (November 6, 2022)
-- BeInCrypto: "CZ Finally Reveals Hidden Story Behind Binance Exit From FTX"
-- Fortune: "'Going Infinite' has new details on how CZ sank FTX" (October 5, 2023)
-- CZ's Twitter/X post (November 6, 2022): https://x.com/cz_binance/status/1589283421704290306
+On Sunday, CZ said that his company usually holds tokens for the long term, but that Binance had held on to its position in FTT for too long.

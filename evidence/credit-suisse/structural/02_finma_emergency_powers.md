@@ -1,67 +1,76 @@
 ---
-source_url: https://www.finma.ch/en/enforcement/recovery-und-resolution-n/gesetzliche-grundlagen/banken/ | https://www.finma.ch/en/news/2023/03/20230323-mm-at1-kapitalinstrumente/
-date: 2023-03-19 (Emergency Ordinance enacted)
-description: FINMA's legal authority under Swiss law to intervene in failing banks — sourced from FINMA's own published legal basis pages and AT1 press release
+source_url: https://www.finma.ch/en/news/2023/03/20230323-mm-at1-kapitalinstrumente/ | https://www.finma.ch/en/enforcement/recovery-und-resolution-n/gesetzliche-grundlagen/banken/
+date: 2023-03-23 (AT1 press release) | ongoing (legal basis page)
+description: FINMA AT1 write-down press release (full text) and legal basis for bank recovery/resolution (full text)
 ---
 
-# FINMA Emergency Powers — Swiss Bank Resolution Authority
+# FINMA Press Release: FINMA provides information about the basis for writing down AT1 capital instruments
 
-## Legislative Framework (from FINMA website: "Legal basis — Banks")
+Published: 23 March 2023
+Source: https://www.finma.ch/en/news/2023/03/20230323-mm-at1-kapitalinstrumente/
 
-The Banking Act (BA) and its implementing ordinances establish the core legal foundation for bank resolution:
+---
 
-- **Systemically Important Banks (Art. 7 ff. BA)**: Sets requirements for institutions performing critical economic functions like maturity transformation and payment transactions.
+The Swiss Financial Market Supervisory Authority FINMA hereby explains the basis for the complete write-down of the nominal value of AT1 capital instruments issued by Credit Suisse. For this, FINMA relies on the issuance prospectuses for the bonds and the Federal Council's Emergency Ordinance.
 
-- **Risk of Insolvency Measures (Art. 25 ff. BA)**: Grants FINMA authority to initiate protective actions when banks face destabilization.
+Due to numerous enquiries about Credit Suisse's capital instruments, so-called AT1 bonds, FINMA is providing information about the basis for writing down these instruments. FINMA has instructed Credit Suisse to completely write down its AT1 instruments and to inform the bondholders concerned without delay. Tier 2 bonds are not written down. Questions regarding individual bonds should be addressed to the issuers of the capital instruments.
 
-- **Liquidation of Insolvent Banks (Art. 33 ff. BA)**: Establishes procedures for restructuring or bankruptcy proceedings.
+## Contractual basis
 
-FINMA has "sole responsibility for initiating protective measures as well as restructuring and bankruptcy proceedings."
+The AT1 instruments issued by Credit Suisse contractually provide that they will be completely written down in a "Viability Event", in particular if extraordinary government support is granted. As Credit Suisse was granted extraordinary liquidity assistance loans secured by a federal default guarantee on 19 March 2023, these contractual conditions were met for the AT1 instruments issued by the bank.
 
-## Implementing Regulations (from FINMA website)
+## Federal Council's Emergency Ordinance
 
-- **Banking Ordinance (BO)**: Specifies operational details for emergency planning, recovery and resolution planning, and resolvability improvements for systemically important institutions (Art. 60 ff.).
+On 19 March 2023, the Federal Council enacted the Emergency Ordinance on Additional Liquidity Assistance Loans and the Granting of Federal Default Guarantees for Liquidity Assistance Loans by the Swiss National Bank to Systemically Important Banks. The Ordinance also authorises FINMA to order the borrower and the financial group to write down Additional Tier 1 capital.
 
-- **Capital Adequacy Ordinance (CAO)**: Addresses loss-absorbing capital requirements (Art. 18 ff.), enabling Additional Tier 1 capital and supplementary capital to offset losses during insolvency measures.
+Based on the contractual agreements and the Emergency Ordinance, FINMA instructed Credit Suisse to write down the AT1 bonds.
 
-- **Liquidity Ordinance (LiqO)**: Establishes liquidity standards and buffers (Art. 19 ff.), with provisions for institution-specific requirements during restructuring or liquidation scenarios.
+FINMA CEO Urban Angehrn: "On Sunday, a solution could be found to protect clients, the financial centre and the markets. In this context, it is important that CS's banking business continues to function smoothly and without interruption. That is now the case."
 
-- **FINMA Banking Insolvency Ordinance**: Defines restructuring and bankruptcy proceedings under FINMA's exclusive jurisdiction.
+## Instruments for institutional investors
 
-## FINMA AT1 Write-Down Press Release (March 23, 2023)
+AT1 instruments in Switzerland are designed in such a way that they are written down or converted into Common Equity Tier 1 capital before the equity capital of the bank concerned is completely used up or written down. The instruments publicly issued by large banks are mainly held by institutional investors due to their risk profile and large denominations.
 
-Source: FINMA press release, "FINMA provides information about the basis for writing down AT1 capital instruments"
+## Affected publicly issued instruments
 
-On March 23, 2023, FINMA explained the basis for the Credit Suisse AT1 write-down:
+The following is a list of all affected publicly issued Additional Tier 1 capital (AT1) instruments:
 
-- Credit Suisse's AT1 instruments contained provisions for complete write-down upon a "Viability Event," specifically when "extraordinary government support is granted."
-- The liquidity assistance loans secured by federal guarantee on March 19 triggered these contractual conditions.
-- The Federal Council's Emergency Ordinance (enacted March 19, 2023) on Additional Liquidity Assistance authorized FINMA to order write-down of Additional Tier 1 capital.
-- All 13 publicly issued AT1 instruments (denominated in USD, CHF, and SGD) were written down to zero.
-- Tier 2 bonds were not affected.
-- Holders were primarily institutional investors.
-- FINMA CEO Urban Angehrn stated: "On Sunday, a solution could be found to protect clients, the financial centre and the markets."
+| ISIN | Date of issue | Currency | Name |
+|------|---------------|----------|------|
+| US22546DAB29 (144A) / XS0989394589 (Reg S) | 11.12.2013 | USD | 7.500% Tier 1 Capital Notes |
+| US225436AA21 (144A) / XS1076957700 (Reg S) | 18.12.2014 | USD | 6.250% Tier 1 Capital Notes |
+| CH0360172719 | 22.03.2017 | CHF | 3.875% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AJ72 (144A) / USH3698DBW32 (Reg S) | 16.07.2018 | USD | 7.500% Perpetual Tier 1 Contingent Write-Down Capital Notes |
+| CH0428194226 | 04.09.2018 | CHF | 3.500% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AK46 (144A) / USH3698DBZ62 (Reg S) | 12.09.2018 | USD | 7.250% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| CH0482172324 | 06.06.2019 | SGD | 5.625% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AL29 (144A) / USH3698DCP71 (Reg S) | 21.08.2019 | USD | 6.375% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| CH0494734384 | 11.09.2019 | CHF | 3.000% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AN84 (144A) / USH3698DCV40 (Reg S) | 24.01.2020 | USD | 5.100% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AR98 (144A) / USH3698DDA93 (Reg S) | 11.08.2020 | USD | 5.250% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AS71 (144A) / USH3698DDD33 (Reg S) | 09.12.2020 | USD | 4.500% Perpetual Tier 1 Contingent Write-down Capital Notes |
+| US225401AX66 / USH3698DDQ46 | 23.06.2022 | USD | 9.750% Perpetual Tier 1 Contingent Write-down Capital Notes |
 
-## Emergency Ordinance (March 16-19, 2023)
+Contact: Tobias Lux, Spokesperson, Tel. +41 31 327 91 71 | Vinzenz Mathys, Spokesperson, Tel. +41 31 327 19 77
 
-### March 16, 2023 — Initial Emergency Ordinance
-"Emergency Ordinance on Additional Liquidity Assistance Loans and the Granting of Federal Default Guarantees"
-- Authorized the SNB to provide additional liquidity assistance beyond normal facilities
-- Granted federal government guarantees for these loans
+---
 
-### March 19, 2023 — Critical Amendment
-The Federal Council amended the emergency ordinance:
+# FINMA: Legal basis for the recovery and resolution of banks
 
-**Article 5a — AT1 Write-Down Authority:** Authorized FINMA to order a systemically important bank receiving government support to write down its additional core capital (AT1) completely.
+Source: https://www.finma.ch/en/enforcement/recovery-und-resolution-n/gesetzliche-grundlagen/banken/
 
-**Article 10a — Bypass Shareholder Approval:** Removed the requirement for general meeting (shareholder) approval for transactions involving systemically important banks under the emergency ordinance.
+---
 
-## Subsequent Legal Challenge
+The financial market law principles for banks relating to recovery and resolution are primarily found in the Banking Act and the ordinances based on it.
 
-The Swiss Federal Administrative Court ruled (October 2025) that Article 5a of the Emergency Ordinance was unconstitutional in several respects — it violated constitutional requirements for emergency ordinances, improperly delegated expropriation rights, and violated the guarantee of ownership. FINMA appealed. For the purposes of March 2023, FINMA acted under these powers and the write-down was executed.
+Banks fulfil important economic functions such as maturity transformation and payment transactions. Institutions that perform a very high proportion of these activities are considered systemically important. The Banking Act and the ordinances based on it contain specific provisions to increase the resilience of these institutions and define requirements for crisis planning. In addition, the law grants FINMA sole responsibility for initiating protective measures as well as restructuring and bankruptcy proceedings.
 
-## Sources
+The provisions of the Banking Act (BA) on systemically important banks (Art. 7 ff.), on measures in the event of a risk of insolvency (Art. 25 ff.) and on the liquidation of insolvent banks (Art. 33 ff.) set out the specific requirements and measures for the recovery and resolution planning of systemically important banks and for a possible restructuring or bankruptcy of a bank.
 
-- FINMA: Legal basis for bank resolution (https://www.finma.ch/en/enforcement/recovery-und-resolution-n/gesetzliche-grundlagen/banken/)
-- FINMA: AT1 capital instruments press release (March 23, 2023)
-- Federal Administrative Court: "Unlawful write-off of AT1 capital instruments" media release (October 2025)
+The Banking Ordinance (BO) specifies the necessary implementing provisions. In particular, the ordinance regulates emergency planning, recovery and resolution planning and improvements to the resolvability of systemically important banks (Art. 60 ff.).
+
+The Capital Adequacy Ordinance (CAO) also contains the provisions on additional loss-absorbing capital (Art. 18 ff.). Additional Tier 1 capital and supplementary capital can be used to offset losses in the event of insolvency measures. This in turn strengthens the effectiveness of insolvency measures.
+
+The Liquidity Ordinance (LiqO) specifies the liquidity requirements for systemically important banks and covers their specific risks ("liquidity buffer", Art. 19 ff.). The additional requirements must, for example, take account of a prolonged stress situation. FINMA may also stipulate additional institution-specific requirements, for example to take account of intraday liquidity requirements or liquidity requirements for a restructuring or liquidation.
+
+The FINMA Banking Insolvency Ordinance specifies the restructuring and bankruptcy proceedings under banking law within FINMA's remit.
