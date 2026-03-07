@@ -183,8 +183,39 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
     total_tokens["output"] += phase2_result["token_usage"]["output_tokens"]
     total_tokens["reasoning"] += phase2_result["token_usage"].get("reasoning_tokens", 0)
 
-    print(f"    ✓ {len(phase2_output.get('eliminated_hypotheses', []))} eliminations")
-    print(f"    ✓ {len(phase2_output.get('surviving_hypotheses', []))} survivors")
+    # Post-process: Add score-based eliminations (score < 0.2)
+    eliminated = list(phase2_output.get("eliminated_hypotheses", []))
+    surviving = list(phase2_output.get("surviving_hypotheses", []))
+
+    # Check each survivor's score
+    low_score_eliminations = []
+    final_survivors = []
+
+    for hyp in surviving:
+        if hyp.get("score", 1.0) < 0.2:
+            # Eliminate due to low confidence
+            low_score_eliminations.append({
+                "id": hyp["id"],
+                "name": hyp["name"],
+                "killed_by_atom": "low_confidence",
+                "killed_in_cycle": context["cycle_num"],
+                "reason": f"Score {hyp['score']:.2f} dropped below 0.2 threshold, indicating hypothesis is highly implausible"
+            })
+        else:
+            final_survivors.append(hyp)
+
+    # Merge eliminations
+    eliminated.extend(low_score_eliminations)
+
+    # Update phase2_output with final lists
+    phase2_output["eliminated_hypotheses"] = eliminated
+    phase2_output["surviving_hypotheses"] = final_survivors
+
+    gemini_eliminations = len(phase2_output.get("eliminated_hypotheses", [])) - len(low_score_eliminations)
+    print(f"    ✓ {len(eliminated)} total eliminations:")
+    print(f"      - {gemini_eliminations} evidence-based (from Gemini)")
+    print(f"      - {len(low_score_eliminations)} score-based (< 0.2 threshold)")
+    print(f"    ✓ {len(final_survivors)} survivors")
     print(f"    ✓ Token usage: {phase2_result['token_usage']['input_tokens']} in, {phase2_result['token_usage']['output_tokens']} out")
 
     # =========================================================================

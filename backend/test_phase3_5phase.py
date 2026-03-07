@@ -32,6 +32,13 @@ async def test_cycle1_hypothesis_generation():
 
     result = await investigate(context)
 
+    # Show raw output
+    print("\n" + "=" * 60)
+    print("RAW OUTPUT FROM INVESTIGATOR:")
+    print("=" * 60)
+    print(json.dumps(result, indent=2))
+    print("=" * 60)
+
     # Validate structure
     assert "surviving_hypotheses" in result, "Missing surviving_hypotheses"
     assert "evidence_requests" in result, "Missing evidence_requests"
@@ -147,6 +154,13 @@ async def test_cycle2_full_pipeline():
     }
 
     result = await investigate(context)
+
+    # Show raw output
+    print("\n" + "=" * 60)
+    print("RAW OUTPUT FROM INVESTIGATOR (CYCLE 2):")
+    print("=" * 60)
+    print(json.dumps(result, indent=2))
+    print("=" * 60)
 
     # Validate all 5 phases ran
     assert "phase1_scoring" in result["phase_outputs"], "Missing Phase 1"
