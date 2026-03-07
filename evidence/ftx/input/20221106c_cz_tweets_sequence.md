@@ -1,10 +1,10 @@
 ---
 source_url: https://twitter.com/caborek | https://gist.github.com/travisbrown/04a30eae7808d5ff0d52f9e90a5e7282
-date: 2022-11-06 to 2022-11-09
-description: CZ's tweet sequence during FTX crisis — liquidation announcement through LOI and withdrawal
+date: 2022-11-06 to 2022-11-08
+description: CZ's tweet sequence — liquidation announcement through Binance LOI
 ---
 
-# CZ Tweet Sequence (November 6-9, 2022)
+# CZ Tweet Sequence (November 6-8, 2022)
 
 Reconstructed from news reporting and archive sources. CZ's Twitter/X account (@caborek) still exists, some tweets may still be live.
 
@@ -30,10 +30,3 @@ Reconstructed from news reporting and archive sources. CZ's Twitter/X account (@
 
 "Every time a major player in an industry falls, it hurts every other player. I am focused on the industry's wellbeing. Regulators will scrutinize exchanges even more. Licenses, regulations are the only way forward."
 
-## November 9, 2022
-
-"As a result of corporate due diligence, as well as the latest news reports regarding mishandled customer funds and alleged US agency investigations, we have decided that we will not pursue the potential acquisition of FTX.com."
-
-"In the beginning, our hope was to be able to support FTX's customers to provide liquidity, but the issues are beyond our control or ability to help."
-
-"Sad day. Tried to help, but..."
