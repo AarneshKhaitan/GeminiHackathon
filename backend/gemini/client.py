@@ -103,27 +103,38 @@ class GeminiClient:
                 try:
                     parsed = json.loads(content)
                 except json.JSONDecodeError as json_err:
-                    # Try to extract JSON from markdown code blocks
+                    # Try to extract JSON from markdown code blocks first
                     text = content
                     if "```json" in text:
                         text = text.split("```json")[1].split("```")[0].strip()
                     elif "```" in text:
                         text = text.split("```")[1].split("```")[0].strip()
 
-                    # Try parsing again
+                    # Try parsing the extracted text
                     try:
                         parsed = json.loads(text)
                     except json.JSONDecodeError:
-                        # If still failing, it might be control characters
-                        # Try with strict=False to allow control characters
+                        # If still failing, try to find JSON object boundaries
+                        # Look for first { and last }
                         import re
-                        # Remove invalid control characters but keep newlines/tabs we want
-                        cleaned = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F]', '', text)
-                        try:
-                            parsed = json.loads(cleaned, strict=False)
-                        except json.JSONDecodeError:
-                            # Last resort: try original content with strict=False
-                            parsed = json.loads(content, strict=False)
+
+                        # Try to extract just the JSON object
+                        json_match = re.search(r'\{.*\}', text, re.DOTALL)
+                        if json_match:
+                            json_str = json_match.group(0)
+                            try:
+                                # Clean control characters but keep newlines/tabs
+                                cleaned = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F]', '', json_str)
+                                parsed = json.loads(cleaned, strict=False)
+                            except json.JSONDecodeError:
+                                # Try with original content as last resort
+                                json_match_orig = re.search(r'\{.*\}', content, re.DOTALL)
+                                if json_match_orig:
+                                    parsed = json.loads(json_match_orig.group(0), strict=False)
+                                else:
+                                    raise
+                        else:
+                            raise
 
                 # Validate against schema if provided (basic check)
                 if schema:
