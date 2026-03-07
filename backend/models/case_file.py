@@ -20,7 +20,7 @@ class Hypothesis(BaseModel):
 
     id: str = Field(..., description="Unique hypothesis identifier (e.g., 'H01')")
     name: str = Field(..., description="Short name for the hypothesis")
-    description: str = Field(..., description="Detailed description of the hypothesis")
+    description: str = Field(default="", description="Detailed description of the hypothesis")
     score: float = Field(..., description="Confidence score 0.0-1.0")
     evidence_chain: list[str] = Field(
         default_factory=list,

@@ -28,6 +28,9 @@ from pydantic import BaseModel
 # Phase 6: LangGraph
 from graph.investigation_graph import compiled_graph
 
+# Playback
+from playback import playback_cached_investigation
+
 # Config
 from config import MAX_CYCLES, CONVERGENCE_THRESHOLD
 
@@ -327,28 +330,27 @@ async def investigate_live(request: InvestigateRequest):
 @app.post("/api/investigate/cached")
 async def investigate_cached(request: CachedInvestigateRequest):
     """
-    Pre-cached demo fallback - returns cached investigation.
+    Cached investigation playback - streams cached investigation with simulated delays.
+
+    This endpoint provides a 1-minute demo experience by playing back a pre-computed
+    investigation with realistic timing delays to simulate real-time reasoning.
 
     Args:
         request: CachedInvestigateRequest with entity
 
     Returns:
-        Cached investigation result as JSON
+        StreamingResponse with SSE events
     """
 
-    cached = load_cached_run(request.entity)
-
-    if not cached:
-        return {
-            "error": "No cached run available for this entity",
-            "entity": request.entity,
+    return StreamingResponse(
+        playback_cached_investigation(entity=request.entity),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
         }
-
-    return {
-        "status": "cached",
-        "entity": request.entity,
-        "data": cached,
-    }
+    )
 
 
 @app.get("/api/case/{entity}")

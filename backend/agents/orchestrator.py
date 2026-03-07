@@ -368,13 +368,14 @@ def update_case_file_with_investigator_output(
 # =============================================================================
 
 
-def decide_convergence(case_file: dict, cycle_num: int) -> dict:
+def decide_convergence(case_file: dict, cycle_num: int, min_cycles: int = 3) -> dict:
     """
     Decide whether to continue investigation or converge.
 
     Args:
         case_file: Current case file (dict)
         cycle_num: Current cycle number
+        min_cycles: Minimum cycles before convergence allowed (default: 3)
 
     Returns:
         {
@@ -385,6 +386,7 @@ def decide_convergence(case_file: dict, cycle_num: int) -> dict:
         }
 
     Convergence triggers:
+        0. Minimum cycles not yet reached (forced continue)
         1. Hypothesis count ≤ CONVERGENCE_THRESHOLD (2)
         2. Max cycles reached
         3. Stagnation: hypothesis count unchanged for STAGNATION_CYCLES
@@ -392,6 +394,15 @@ def decide_convergence(case_file: dict, cycle_num: int) -> dict:
     """
     case_file_obj = CaseFile(**case_file)
     hypotheses_count = len(case_file_obj.active_hypotheses)
+
+    # Trigger 0: Enforce minimum cycles (demo requirement)
+    if cycle_num < min_cycles:
+        return {
+            "decision": "continue",
+            "reason": f"Investigation ongoing: minimum {min_cycles} cycles required (current: {cycle_num})",
+            "hypotheses_count": hypotheses_count,
+            "cycles_completed": cycle_num,
+        }
 
     # Trigger 1: Hypothesis count at or below threshold
     if hypotheses_count <= CONVERGENCE_THRESHOLD:

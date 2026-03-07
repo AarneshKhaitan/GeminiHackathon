@@ -177,6 +177,7 @@ def check_convergence_node(state: InvestigationState) -> InvestigationState:
     decision = decide_convergence(
         state["case_file"],
         cycle_num=cycle_num,
+        min_cycles=3,  # Force minimum 3 cycles for demo
     )
 
     state["convergence_decision"] = decision
