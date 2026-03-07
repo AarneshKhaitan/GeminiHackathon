@@ -14,12 +14,15 @@ from pathlib import Path
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
 
 # Ensure backend package is importable
 sys.path.insert(0, str(Path(__file__).parent))
 
 from agents.investigator_5phase import investigate
 from config import MAX_CYCLES, CONVERGENCE_THRESHOLD, STAGNATION_CYCLES
+from playback import playback_cached_investigation
 
 app = FastAPI(title="IHEE Investigation Engine")
 
@@ -409,6 +412,36 @@ async def ws_handler(ws: WebSocket, session_id: str):
             await ws.send_text(json.dumps({"type": "ERROR", "message": str(exc)}))
         except Exception:
             pass
+
+
+class CachedInvestigateRequest(BaseModel):
+    entity: str
+
+
+@app.post("/api/investigate/cached")
+async def investigate_cached(request: CachedInvestigateRequest):
+    """
+    Cached investigation playback - streams cached investigation with simulated delays.
+
+    This endpoint provides a 2-minute demo experience by playing back a pre-computed
+    investigation with realistic timing delays to simulate real-time reasoning.
+
+    Args:
+        request: CachedInvestigateRequest with entity
+
+    Returns:
+        StreamingResponse with SSE events
+    """
+
+    return StreamingResponse(
+        playback_cached_investigation(entity=request.entity),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 if __name__ == "__main__":

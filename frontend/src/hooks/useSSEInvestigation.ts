@@ -133,7 +133,7 @@ export function useSSEInvestigation() {
               entity: trigger.entity,
               event: trigger.description,
               date: new Date().toISOString().split('T')[0],
-              magnitude: trigger.magnitude || 'N/A',
+              magnitude: trigger.magnitudeSigma || 'N/A',
               description: trigger.description,
             },
             mode: 'live',

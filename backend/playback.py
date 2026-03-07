@@ -27,11 +27,14 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
         SSE-formatted event strings
     """
 
-    # Load cached investigation
-    cache_file = Path(__file__).parent / "corpus" / "cached" / f"{entity.lower().replace(' ', '_')}_full_run.json"
+    # Load cached investigation - use demo file for Credit Suisse
+    if entity.lower() == "credit suisse":
+        cache_file = Path(__file__).parent / "corpus" / "cached" / "credit_suisse_demo.json"
+    else:
+        cache_file = Path(__file__).parent / "corpus" / "cached" / f"{entity.lower().replace(' ', '_')}_full_run.json"
 
     if not cache_file.exists():
-        cache_file = Path(__file__).parent / "corpus" / "cached" / "credit_suisse_full_run.json"
+        cache_file = Path(__file__).parent / "corpus" / "cached" / "credit_suisse_demo.json"
 
     if not cache_file.exists():
         yield sse_event("ERROR", {"message": f"No cached investigation for {entity}"})
@@ -51,7 +54,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
         "mode": "cached",
     })
 
-    await asyncio.sleep(0.2)
+    await asyncio.sleep(2.0)
 
     # Tier 2 evaluation
     yield sse_event("TIER2_EVALUATION", {
@@ -59,29 +62,29 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
         "done": False,
     })
 
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(3.0)
 
     yield sse_event("TIER2_EVALUATION", {
         "text": f"Signal magnitude: {trigger.get('magnitude', 'N/A')}\n",
         "done": False,
     })
 
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(3.0)
 
     yield sse_event("TIER2_EVALUATION", {
-        "text": "Decision: PROMOTE to Tier 4 investigation\n",
+        "text": "Decision: PROMOTE to Tier 3 investigation\n",
         "done": True,
     })
 
-    await asyncio.sleep(0.2)
+    await asyncio.sleep(5.0)  # Give time to see the escalation decision
 
     # Tier escalated
     yield sse_event("TIER_ESCALATED", {
         "from": 2,
-        "to": 4,
+        "to": 3,
     })
 
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(3.0)  # Pause before starting investigation cycles
 
     # Stream cycles
     cycle_history = case_file.get("cycle_history", [])
@@ -96,7 +99,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
             "cycle_number": cycle_num,
         })
 
-        await asyncio.sleep(0.3)
+        await asyncio.sleep(2.0)
 
         # Simulate reasoning phase
         yield sse_event("AGENT_STATUS_CHANGED", {
@@ -104,16 +107,17 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
             "status": "reasoning",
         })
 
-        await asyncio.sleep(1.5)  # Simulate reasoning time
+        await asyncio.sleep(8.0)  # Longer reasoning time for demo
 
-        # Hypotheses - show all active ones for cycle 1, then score updates for subsequent cycles
+        # Hypotheses - show ALL in cycle 1 (active + eliminated), then score updates for subsequent cycles
         if cycle_num == 1:
-            # First cycle - generate hypotheses
-            for h in active_hypotheses:
+            # First cycle - generate ALL hypotheses (both surviving and those that will be eliminated)
+            all_hypotheses = active_hypotheses + eliminated_hypotheses
+            for h in all_hypotheses:
                 yield sse_event("HYPOTHESIS_GENERATED", {
                     "hypothesis": {
                         "id": h["id"],
-                        "label": h["name"],
+                        "label": h.get("name", h.get("label", "")),
                         "description": h.get("description", ""),
                         "status": "surviving",
                         "initialConfidence": h.get("score", 0.5),
@@ -123,7 +127,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
                         "contradictingAtoms": [],
                     }
                 })
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(1.0)
         else:
             # Subsequent cycles - score hypotheses
             for h in active_hypotheses:
@@ -131,7 +135,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
                     "id": h["id"],
                     "confidence": h.get("score", 0.5),
                 })
-                await asyncio.sleep(0.08)
+                await asyncio.sleep(0.8)
 
         # Eliminations (show all eliminations that happened in this cycle)
         for h in eliminated_hypotheses:
@@ -142,11 +146,11 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
                     "kill_reason": h.get("reason", "Contradicted by evidence"),
                     "cycle": cycle_num,
                 })
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(1.0)
 
         # Compression
         yield sse_event("COMPRESSION_STARTED", {})
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(3.0)
 
         compressed_state = cycle_data.get("compressed_state", "")
         if compressed_state:
@@ -163,7 +167,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
             "compression_ratio": round(reasoning_tokens / max(compressed_tokens, 1), 2),
         })
 
-        await asyncio.sleep(0.3)
+        await asyncio.sleep(2.0)
 
         # Key insights
         key_insights = cycle_data.get("key_insights", [])
@@ -174,7 +178,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
                     "insight": insight
                 }
             })
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(0.8)
 
         # Token usage
         yield sse_event("TOKENS_UPDATED", {
@@ -194,7 +198,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
             "evidence_collected": [],
         })
 
-        await asyncio.sleep(0.3)
+        await asyncio.sleep(2.0)
 
     # Convergence reached
     alert = case_file.get("alert", {})
@@ -211,7 +215,7 @@ async def playback_cached_investigation(entity: str) -> AsyncIterator[str]:
         },
     })
 
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(3.0)
 
     # Investigation complete
     yield sse_event("INVESTIGATION_COMPLETE", {

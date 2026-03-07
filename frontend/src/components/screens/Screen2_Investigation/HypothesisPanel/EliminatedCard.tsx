@@ -8,7 +8,7 @@ interface EliminatedCardProps {
 }
 
 export function EliminatedCard({ hypothesis }: EliminatedCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)  // Start expanded to show kill reason
   const [flashBg, setFlashBg] = useState(true)
 
   useEffect(() => {
