@@ -43,6 +43,7 @@ from agents.investigator_v2 import investigate
 # Phase 4: Evidence Pipeline
 from agents.evidence.packager import gather_evidence
 from agents.evidence.batch_tagger import tag_all_evidence_parallel
+from agents.evidence.selector import select_evidence_for_requests
 
 
 # =============================================================================
@@ -67,8 +68,9 @@ class InvestigationState(TypedDict, total=False):
     # Core state
     case_file: dict
 
-    # Pre-tagged evidence cache (tagged once at start)
-    all_tagged_evidence: list[dict]
+    # ChromaDB embedding management
+    embeddings_indexed: bool  # Flag to prevent re-indexing
+    embedding_launched: bool  # Flag to prevent duplicate launches
 
     # Intermediate results
     tier2_assessment: dict
@@ -140,29 +142,34 @@ async def investigate_node(state: InvestigationState) -> InvestigationState:
 
     state["investigation_output"] = result
 
-    # If Cycle 1 and we have hypotheses, launch parallel batch tagging in background
-    if cycle_num == 1 and result.get("surviving_hypotheses") and not state.get("all_tagged_evidence"):
-        import asyncio
+    # If Cycle 1 and we have hypotheses, embed all observations for semantic search
+    # Do NOT tag them yet - we'll tag selected observations per-cycle
+    if (cycle_num == 1 and
+        result.get("surviving_hypotheses") and
+        not state.get("embeddings_indexed") and
+        not state.get("embedding_launched")):
+
         entity = state["case_file"]["entity"]
-        hypotheses = result["surviving_hypotheses"]
 
-        print(f"  🏷️  Launching parallel batch tagging in background (10 parallel batches)...")
+        print(f"  📊 Indexing observations in vector database (for semantic search)...")
 
-        # Launch batch tagging as background task (don't wait)
-        async def batch_tag_background():
-            try:
-                all_tagged = await tag_all_evidence_parallel(
-                    entity=entity,
-                    hypotheses=hypotheses,
-                    batch_size=7,  # 71 observations / 10 batches ≈ 7 per batch
-                )
-                state["all_tagged_evidence"] = all_tagged
-                print(f"  ✓ Background tagging complete: {len(all_tagged)} observations")
-            except Exception as e:
-                print(f"  ⚠️  Background tagging failed: {e}")
+        # Mark as launched to prevent duplicates
+        state["embedding_launched"] = True
 
-        # Create task but don't await it - let it run in parallel
-        asyncio.create_task(batch_tag_background())
+        # Load all observations (untagged)
+        from utils.corpus_loader import load_all_corpus
+        structural_obs = load_all_corpus(entity, "structural")
+        empirical_obs = load_all_corpus(entity, "empirical")
+        all_observations = structural_obs + empirical_obs
+
+        # Index in ChromaDB (computes embeddings)
+        try:
+            from agents.evidence.selector import index_observations
+            index_observations(all_observations, entity)
+            state["embeddings_indexed"] = True
+            print(f"  ✓ Vector index complete: {len(all_observations)} observations indexed")
+        except Exception as e:
+            print(f"  ⚠️  Vector indexing failed: {e}")
 
     print(f"  Completed: {result['token_usage']['total']} tokens used")
 
@@ -187,6 +194,15 @@ def process_output_node(state: InvestigationState) -> InvestigationState:
         parsed,
         cycle_num=cycle_num,
     )
+
+    # Track evidence gathered in this cycle (add to cycle history)
+    new_evidence = state.get("new_evidence", [])
+    if new_evidence and case_file.get("cycle_history"):
+        # Find the current cycle in history and add evidence_gathered
+        for cycle in case_file["cycle_history"]:
+            if cycle["cycle_num"] == cycle_num:
+                cycle["evidence_gathered"] = [obs["observation_id"] for obs in new_evidence]
+                break
 
     state["case_file"] = case_file
 
@@ -229,64 +245,70 @@ async def gather_evidence_node(state: InvestigationState) -> InvestigationState:
     active_hypotheses = state["case_file"]["active_hypotheses"]
     entity = state["case_file"]["entity"]
 
-    # Track which observations have already been gathered
-    already_gathered = []
-    for cycle in state["case_file"].get("cycle_history", []):
-        if "evidence_gathered" in cycle:
-            already_gathered.extend(cycle["evidence_gathered"])
+    # Track which observations have already been gathered (from evidence_collected)
+    already_gathered = [ref["atom_id"] for ref in state["case_file"].get("evidence_collected", [])]
 
     print(f"  Requests: {len(evidence_requests)}")
     print(f"  Already gathered: {len(already_gathered)} observations")
 
-    # Use pre-tagged evidence cache if available (from parallel batch tagging)
-    if state.get("all_tagged_evidence"):
-        print(f"  ✓ Using pre-tagged cache ({len(state['all_tagged_evidence'])} observations)")
-        all_evidence = state["all_tagged_evidence"]
+    # Use ChromaDB to select semantically matching observations
+    if state.get("embeddings_indexed") and evidence_requests:
+        print(f"  🔍 Using semantic search to match {len(evidence_requests)} requests...")
 
-        # Filter: remove already-gathered
-        available = [
-            obs for obs in all_evidence
-            if obs['observation_id'] not in already_gathered
-        ]
-        print(f"  Available after filtering: {len(available)} observations")
+        # Get entity name
+        entity = state["case_file"]["entity"]
 
-        # Filter by request relevance
-        if evidence_requests and available:
-            requested_types = {req.get('type', '').lower() for req in evidence_requests if req.get('type')}
-            keywords = [w for req in evidence_requests for w in req.get('description', '').lower().split() if len(w) > 4]
+        # Load all observations (untagged)
+        from utils.corpus_loader import load_all_corpus
+        structural_obs = load_all_corpus(entity, "structural")
+        empirical_obs = load_all_corpus(entity, "empirical")
+        all_observations = structural_obs + empirical_obs
 
-            filtered = []
-            for obs in available:
-                obs_type = obs.get('type', '').lower()
-                content = obs.get('content', '').lower()
-                type_match = obs_type in requested_types or not requested_types
-                keyword_match = any(kw in content for kw in keywords) if keywords else False
-
-                if type_match or keyword_match:
-                    if keyword_match:
-                        filtered.insert(0, obs)
-                    else:
-                        filtered.append(obs)
-
-            if filtered:
-                available = filtered
-                print(f"  Filtered by relevance: {len(available)} observations")
-
-        # Limit to 15
-        tagged_evidence = available[:15]
-    else:
-        # Fallback: batch tagging not ready yet, use slower on-the-fly tagging
-        print(f"  ⚠️  Pre-tagged cache not ready, falling back to on-the-fly tagging")
-        tagged_evidence = await gather_evidence(
+        # Use selector to find best matches via ChromaDB
+        selected_observations = await select_evidence_for_requests(
             evidence_requests=evidence_requests,
-            active_hypotheses=active_hypotheses,
-            entity=entity,
+            available_observations=all_observations,
             already_gathered=already_gathered,
         )
 
+        print(f"  📋 Selected {len(selected_observations)} observations via semantic search")
+
+        # Now tag the selected observations against current hypotheses
+        if selected_observations and active_hypotheses:
+            print(f"  🏷️  Tagging {len(selected_observations)} selected observations...")
+
+            from agents.evidence.batch_tagger import tag_single_batch
+
+            tagged_evidence = await tag_single_batch(
+                observations=selected_observations,
+                hypotheses=active_hypotheses,
+                batch_num=1
+            )
+
+            print(f"  ✓ Tagged {len(tagged_evidence)} observations")
+        else:
+            tagged_evidence = selected_observations
+
+    else:
+        # Fallback: no embeddings yet or no requests
+        print(f"  ⚠️  Embeddings not ready or no requests, returning empty")
+        tagged_evidence = []
+
     state["new_evidence"] = tagged_evidence
 
-    print(f"  Retrieved: {len(tagged_evidence)} observations")
+    # Update evidence_collected in case_file (FIX: properly track evidence)
+    from agents.orchestrator import update_evidence_collected
+    if tagged_evidence:
+        state["case_file"] = update_evidence_collected(
+            state["case_file"],
+            tagged_evidence,
+            state["current_cycle"]
+        )
+
+    # Track which observations were gathered (for next cycle filtering)
+    gathered_ids = [obs["observation_id"] for obs in tagged_evidence]
+
+    print(f"  Retrieved: {len(tagged_evidence)} observations: {gathered_ids}")
 
     return state
 

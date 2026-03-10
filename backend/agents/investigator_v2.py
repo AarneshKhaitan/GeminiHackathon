@@ -201,7 +201,7 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
     total_tokens["output"] += phase2_result["token_usage"]["output_tokens"]
     total_tokens["reasoning"] += phase2_result["token_usage"].get("reasoning_tokens", 0)
 
-    # Post-process: Add score-based eliminations (score < 0.15 - very conservative)
+    # Post-process: Add score-based eliminations (score < 0.30 - moderate threshold for hybrid approach)
     eliminated = list(phase2_output.get("eliminated_hypotheses", []))
     surviving = list(phase2_output.get("surviving_hypotheses", []))
 
@@ -216,14 +216,14 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
     final_survivors = []
 
     for hyp in surviving:
-        if hyp.get("score", 1.0) < 0.15:  # Changed from 0.2 to 0.15 - more conservative
+        if hyp.get("score", 1.0) < 0.40:  # AGGRESSIVE: Raised to 0.40 for more aggressive elimination
             # Eliminate due to low confidence
             low_score_eliminations.append({
                 "id": hyp["id"],
                 "name": hyp["name"],
                 "killed_by_atom": "low_confidence",
                 "killed_in_cycle": context["cycle_num"],
-                "reason": f"Score {hyp['score']:.2f} dropped below 0.15 threshold, indicating hypothesis is virtually impossible"
+                "reason": f"Score {hyp['score']:.2f} dropped below 0.40 threshold - insufficient evidence support"
             })
         else:
             final_survivors.append(hyp)
@@ -238,7 +238,7 @@ Based on the scored hypotheses from Phase 1, identify which ones MUST be elimina
     gemini_eliminations = len(eliminated) - len(low_score_eliminations)
     print(f"    ✓ {len(eliminated)} total eliminations:")
     print(f"      - {gemini_eliminations} evidence/subsumption-based (from Gemini)")
-    print(f"      - {len(low_score_eliminations)} score-based (< 0.2 threshold)")
+    print(f"      - {len(low_score_eliminations)} score-based (< 0.40 threshold)")
     print(f"    ✓ {len(final_survivors)} survivors")
     print(f"    ✓ Token usage: {phase2_result['token_usage']['input_tokens']} in, {phase2_result['token_usage']['output_tokens']} out")
     logger.info(f"Cycle {context['cycle_num']} Phase 2: Eliminated {len(eliminated)} ({gemini_eliminations} evidence-based, {len(low_score_eliminations)} score-based), {len(final_survivors)} survivors")

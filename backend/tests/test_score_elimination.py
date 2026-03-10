@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
 #!/usr/bin/env python3
 """Test score-based elimination (score < 0.2)"""
 

@@ -27,7 +27,7 @@ def build_phase1_score_and_crossmodal_prompt(
     """
 
     if cycle_num == 1:
-        # Cycle 1: Generate initial hypotheses
+        # Cycle 1: Generate initial hypotheses (15-20 for comprehensive coverage)
         return f"""
 You are a financial risk investigator analyzing a trigger signal for {entity}.
 
@@ -36,34 +36,82 @@ You are a financial risk investigator analyzing a trigger signal for {entity}.
 
 # PHASE 1: HYPOTHESIS GENERATION
 
-Generate 8-10 competing hypotheses that could explain this trigger signal.
+Generate 15-20 diverse hypotheses covering ALL plausible causal mechanisms that could explain this trigger signal.
 
 ## Requirements:
-1. Cover diverse causal categories:
-   - Structural risk (capital, liquidity, duration mismatch, concentration)
-   - Market risk (rates, FX, equity, credit spreads)
-   - Counterparty risk (exposure to failing entities)
-   - Operational risk (fraud, systems failure, key person)
-   - Regulatory/legal risk (violations, investigations)
-   - Reputational risk (social media, news)
-   - Contagion/systemic risk (correlated exposures)
+1. Cover diverse causal categories COMPREHENSIVELY:
+
+   **Structural risk (4-5 hypotheses):**
+   - Capital adequacy issues (CET1, leverage ratio)
+   - Liquidity mismatches (LCR, NSFR violations)
+   - Duration/maturity mismatches (HTM accounting hiding losses)
+   - Asset concentration risks (single sector/counterparty exposure)
+
+   **Market risk (3-4 hypotheses):**
+   - Interest rate exposure (rate sensitivity, DV01)
+   - Credit spread movements (CDS widening, bond spreads)
+   - FX volatility (currency mismatches)
+   - Equity market correlations
+
+   **Counterparty/contagion (3-4 hypotheses):**
+   - Direct counterparty failures
+   - Correlation cascades (multiple exposures failing together)
+   - Systemic interconnections (too-interconnected-to-fail)
+   - Network effects (second-order exposures)
+
+   **Operational/governance (2-3 hypotheses):**
+   - Management failures or turnover
+   - Internal controls breakdown
+   - Fraud/misconduct indicators
+   - Key person risk
+
+   **Regulatory/legal (2-3 hypotheses):**
+   - Compliance violations
+   - Regulatory interventions or investigations
+   - Legal proceedings or settlements
+
+   **Reputational (1-2 hypotheses):**
+   - Social media amplification
+   - Media narrative momentum
+   - Loss of stakeholder confidence
 
 2. Each hypothesis must be:
    - Specific and testable
    - Falsifiable
-   - Assigned initial score 0.0-1.0
+   - Assigned initial score 0.3-0.7 (rough scoring acceptable - evidence will refine)
+
+3. Prioritize COVERAGE over precision:
+   - Include "long shot" hypotheses that might explain outlier data
+   - Edge cases and tail risks should be represented
+   - Better to include uncertain hypotheses than miss the truth
+
+## HYPOTHESIS QUALITY EXAMPLES:
+
+❌ BAD (too vague): "Capital is too low"
+✅ GOOD: "CET1 ratio below 10.5% due to unrealized losses on HTM bond portfolio hidden from regulatory balance sheet"
+
+❌ BAD (not falsifiable): "Management made bad decisions"
+✅ GOOD: "October 2022 strategic restructuring announcement (CS First Boston spinoff) triggered institutional counterparty abandonment due to execution risk"
+
+❌ BAD (not testable): "Market lost confidence"
+✅ GOOD: "Archegos ($5.5B loss) + Greensill ($10B frozen) scandals in 2021 created lasting reputational damage, amplified by social media in Q4 2022"
+
+Each hypothesis MUST:
+- Cite specific mechanisms (e.g., "HTM accounting", "CDS spreads", "LCR ratio")
+- Include testable predictions (e.g., "CET1 < 10.5%", "deposit outflows > CHF 100B")
+- Be falsifiable with specific evidence (e.g., "If LCR > 120%, liquidity crisis hypothesis fails")
 
 ## OUTPUT FORMAT (JSON):
 
 {{
-  "thinking": "Write detailed reasoning for hypothesis generation. Explain what each hypothesis means and why it's plausible given the trigger signal. Be thorough in your analysis.",
+  "thinking": "Write detailed reasoning for hypothesis generation. Explain what each hypothesis means and why it's plausible given the trigger signal. Be thorough in your analysis. Aim for comprehensive coverage across all causal categories.",
 
   "surviving_hypotheses": [
     {{
       "id": "H01",
       "name": "Short name",
       "description": "Detailed description",
-      "score": 0.75,
+      "score": 0.50,
       "evidence_chain": [],
       "status": "active",
       "reasoning": "Why this hypothesis is plausible"
@@ -73,7 +121,7 @@ Generate 8-10 competing hypotheses that could explain this trigger signal.
   "cross_modal_flags": []
 }}
 
-Generate 8-10 hypotheses with clear reasoning.
+Generate 15-20 hypotheses with clear reasoning. Cast a wide net - aggressive elimination in later cycles will filter to the truth.
 """
 
     else:
@@ -121,14 +169,25 @@ You are a financial risk investigator in Cycle {cycle_num} for {entity}.
 
 # PHASE 1: SCORE + CROSS-MODAL ANALYSIS
 
-Your task has TWO parts:
+Your task has THREE parts:
 
-## PART A: SCORE HYPOTHESES
+## PART A: SCORE HYPOTHESES (WITH DIFFERENTIATION)
 For EACH hypothesis, evaluate it against ALL evidence:
 1. How well does structural evidence support/contradict it?
 2. How well does empirical evidence support/contradict it?
 3. Can this hypothesis EXPLAIN any cross-modal contradictions?
 4. Update confidence score accordingly
+
+**CRITICAL: DIFFERENTIATE SCORES**
+- You MUST assign DISTINCT scores to different hypotheses
+- Do NOT give all hypotheses the same score (e.g., all 0.95)
+- Rank hypotheses by evidence strength and assign scores accordingly:
+  * Strongest evidence support: 0.85-0.95
+  * Good evidence support: 0.70-0.84
+  * Moderate evidence support: 0.55-0.69
+  * Weak evidence support: 0.40-0.54
+  * Poor evidence support: below 0.40
+- If two hypotheses are equally supported, differentiate by specificity of mechanism
 
 ## PART B: DETECT CROSS-MODAL CONTRADICTIONS
 Compare structural vs empirical evidence:
@@ -136,9 +195,11 @@ Compare structural vs empirical evidence:
 - Where does empirical evidence show "X is false" (or vice versa)?
 - Flag these contradictions - they reveal hidden risks
 
-## SCORING BONUS:
-If a hypothesis CAN explain a cross-modal contradiction → BOOST its score
-If a hypothesis CANNOT explain a cross-modal contradiction → REDUCE its score
+**Note:** Actively look for cross-modal contradictions in EVERY cycle, not just late cycles.
+
+## PART C: SCORING ADJUSTMENTS
+If a hypothesis CAN explain a cross-modal contradiction → BOOST its score (+0.05 to +0.15)
+If a hypothesis CANNOT explain a cross-modal contradiction → REDUCE its score (-0.05 to -0.10)
 
 Example:
 - Structural: "Bank has adequate capital (12% ratio)"
@@ -152,8 +213,10 @@ Example:
 {{
   "thinking": "Write detailed reasoning:
 
-  PART A - SCORING:
-  For each hypothesis, explain how you scored it against structural evidence, empirical evidence, and whether it explains cross-modal contradictions. Show your work.
+  PART A - SCORING (with ranking):
+  Rank hypotheses from strongest to weakest evidence support.
+  For each hypothesis, explain how you scored it against structural evidence, empirical evidence, and whether it explains cross-modal contradictions.
+  ENSURE DISTINCT SCORES - do not give all hypotheses the same score.
 
   PART B - CROSS-MODAL:
   Identify where structural and empirical evidence conflict. Explain why these contradictions matter and which hypotheses explain them vs which don't.",
@@ -228,45 +291,57 @@ You have scored hypotheses. Now identify which ones MUST be eliminated.
 
 ## ELIMINATION CRITERIA
 
-**BE CONSERVATIVE**: Only eliminate hypotheses with CLEAR, DEFINITIVE evidence of impossibility.
+**BE AGGRESSIVE**: With 15-20 initial hypotheses, we MUST eliminate decisively to converge on the truth.
 
 Eliminate a hypothesis if ANY of these conditions are met:
 
-1. **Evidence-Based Elimination (HIGH BAR):**
-   - Evidence DIRECTLY AND DEFINITIVELY contradicts hypothesis
-   - Makes hypothesis logically IMPOSSIBLE (not just unlikely or weak)
+1. **Evidence-Based Elimination (PRIMARY):**
+   - Evidence DIRECTLY contradicts hypothesis
+   - Makes hypothesis logically IMPOSSIBLE or highly implausible
    - Must cite specific observation ID as kill atom
    - Examples:
      * "Liquidity crisis" hypothesis when LCR is 144% (well above minimum)
      * "Hidden capital breach" when CET1 ratio publicly disclosed at 14%
-   - DO NOT eliminate if evidence merely weakens or reduces confidence
+   - If evidence clearly undermines a hypothesis, eliminate it
 
-2. **Score-Based Elimination (ONLY EXTREME CASES):**
-   - Hypothesis score below 0.15 (changed from 0.2 to be more conservative)
-   - Indicates hypothesis is virtually impossible
+2. **Score-Based Elimination (AGGRESSIVE - 0.40 threshold):**
+   - Hypothesis score below 0.40 (aggressive threshold for quality convergence)
+   - With 15-20 initial hypotheses, we must eliminate aggressively
+   - Score < 0.40 means evidence does not strongly support this hypothesis
+   - BE DECISIVE: If a hypothesis isn't gaining traction, eliminate it
+   - Don't keep weak hypotheses "just in case"
    - Cite "low_confidence" as reason
-   - BE CONSERVATIVE: Don't use this criterion unless score is truly abysmal
 
 3. **Subsumption Elimination:**
    - One hypothesis logically contains another
    - Example: "Duration mismatch + HTM accounting" subsumes "Duration mismatch alone"
-   - Eliminate the weaker/narrower hypothesis ONLY if it adds no additional explanatory value
+   - Eliminate the weaker/narrower hypothesis
    - Cite "subsumed_by_H0X" as reason
 
-**IMPORTANT**: When in doubt, KEEP the hypothesis. It's better to have survivors than eliminate everything.
-Aim to keep at least 3-5 hypotheses surviving each cycle unless evidence clearly rules them out.
+**ELIMINATION TARGETS:**
+- Target: 30-50% elimination per cycle in early cycles (2-3)
+- Target: 50-70% total elimination by cycle 3
+- Final convergence: 2-7 hypotheses depending on case complexity
+
+**IMPORTANT**: It's better to eliminate a weak hypothesis now than carry it indefinitely.
+Strong hypotheses will have evidence support. Weak ones won't.
 
 ## OUTPUT FORMAT (JSON):
 
 {{
-  "thinking": "For each hypothesis, analyze elimination criteria:
+  "thinking": "For each hypothesis, analyze elimination criteria AGGRESSIVELY:
 
-  1. Evidence-based: Does contradicting evidence make it IMPOSSIBLE? If yes, cite kill atom.
-  2. Score-based: Is score below 0.2? If yes, eliminate due to low confidence.
-  3. Subsumption: Is this hypothesis a subset of another? If yes, eliminate the weaker one.
-  4. Cross-modal: Can this hypothesis explain the contradictions? If not, consider eliminating.
+  1. Evidence-based: Does evidence contradict it? Eliminate.
+  2. Score-based: Is score below 0.40? Eliminate unless recent evidence might boost it.
+  3. Subsumption: Is another hypothesis strictly better? Eliminate the weaker one.
+  4. Stagnation: Has score been flat for 2 cycles? Consider eliminating.
 
-  Explain your elimination decisions step-by-step.",
+  BE DECISIVE. With 15-20 initial hypotheses, we MUST eliminate aggressively.
+  Only keep hypotheses with strong evidence support (score >= 0.40).
+
+  Target elimination rate: 30-50% per cycle in early cycles.
+
+  Explain elimination decisions step-by-step.",
 
   "eliminated_hypotheses": [
     {{
@@ -288,7 +363,7 @@ Aim to keep at least 3-5 hypotheses surviving each cycle unless evidence clearly
   ]
 }}
 
-Provide thorough elimination analysis with clear reasoning.
+Provide thorough elimination analysis with clear reasoning. Be aggressive - the goal is convergence.
 """
 
 
@@ -442,6 +517,25 @@ Highest priority evidence:
 - Discriminates between top 2-3 candidates
 - Available/obtainable (not hypothetical)
 
+## EVIDENCE REQUEST SPECIFICITY
+
+Your requests will be matched via semantic search. Be SPECIFIC:
+
+❌ BAD (too general): "Market data showing stress"
+✅ GOOD: "Daily CDS spread levels for Credit Suisse 5Y senior debt during Q4 2022, compared to UBS and Deutsche Bank"
+
+❌ BAD (vague): "Information about capital structure"
+✅ GOOD: "Detailed breakdown of Common Equity Tier 1 (CET1) capital components as of Q4 2022, including unrealized losses on Available-For-Sale vs Held-To-Maturity securities"
+
+❌ BAD (unfalsifiable): "Evidence of management issues"
+✅ GOOD: "Timeline of CEO and CFO turnover events in 2021-2022, with stated reasons for departure and market reactions (stock price, CDS spreads)"
+
+Include in each request:
+- Specific metrics (CDS spreads, LCR ratio, CET1 %, deposit flows)
+- Time periods (Q4 2022, March 2023, specific dates)
+- Comparisons (peer banks, regulatory minimums, historical trends)
+- Sources (regulatory filings, earnings calls, market data)
+
 ## OUTPUT FORMAT (JSON):
 
 {{
@@ -455,7 +549,7 @@ Highest priority evidence:
 
   "evidence_requests": [
     {{
-      "type": "structural",
+      "type": "structural or empirical",
       "description": "Specific evidence needed (be exact, not vague)",
       "reason": "Tests prediction X from hypothesis Y vs prediction Z from hypothesis W",
       "tests_hypothesis": ["H01", "H02"],
@@ -464,6 +558,10 @@ Highest priority evidence:
     }}
   ]
 }}
+
+**Evidence types:**
+- **structural**: Regulations, contracts, legal mechanisms, capital structure rules, Basel III frameworks, writedown triggers, organizational structure
+- **empirical**: Market data, historical events, news articles, stock prices, CDS spreads, deposit flows, public statements, timelines
 
 Request 3-5 critical pieces of evidence with clear testing strategy.
 """

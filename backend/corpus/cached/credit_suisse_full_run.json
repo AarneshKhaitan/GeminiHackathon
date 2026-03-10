@@ -2,9 +2,9 @@
   "metadata": {
     "entity": "Credit Suisse",
     "trigger_date": "2023-02-09",
-    "investigation_run_date": "2026-03-07T19:29:30.159706",
-    "duration_seconds": 558.63551,
-    "total_tokens": 212558
+    "investigation_run_date": "2026-03-09T23:09:29.741479",
+    "duration_seconds": 1216.452928,
+    "total_tokens": 370850
   },
   "trigger": {
     "entity": "Credit Suisse",
@@ -26,58 +26,26 @@
     },
     "active_hypotheses": [
       {
+        "id": "H18",
+        "name": "Cumulative Brand Destruction",
+        "description": "",
+        "score": 0.98,
+        "evidence_chain": [],
+        "status": "active"
+      },
+      {
         "id": "H01",
-        "name": "Reputational Crisis & Loss of Client Confidence",
+        "name": "LCR Breach via Deposit Flight",
         "description": "",
-        "score": 0.98,
-        "evidence_chain": [],
-        "status": "active"
-      },
-      {
-        "id": "H02",
-        "name": "Perceived Structural Weakness & Liquidity Concerns",
-        "description": "",
-        "score": 0.95,
-        "evidence_chain": [],
-        "status": "active"
-      },
-      {
-        "id": "H03",
-        "name": "Ineffective or Poorly Communicated Restructuring Plan",
-        "description": "",
-        "score": 0.98,
-        "evidence_chain": [],
-        "status": "active"
-      },
-      {
-        "id": "H04",
-        "name": "Regulatory Scrutiny & Legal Liabilities",
-        "description": "",
-        "score": 0.8,
+        "score": 0.94,
         "evidence_chain": [],
         "status": "active"
       },
       {
         "id": "H06",
-        "name": "Contagion from Broader Economic/Banking Sector Instability",
+        "name": "CDS Spread Automated Breaches",
         "description": "",
-        "score": 0.7,
-        "evidence_chain": [],
-        "status": "active"
-      },
-      {
-        "id": "H07",
-        "name": "Targeted Exodus of Wealth Management Clients",
-        "description": "",
-        "score": 0.85,
-        "evidence_chain": [],
-        "status": "active"
-      },
-      {
-        "id": "H08",
-        "name": "Perceived Operational Weakness or Key Personnel Departures",
-        "description": "",
-        "score": 0.75,
+        "score": 0.82,
         "evidence_chain": [],
         "status": "active"
       }
@@ -85,101 +53,460 @@
     "eliminated_hypotheses": [
       {
         "id": "H05",
-        "name": "Market-Driven Opportunity Cost",
-        "killed_by_atom": "E45",
+        "name": "Leverage Ratio Denominator Effect",
+        "killed_by_atom": "E06",
         "killed_in_cycle": 2,
-        "reason": "This hypothesis claims clients moved deposits 'in search of better returns'. However, empirical evidence (E45, E44, E43, E42, E40, E38, E37, E36, E35, E34, E33, E32) overwhelmingly demonstrates a market in extreme panic, characterized by a flight from risk and severe loss of confidence. Credit Suisse's CDS spreads (E45) were 5-10 times higher than peers, indicating extreme risk perception, which is fundamentally inconsistent with clients calmly seeking 'better returns' as a primary driver for massive outflows. The observed market behavior (stock crash, emergency liquidity, panic reaction to investor statements) makes it logically impossible for 'opportunity cost' to be the significant underlying motivation for the scale of withdrawals seen during this crisis."
-      }
-    ],
-    "cross_modal_flags": [],
-    "key_insights": [
-      "Empirical evidence from March 2023 strongly supports Reputational Crisis (H01), Perceived Structural Weakness (H02), and Ineffective Restructuring Plan (H03) as primary drivers of the crisis.",
-      "The 'Market-Driven Opportunity Cost' hypothesis (H05) was definitively eliminated as market behavior indicated extreme fear and risk aversion, not a calm search for better returns.",
-      "The absence of structural evidence in this cycle prevented the detection of cross-modal contradictions.",
-      "Critical evidence from Q4 2022 (restructuring plan details, Q4 market reaction, and deposit outflow breakdown) is still needed to fully understand the crisis's origins and specific impacts on client segments.",
-      "All 7 active hypotheses were further strengthened by empirical evidence from March 2023, leading to increased confidence scores, with H01 and H03 now at 0.98.",
-      "No hypotheses were eliminated in Cycle 3, indicating that all remaining hypotheses are still considered plausible and require further investigation.",
-      "The continued absence of structural evidence prevented the detection of cross-modal contradictions in Cycle 3, highlighting a critical information gap.",
-      "Detailed forward simulations have been developed for all surviving hypotheses, providing clear testable predictions for future evidence collection.",
-      "The evidence requests for Cycle 4 are precisely targeted to address the crux question regarding Q4 2022 deposit composition and the initial market reaction to the October 2022 restructuring plan, which are crucial for discriminating between top hypotheses."
-    ],
-    "evidence_collected": [],
-    "evidence_pending": [
-      {
-        "type": "structural",
-        "description": "A detailed breakdown of the CHF 110.5 billion deposit outflows for Q4 2022, categorized by client segment (e.g., Wealth Management, Investment Bank, Swiss Bank, Asset Management) and, if available, by client type (e.g., institutional, high-net-worth individual, retail).",
-        "reason": "This evidence is critical to precisely quantify the composition of the Q4 2022 outflows, directly testing the prediction from H07 regarding a targeted exodus of Wealth Management clients. It also helps discriminate between H01 and H02 by showing which client segments were most sensitive to the crisis.",
-        "tests_hypothesis": [
-          "H07",
-          "H01",
-          "H02"
-        ],
-        "expected_if_h07": "The breakdown would show a disproportionately large share of the CHF 110.5 billion outflows originating from the Wealth Management division, potentially also from high-net-worth individual clients.",
-        "expected_if_h01_h02": "While Wealth Management would likely contribute, outflows might be more broadly distributed across client segments (e.g., Investment Bank, Asset Management, institutional clients) reflecting a general flight of capital due to systemic concerns rather than a specific targeting of WM."
+        "reason": "Directly contradicted by E06, which shows leverage exposure dropped significantly and the Tier 1 leverage ratio actually increased from 6.0% to 7.7%, mathematically disproving the denominator effect hypothesis."
       },
       {
+        "id": "H10",
+        "name": "Clearinghouse Margin Calls",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.49. No evidence of clearinghouse margin calls creating a liquidity drain in Q4 2022. Eliminating to focus on hypotheses with direct empirical support."
+      },
+      {
+        "id": "H19",
+        "name": "Saudi National Bank Cap",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.46. No evidence regarding the Saudi National Bank cap driving the October 2022 flight. The timeline aligns better with the social media bank run (H17)."
+      },
+      {
+        "id": "H07",
+        "name": "Unhedged Interest Rate Exposure",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.43. No evidence of unhedged interest rate exposure causing massive mark-to-market losses. Other balance sheet hypotheses (like FX volatility H08) have direct empirical backing."
+      },
+      {
+        "id": "H11",
+        "name": "Hung Syndicated Debt",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.40. No evidence of hung syndicated debt causing corporate deposit flight. Fails to meet the confidence threshold for continued investigation."
+      },
+      {
+        "id": "H16",
+        "name": "Unprovisioned Legal Liabilities",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.37. Lacks any evidence of unprovisioned legal liabilities driving the Q4 2022 deposit flight."
+      },
+      {
+        "id": "H14",
+        "name": "Liquidity Monitoring Breakdown",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.34. No evidence of internal liquidity monitoring breakdowns. The timeline of outflows is better explained by external social media rumors (H17)."
+      },
+      {
+        "id": "H15",
+        "name": "Secret FINMA Intervention",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 2,
+        "reason": "Score 0.31. No empirical or structural evidence supports a secret FINMA intervention. Falling too far behind other strongly supported hypotheses."
+      },
+      {
+        "id": "H03",
+        "name": "HQLA Fire Sale Hidden Losses",
+        "killed_by_atom": "E42",
+        "killed_in_cycle": 3,
+        "reason": "E42 shows CS utilized a CHF 50B SNB liquidity facility. Borrowing against assets via a central bank facility prevents the need to fire-sell HQLA at a loss, directly contradicting the SVB-style hidden loss mechanism."
+      },
+      {
+        "id": "H09",
+        "name": "Prime Brokerage Contagion",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 3,
+        "reason": "Score has degraded to 0.48 with zero empirical support in recent cycles. The crisis was clearly concentrated in Wealth Management outflows and institutional CDS triggers, not Prime Brokerage."
+      },
+      {
+        "id": "H08",
+        "name": "FX Volatility and CHF Appreciation",
+        "killed_by_atom": "E12",
+        "killed_in_cycle": 3,
+        "reason": "E12 proves CHF 110.5B of the decline was 'Net new assets/(outflows)', a metric that explicitly excludes FX translation effects. This proves the liquidity crisis was driven by actual cash flight, invalidating FX volatility as the primary cause of the LCR breach."
+      },
+      {
+        "id": "H12",
+        "name": "Restructuring Execution Risk",
+        "killed_by_atom": "subsumed_by_H02",
+        "killed_in_cycle": 3,
+        "reason": "Generic restructuring risk is subsumed by H02 (Capital Raise Insufficiency), which provides the specific, measurable mechanism for why the market rejected the restructuring plan (insufficient capital buffer as proven by SNB's refusal to inject more)."
+      },
+      {
+        "id": "H02",
+        "name": "Capital Raise Insufficiency",
+        "killed_by_atom": "E41",
+        "killed_in_cycle": 4,
+        "reason": "Directly contradicted by E41, E19, and E31, which confirm CS met regulatory capital requirements with a 14.1% CET1 ratio. The collapse was a liquidity and trust crisis, not a capital shortfall."
+      },
+      {
+        "id": "H13",
+        "name": "Wealth Manager Exodus",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 4,
+        "reason": "Score has stagnated at 0.58. While a contributing background factor, there is no evidence it was the acute driver of the massive March 15-16 collapse."
+      },
+      {
+        "id": "H04",
+        "name": "Wealth Management Illiquidity Concentration",
+        "killed_by_atom": "low_confidence",
+        "killed_in_cycle": 4,
+        "reason": "The SNB's CHF 50B facility allowed borrowing against assets, mitigating pure asset illiquidity. The fatal issue was the velocity of the flight (H01), not just the illiquidity of the WM assets."
+      },
+      {
+        "id": "H17",
+        "name": "Social Media Bank Run",
+        "killed_by_atom": "subsumed_by_H01",
+        "killed_in_cycle": 5,
+        "reason": "H17 is a specific transmission vector (social media rumors) for the broader deposit flight mechanism. It is logically subsumed by H01 (which covers the mechanical LCR breach via deposit outflows) and H18 (which covers the root cause of trust evaporation). Eliminating to converge on the primary structural drivers."
+      }
+    ],
+    "cross_modal_flags": [
+      {
+        "structural_atom_id": "S09",
+        "empirical_atom_id": "E44",
+        "detected_in_cycle": 5,
+        "contradiction_description": "S09 highlights CS's G-SIB status and progressive capital buffers meant to ensure stability. E44 and E01 show a total collapse in market value (86% drop, 2.5x worse than peers in March) and E25 shows massive deposit flight. This reveals that regulatory G-SIB capital buffers provide zero protection against a terminal loss of franchise trust and dynamic liquidity runs."
+      },
+      {
+        "structural_atom_id": "Implied_Regulatory_Limit",
+        "empirical_atom_id": "E33",
+        "detected_in_cycle": 6,
+        "contradiction_description": "Structural prudential rules (10% ownership limit triggering regulatory scrutiny) are designed to ensure stability. Empirically, citing this structural limit prevented a capital backstop and triggered a fatal market panic, showing that structural safeguards can inadvertently catalyze a crisis when trust is zero."
+      },
+      {
+        "structural_atom_id": "S09",
+        "empirical_atom_id": "E36",
+        "detected_in_cycle": 7,
+        "contradiction_description": "Structural liquidity frameworks (LCR) assume a 30-day stress runway. Empirical evidence (E36) shows a single interview triggered a 30% crash and a $50B central bank draw, proving static buffers are instantly vaporized by dynamic panic velocity."
+      }
+    ],
+    "key_insights": [
+      "Empirical evidence (E10, E26) explicitly confirms Credit Suisse breached legal entity-level liquidity regulatory requirements in Q4 2022, providing smoking-gun validation for the LCR Breach hypothesis (H01).",
+      "Two-thirds of the Q4 2022 outflows were concentrated in October (E11), which perfectly aligns the timeline with the early-October 'Lehman moment' social media rumors (H17) rather than the late-October restructuring announcement.",
+      "The Leverage Ratio Denominator Effect hypothesis (H05) was mathematically disproven; shrinking AUM actually reduced leverage exposure and improved the Tier 1 leverage ratio to 7.7%.",
+      "The CHF 110.5B Q4 2022 outflow was confirmed as actual cash flight ('Net new assets'), definitively killing the FX translation illusion hypothesis (H08).",
+      "The crisis entered its terminal phase when the Saudi National Bank ruled out further investment, spiking CDS to 1000bps and forcing a CHF 50B SNB bailout that ultimately failed to restore market trust.",
+      "The SVB-style 'HQLA fire sale' mechanism (H03) did not apply to Credit Suisse, as they utilized central bank liquidity facilities to borrow against assets rather than selling them at a loss.",
+      "Credit Suisse definitively did not fail due to a regulatory capital shortfall; E19, E31, and E41 confirm a strong 14.1% CET1 ratio, eliminating H02 and proving this was purely a liquidity and trust crisis.",
+      "A massive contradiction exists between regulatory reassurances (claiming CS met liquidity requirements) and empirical reality (a CHF 50B emergency draw the next day), showing static LCR metrics were useless against digital-speed bank runs.",
+      "The crisis has narrowed to four interconnected drivers: massive deposit flight (H01) accelerated by digital panic (H17) and automated institutional CDS triggers (H06), all underpinned by a terminal loss of franchise trust (H18).",
+      "H18 (Cumulative Brand Destruction) has emerged as the highest-probability root cause, explaining why robust regulatory capital (G-SIB buffers, 14.1% CET1) failed to prevent the collapse.",
+      "H17 (Social Media Bank Run) was eliminated as a standalone hypothesis, recognized instead as merely a transmission vector subsumed by the broader deposit flight (H01) and trust collapse (H18).",
+      "A recurring cross-modal theme is the total failure of static regulatory metrics (LCR, G-SIB buffers) to capture or mitigate dynamic, trust-driven liquidity crises.",
+      "The Saudi National Bank Chairman's comments (E33) acted as the definitive psychological catalyst for the final collapse, proving that when trust is zero, even benign structural/regulatory constraints are interpreted as fatal signals.",
+      "The three surviving hypotheses (H18, H01, H06) are highly complementary, representing the psychological root cause (H18), the retail/wealth mechanical failure (H01), and the wholesale/institutional mechanical failure (H06).",
+      "The $50B SNB lifeline drawn on March 15 (E36) provides definitive proof that the static 30-day LCR framework was instantly overwhelmed by dynamic panic velocity.",
+      "The investigation is now entirely focused on the March 15-19 terminal window, specifically testing why the massive $50B central bank intervention failed to prevent the bank's collapse within 96 hours."
+    ],
+    "evidence_collected": [
+      {
+        "atom_id": "E16",
+        "brief": "# Credit Suisse stock and CDS spreads — March 10-14, 2023\n\n## CDS spreads (5-year senior)\n\nCredit Default Swap spreads — the annual cost to insure $10 million of CS debt against default:\n\nEarly March:",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E45",
+        "brief": "# Credit Suisse CDS Spread Data — March 1-16, 2023\n\n## Peer comparison (March 15):\n\n| Bank | CDS (5yr, approx) |\n|------|-------------------|\n| Credit Suisse | 800-1000 bp |\n| Deutsche Bank | ~170-200",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E10",
+        "brief": "# Credit Suisse Q4 2022 Earnings Release — Capital Structure & Liquidity\n\n## Liquidity Issues in 4Q22 (verbatim)\n\n\"As previously disclosed, during early 4Q22, Credit Suisse began experiencing signific",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E11",
+        "brief": "# Credit Suisse Q4 2022 Earnings Release — Capital Structure & Liquidity\n\n## Outflows in Assets Under Management (verbatim)\n\n\"As previously disclosed, Credit Suisse began experiencing deposit and net ",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E05",
+        "brief": "# Credit Suisse Q4 2022 Earnings Release — Capital Structure & Liquidity\n\n## Results Summary (verbatim)\n\n\"In 4Q22, Credit Suisse reported a net loss attributable to shareholders of CHF 1,393 million, ",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E13",
+        "brief": "# CREDIT SUISSE GROUP AG FOURTH QUARTER AND FULL YEAR 2022 RESULTS\n\nSource: SEC Filing, Exhibit 99.1, February 9, 2023\n\nZURICH, February 9, 2023 – Credit Suisse today reported its 4Q22 and full year 2",
+        "type": "filing",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E08",
+        "brief": "# Credit Suisse Q4 2022 Earnings Release — Capital Structure & Liquidity\n\n## CET1 Capital Movement in 4Q22 (verbatim, CHF million)\n\n| Item | Amount |\n|------|--------|\n| Balance at beginning of period",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E26",
+        "brief": "# Credit Suisse FY2022 Annual Report — Risk Disclosures\n\n## Q4 2022 Outflow Consequences (verbatim from filing)\n\n\"As previously disclosed, early in the fourth quarter of 2022, Credit Suisse began expe",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E06",
+        "brief": "# Credit Suisse Q4 2022 Earnings Release — Capital Structure & Liquidity\n\n## Capital Metrics (from filing tables)\n\n| Metric | 4Q22 | 3Q22 | 4Q21 |\n|--------|------|------|------|\n| Risk-weighted asset",
+        "type": "market",
+        "collected_in_cycle": 1
+      },
+      {
+        "atom_id": "E15",
+        "brief": "# Credit Suisse stock and CDS spreads — March 10-14, 2023\n\n## Credit Suisse (CSGN.SW) — SIX Swiss Exchange\n\nMar 8: CHF 2.82 (close)\nMar 9: CHF 2.70 (-4.3%) — SVB capital raise announcement spooks mark",
+        "type": "market",
+        "collected_in_cycle": 2
+      },
+      {
+        "atom_id": "E42",
+        "brief": "# Credit Suisse to borrow up to CHF50 billion from Swiss National Bank\n\nSWI swissinfo.ch\nPublished: March 16, 2023 - 17:54\n\nSwitzerland's second largest bank announced plans to borrow up to CHF50 bill",
+        "type": "market",
+        "collected_in_cycle": 2
+      },
+      {
+        "atom_id": "E34",
+        "brief": "# Saudi National Bank Chairman Interview — Bloomberg TV, March 15, 2023\n\n## What the market did:\n\nCredit Suisse stock on SIX Swiss Exchange (CSGN.SW):\n- Trading around CHF 2.20 before the interview\n- ",
+        "type": "news",
+        "collected_in_cycle": 2
+      },
+      {
+        "atom_id": "E02",
+        "brief": "# Credit Suisse suspends $10 billion of funds linked to Greensill Capital\n\nReuters / Financial Times, March 2021\n\nCredit Suisse has frozen approximately $10 billion in supply chain finance funds conne",
+        "type": "market",
+        "collected_in_cycle": 2
+      },
+      {
+        "atom_id": "E12",
+        "brief": "# Credit Suisse Q4 2022 Earnings Release — Capital Structure & Liquidity\n\n## Key Balance Sheet Statistics (from filing)\n\n| Metric | 4Q22 | 4Q21 | % Change |\n|--------|------|------|----------|\n| Total",
+        "type": "market",
+        "collected_in_cycle": 2
+      },
+      {
+        "atom_id": "E04",
+        "brief": "# Credit Suisse shares are a 'steal,' say new Saudi backers after taking 9.9% stake\n\nCNBC, October 31, 2022\n\nSaudi National Bank, the kingdom's largest lender, has acquired a 9.9% stake in Credit Suis",
+        "type": "market",
+        "collected_in_cycle": 2
+      },
+      {
+        "atom_id": "E41",
+        "brief": "# SNB and FINMA Issue Joint Statement on Credit Suisse\n\nFollowing the 30% crash in Credit Suisse shares on March 15, 2023, the Swiss National Bank and the Swiss Financial Market Supervisory Authority ",
+        "type": "news",
+        "collected_in_cycle": 3
+      },
+      {
+        "atom_id": "E22",
+        "brief": "# Regulatory Stability Statements — March 2023\n\n## Note on the SNB/FINMA statement specifically:\n\nThe SNB/FINMA statement is the most important for the CS case. On its face it's reassuring: the regula",
+        "type": "news",
+        "collected_in_cycle": 3
+      },
+      {
+        "atom_id": "E31",
+        "brief": "# Analyst and Commentator Defenses of Credit Suisse During Crisis Week\n\nThroughout the week of March 13-17, 2023, a number of analysts and market commentators pushed back on the panic surrounding Cred",
+        "type": "market",
+        "collected_in_cycle": 3
+      },
+      {
+        "atom_id": "E27",
+        "brief": "# Credit Suisse FY2022 Annual Report — Risk Disclosures\n\n## Credit Rating Downgrades — Complete Timeline (verbatim from filing)\n\n\"In May 2022, Standard and Poor's Global Ratings Europe Limited (S&P) l",
+        "type": "market",
+        "collected_in_cycle": 3
+      },
+      {
+        "atom_id": "E43",
+        "brief": "# Credit Suisse Stock Price — March 1-16, 2023\n\nSource: Yahoo Finance (CSGN.SW — SIX Swiss Exchange)\n\n| Date | Open | High | Low | Close | Volume |\n|------|------|------|-----|-------|--------|\n| Mar ",
+        "type": "market",
+        "collected_in_cycle": 3
+      },
+      {
+        "atom_id": "E19",
+        "brief": "# Regulatory Stability Statements — March 2023\n\n## SNB/FINMA Joint Statement (March 15, 2023)\n\nPublished on the evening of March 15, after CS stock crashed 30%:\n\n\"Credit Suisse meets the capital and l",
+        "type": "news",
+        "collected_in_cycle": 3
+      },
+      {
+        "atom_id": "E44",
+        "brief": "# European Banks Index Comparison — March 1-16, 2023\n\n## Euro STOXX Banks Index (SX7E) vs Credit Suisse\n\n| Date | SX7E (approx) | CS (CHF) |\n|------|---------------|----------|\n| Mar 1 | ~110 | 3.01 |",
+        "type": "market",
+        "collected_in_cycle": 4
+      },
+      {
+        "atom_id": "E46",
+        "brief": "# Thomas Jordan: The Swiss National Bank's role as lender of last resort in the crisis at Credit Suisse\n\nSummary of the keynote speech by Mr Thomas Jordan, Chairman of the Governing Board of the Swiss",
+        "type": "news",
+        "collected_in_cycle": 4
+      },
+      {
+        "atom_id": "E25",
+        "brief": "# Credit Suisse FY2022 Annual Report — Risk Disclosures\n\n## Deposit Outflows Risk Factor (verbatim from filing)\n\n\"Our businesses rely significantly on our deposit base for funding. Our businesses bene",
+        "type": "market",
+        "collected_in_cycle": 4
+      },
+      {
+        "atom_id": "S09",
+        "brief": "# Credit Suisse AT1 Capital Instruments — Contractual Write-Down Terms\n\n## G-SIB Designation (from filing, p.122)\n\n\"The Financial Stability Board (FSB) has identified Credit Suisse as a G-SIB and has ",
         "type": "structural",
-        "description": "A comprehensive report detailing the specific strategic changes, asset sales, capital raise mechanisms, and projected financial impacts of the October 2022 Credit Suisse restructuring plan, including official communication materials and immediate analyst/media commentary following its announcement.",
-        "reason": "This evidence directly addresses the 'initial market reaction' part of the crux question and is crucial for testing H03 (Ineffective or Poorly Communicated Restructuring Plan). It will reveal the specifics of the plan and how it was initially perceived by experts, which also informs H01 and H02 by indicating the level of confidence (or lack thereof) in the bank's future.",
+        "collected_in_cycle": 4
+      },
+      {
+        "atom_id": "E01",
+        "brief": "# Credit Suisse Stock Price Chart — Multi-Year Decline (2020 to March 16, 2023)\n\n## Key price levels:\n\n| Period | Approximate Price (CHF) | Context |\n|--------|------------------------|---------|\n| Ea",
+        "type": "market",
+        "collected_in_cycle": 4
+      },
+      {
+        "atom_id": "E33",
+        "brief": "# Saudi National Bank Chairman Interview — Bloomberg TV, March 15, 2023\n\n## Transcript of key exchange:\n\nBLOOMBERG: Would Saudi National Bank be open to increasing your stake in Credit Suisse, if they",
+        "type": "news",
+        "collected_in_cycle": 5
+      },
+      {
+        "atom_id": "E36",
+        "brief": "# Saudi National Bank Chairman Interview — Bloomberg TV, March 15, 2023\n\n## From CNN Business (March 15, 2023):\n\n\"Credit Suisse borrows more than $50 billion from Swiss National Bank after shares cras",
+        "type": "news",
+        "collected_in_cycle": 6
+      }
+    ],
+    "evidence_pending": [
+      {
+        "type": "empirical",
+        "description": "Official terms of the UBS acquisition of Credit Suisse announced on March 19, 2023, specifically the final purchase price, the implied price-to-tangible-book-value ratio, and the FINMA regulatory decree ordering the complete write-down of CHF 16 billion in Additional Tier 1 (AT1) bonds.",
+        "reason": "Tests H18's prediction that the brand was so toxic that a forced weekend merger at a massive discount was required, bypassing standard shareholder voting, and triggering structural PONV clauses to wipe out AT1 capital.",
         "tests_hypothesis": [
-          "H03",
-          "H01",
-          "H02"
+          "H18"
         ],
-        "expected_if_h03": "Official communication might be vague or lack concrete details, and immediate analyst/media commentary would express significant skepticism, highlight perceived gaps, or criticize the feasibility of the plan's targets.",
-        "expected_if_h01_h02": "The plan's details might appear sound on paper, but analyst/media commentary would still reflect deep-seated market distrust, focusing on the bank's history, governance issues, or broader systemic fears, rather than just the plan's specifics."
+        "expected_if_h01": "Would show a distressed sale, but might not explicitly detail the regulatory bypass or AT1 wipeout as the primary mechanism of resolution.",
+        "expected_if_h02": "Would show a forced acquisition at a fraction of book value, with FINMA explicitly invoking viability clauses to zero out AT1 bonds, proving terminal loss of market trust."
       },
       {
         "type": "empirical",
-        "description": "Daily or weekly 5-year Credit Default Swap (CDS) spreads for Credit Suisse and yields on Credit Suisse's senior unsecured bonds for Q4 2022, focusing on the period immediately following the October 2022 restructuring announcement.",
-        "reason": "This empirical data directly measures the market's real-time assessment of Credit Suisse's credit risk and funding costs immediately after the restructuring plan was announced. It is vital for understanding the 'initial market reaction' (crux question) and for testing predictions from H01 (Reputational Crisis), H02 (Perceived Structural Weakness), and H03 (Ineffective Restructuring Plan).",
+        "description": "Daily deposit outflow velocity and Swiss National Bank (SNB) liquidity facility utilization rates for Credit Suisse specifically between Wednesday, March 15 and Friday, March 17, 2023.",
+        "reason": "Tests H01's prediction that the $50B SNB lifeline was mathematically insufficient because daily outflow velocity (projected at CHF 10B-20B+/day) exhausted or threatened to exhaust the facility before the weekend.",
         "tests_hypothesis": [
           "H01",
-          "H02",
-          "H03"
+          "H18"
         ],
-        "expected_if_h01_h02_h03": "CDS spreads and bond yields would show a significant and sustained increase immediately following the October 2022 restructuring announcement, indicating that the market did not find the plan reassuring and perceived heightened risk.",
-        "expected_if_h03_effective_but_other_factors_dominant": "CDS spreads and bond yields might initially stabilize or even decrease slightly after the announcement, only to rise later in Q4 or Q1 2023 due to other emerging factors, suggesting the plan itself was not immediately rejected."
+        "expected_if_h01": "Would show daily outflows accelerating despite the SNB announcement, rapidly draining the newly acquired $50B liquidity buffer.",
+        "expected_if_h02": "Would show outflows stabilizing slightly, pointing to wholesale lockouts (H06) rather than retail flight as the immediate terminal trigger."
+      },
+      {
+        "type": "empirical",
+        "description": "Credit Suisse 1-year and 5-year Credit Default Swap (CDS) spread pricing data for March 15-17, 2023, and any reports of major global banks freezing OTC derivative novations or cutting counterparty credit limits for CS during this window.",
+        "reason": "Tests H06's prediction that the 30% equity crash mechanically triggered massive CDS spikes, leading to automated counterparty lockouts and wholesale market exclusion.",
+        "tests_hypothesis": [
+          "H06",
+          "H01"
+        ],
+        "expected_if_h01": "Would show CDS spreads spiking to distressed levels (e.g., >1000 bps) and widespread reports of counterparties refusing to trade with CS, draining wholesale liquidity.",
+        "expected_if_h02": "Would show elevated but functional CDS markets, indicating the crisis was primarily driven by retail/wealth deposit flight rather than wholesale derivative lockouts."
+      },
+      {
+        "type": "empirical",
+        "description": "Credit Suisse Q1 2023 earnings report or official regulatory disclosures detailing total Net New Asset (NNA) outflows, specifically breaking down wealth management and retail client withdrawals for the quarter.",
+        "reason": "Provides the definitive post-mortem empirical data on the total scale of the bank run, testing the cumulative impact of the deposit flight predicted by H01 and H18.",
+        "tests_hypothesis": [
+          "H01",
+          "H18"
+        ],
+        "expected_if_h01": "Would show historic, unprecedented quarterly outflows (likely >CHF 60B), confirming that the LCR was completely overwhelmed by the sheer volume of fleeing assets.",
+        "expected_if_h02": "Would show moderate outflows, suggesting that liquidity was drained via other channels (like CCP margin calls in H06) rather than pure deposit flight."
       }
     ],
-    "compressed_reasoning": "CYCLE 3 CUMULATIVE STATE: The investigation into Credit Suisse's CHF 110.5 billion deposit outflows in Q4 2022 and the subsequent March 2023 crisis has progressed through Cycle 3. Initial hypotheses were generated in Cycle 1. In Cycle 2, extensive empirical evidence from March 2023 (E31-E46) was analyzed, and this evidence was re-evaluated in Cycle 3, leading to updated scores for all hypotheses. No hypotheses were eliminated in Cycle 3, and no new structural evidence was provided, preventing the detection of cross-modal contradictions.\n\n**Surviving Hypotheses (with updated scores from Cycle 3):**\n- H01: Reputational Crisis & Loss of Client Confidence (score: 0.98) - Strongly supported by overwhelming evidence of market panic, extreme CDS spreads, and the impact of the Saudi chairman's statement.\n- H02: Perceived Structural Weakness & Liquidity Concerns (score: 0.95) - Strongly supported by SNB intervention, extreme CDS spreads, and market panic despite regulatory assurances.\n- H03: Ineffective or Poorly Communicated Restructuring Plan (score: 0.98) - Strongly supported by the need for emergency liquidity post-plan and the market's negative reaction to investor statements despite confidence in the plan.\n- H04: Regulatory Scrutiny & Legal Liabilities (score: 0.8) - Supported by explicit mention of regulatory constraints by a key investor and analyst commentary on past scandals.\n- H06: Contagion from Broader Economic/Banking Sector Instability (score: 0.7) - Partially supported as an exacerbating factor, but CS's decline was disproportionately worse than the sector.\n- H07: Targeted Exodus of Wealth Management Clients (score: 0.85) - Remains plausible; strong indirect support from overall panic and deposit outflows, but direct evidence is still pending.\n- H08: Perceived Operational Weakness or Key Personnel Departures (score: 0.75) - Supported by analyst commentary on governance and management issues, and the resignation of a key investor.\n\n**Eliminated Hypotheses:**\n- H05: Market-Driven Opportunity Cost (killed_by_atom: E45, killed_in_cycle: 2) - This hypothesis was definitively eliminated because empirical evidence (E45, E44, E43, E42, E40, E38, E37, E36, E35, E34, E33, E32) overwhelmingly showed a market driven by extreme fear, risk aversion, and panic (e.g., CDS spreads 5-10x peers), making the premise of clients moving for 'better returns' as a primary driver logically impossible.\n\n**Cross-Modal Contradictions:** None detected in Cycle 3 due to the continued absence of structural evidence.\n\n**Forward Simulation Insights (from Cycle 3):** All surviving hypotheses have undergone forward simulation, generating testable predictions. Key structural consequences include sustained client outflows and increased funding costs (H01), continued reliance on emergency liquidity and potential credit downgrades (H02), failure to meet restructuring targets and market skepticism (H03), increased fines, legal provisions, and operational burdens (H04), broader market volatility and systemic stress (H06), significant reduction in Wealth Management AUM and fee income (H07), and further executive departures and governance issues (H08).\n\n**Crux Question:** The primary drivers of the Q4 2022 deposit outflows and the subsequent March 2023 crisis are largely understood to be a combination of reputational damage, perceived structural weakness, and an ineffective restructuring plan. The remaining crux is to precisely quantify the *composition* of the CHF 110.5 billion Q4 2022 outflows and the *initial market reaction* to the October 2022 restructuring plan, to fully understand the timeline and specific client segments most affected.\n\n**Evidence Still Needed (for Cycle 4):**\n1.  A detailed breakdown of the CHF 110.5 billion deposit outflows for Q4 2022, categorized by client segment (e.g., Wealth Management, Investment Bank, Swiss Bank, Asset Management) and, if available, by client type (e.g., institutional, high-net-worth individual, retail) (structural).\n2.  A comprehensive report detailing the specific strategic changes, asset sales, capital raise mechanisms, and projected financial impacts of the October 2022 Credit Suisse restructuring plan, including official communication materials and immediate analyst/media commentary following its announcement (structural).\n3.  Daily or weekly 5-year Credit Default Swap (CDS) spreads for Credit Suisse and yields on Credit Suisse's senior unsecured bonds for Q4 2022, focusing on the period immediately following the October 2022 restructuring announcement (empirical).\n\n**Historical Context:** The investigation began by hypothesizing reasons for significant deposit outflows and market instability. Cycle 2 provided strong empirical backing for several key hypotheses related to the March 2023 crisis, allowing for the elimination of one hypothesis. Cycle 3 further refined hypothesis scores, generated detailed forward simulations, and reiterated specific evidence requests to address the remaining crux questions.",
+    "compressed_reasoning": "CYCLE 7 CUMULATIVE STATE:\n\nSURVIVING HYPOTHESES:\nH18: Cumulative Brand Destruction (0.98) - E33/E36 prove terminal brand fragility; a standard regulatory constraint cited by SNB Chairman sparked a 30% crash and forced a $50B bailout. Trust is zero, rendering structural buffers useless.\nH01: LCR Breach via Deposit Flight (0.94) - E36 confirms the $50B SNB borrowing, proving deposit flight velocity instantly overwhelmed static LCR buffers.\nH06: CDS Spread Automated Breaches (0.82) - The 30% equity crash (E36) strongly implies concurrent massive CDS spikes, triggering automated counterparty lockouts and wholesale market exclusion.\n\nPRIOR ELIMINATIONS: H02, H03, H04, H05, H07, H08, H09, H10, H11, H12, H13, H14, H15, H16, H17, H19.\n\nCROSS-MODAL CONTRADICTIONS:\n1. Regulatory vs. Empirical (Cycle 4): SNB/FINMA claimed CS met requirements, but empirical data showed a 30% crash and CHF 50B draw.\n2. G-SIB vs. Trust Collapse (Cycle 5): Contractual G-SIB capital buffers provided zero protection against dynamic trust evaporation.\n3. Regulatory Limit vs. Market Panic (Cycle 6): Structural prudential rules (10% ownership limit) triggered fatal market panic, showing structural safeguards fail when trust is zero.\n4. Static LCR vs. Dynamic Panic (Cycle 7 - S09 vs E36): Structural liquidity frameworks assume a 30-day stress runway, but empirical evidence shows a single interview triggered a $50B central bank draw, vaporizing static buffers instantly.\n\nFORWARD SIMULATION INSIGHTS:\n- H18 predicts the $50B lifeline fails to restore trust, forcing a weekend distressed sale to UBS and a FINMA-ordered wipeout of CHF 16B in AT1 bonds via the PONV clause.\n- H01 predicts the CHF 50B SNB facility was mathematically exhausted by daily outflow velocity (CHF 10B-20B+/day) between March 15-17.\n- H06 predicts the 30% crash mechanically blew out CDS spreads, triggering OTC novation freezes and massive CCP margin calls that drained the newly acquired SNB liquidity.\n\nCRUX QUESTION: What was the exact terminal mechanism between March 15-19 that rendered the $50B SNB lifeline insufficient? Was it mathematical exhaustion via retail deposit flight (H01), wholesale derivative lockouts and margin calls (H06), or terminal psychological toxicity forcing a regulatory bypass and AT1 wipeout (H18)?\n\nEVIDENCE STILL NEEDED:\n1) Official UBS acquisition terms (price-to-book) & FINMA AT1 write-down decree.\n2) Mar 15-17 daily deposit outflows & SNB facility utilization rates.\n3) Mid-March CS CDS spreads, CCP margin calls & OTC novation rejection data.\n4) Q1 2023 NNM/NNA flows (CS vs UBS).",
     "cycle_history": [
       {
         "cycle_num": 1,
-        "hypotheses_count": 8,
+        "hypotheses_count": 19,
         "eliminations_count": 0,
         "evidence_collected_count": 0,
         "token_usage": {
-          "input": 3522,
-          "output": 9528,
-          "reasoning": 5567,
-          "total": 13050
+          "input": 5183,
+          "output": 7385,
+          "reasoning": 3277,
+          "total": 12568
         },
         "duration_seconds": null
       },
       {
         "cycle_num": 2,
-        "hypotheses_count": 7,
-        "eliminations_count": 1,
+        "hypotheses_count": 11,
+        "eliminations_count": 8,
         "evidence_collected_count": 0,
         "token_usage": {
-          "input": 61376,
-          "output": 24437,
-          "reasoning": 15204,
-          "total": 85813
+          "input": 56777,
+          "output": 18347,
+          "reasoning": 10630,
+          "total": 75124
         },
         "duration_seconds": null
       },
       {
         "cycle_num": 3,
         "hypotheses_count": 7,
+        "eliminations_count": 4,
+        "evidence_collected_count": 0,
+        "token_usage": {
+          "input": 57536,
+          "output": 16551,
+          "reasoning": 8870,
+          "total": 74087
+        },
+        "duration_seconds": null
+      },
+      {
+        "cycle_num": 4,
+        "hypotheses_count": 4,
+        "eliminations_count": 3,
+        "evidence_collected_count": 0,
+        "token_usage": {
+          "input": 52971,
+          "output": 13728,
+          "reasoning": 7453,
+          "total": 66699
+        },
+        "duration_seconds": null
+      },
+      {
+        "cycle_num": 5,
+        "hypotheses_count": 3,
+        "eliminations_count": 1,
+        "evidence_collected_count": 0,
+        "token_usage": {
+          "input": 45214,
+          "output": 11039,
+          "reasoning": 5944,
+          "total": 56253
+        },
+        "duration_seconds": null
+      },
+      {
+        "cycle_num": 6,
+        "hypotheses_count": 3,
         "eliminations_count": 0,
         "evidence_collected_count": 0,
         "token_usage": {
-          "input": 88051,
-          "output": 25644,
-          "reasoning": 13295,
-          "total": 113695
+          "input": 33813,
+          "output": 9643,
+          "reasoning": 4994,
+          "total": 43456
+        },
+        "duration_seconds": null
+      },
+      {
+        "cycle_num": 7,
+        "hypotheses_count": 3,
+        "eliminations_count": 0,
+        "evidence_collected_count": 0,
+        "token_usage": {
+          "input": 33791,
+          "output": 8872,
+          "reasoning": 4025,
+          "total": 42663
         },
         "duration_seconds": null
       }
@@ -187,35 +514,55 @@
     "context_windows": {},
     "token_usage": {
       "investigator_cycle_1": {
-        "input": 3522,
-        "output": 9528,
-        "reasoning": 5567,
-        "total": 13050
+        "input": 5183,
+        "output": 7385,
+        "reasoning": 3277,
+        "total": 12568
       },
       "investigator_cycle_2": {
-        "input": 61376,
-        "output": 24437,
-        "reasoning": 15204,
-        "total": 85813
+        "input": 56777,
+        "output": 18347,
+        "reasoning": 10630,
+        "total": 75124
       },
       "investigator_cycle_3": {
-        "input": 88051,
-        "output": 25644,
-        "reasoning": 13295,
-        "total": 113695
+        "input": 57536,
+        "output": 16551,
+        "reasoning": 8870,
+        "total": 74087
+      },
+      "investigator_cycle_4": {
+        "input": 52971,
+        "output": 13728,
+        "reasoning": 7453,
+        "total": 66699
+      },
+      "investigator_cycle_5": {
+        "input": 45214,
+        "output": 11039,
+        "reasoning": 5944,
+        "total": 56253
+      },
+      "investigator_cycle_6": {
+        "input": 33813,
+        "output": 9643,
+        "reasoning": 4994,
+        "total": 43456
+      },
+      "investigator_cycle_7": {
+        "input": 33791,
+        "output": 8872,
+        "reasoning": 4025,
+        "total": 42663
       }
     },
     "alert": {
       "level": "CRITICAL",
-      "diagnosis": "HIGH RISK: 7 hypothesis(es) indicate systemic concern - Reputational Crisis & Loss of Client Confidence, Perceived Structural Weakness & Liquidity Concerns, Ineffective or Poorly Communicated Restructuring Plan, Regulatory Scrutiny & Legal Liabilities, Contagion from Broader Economic/Banking Sector Instability, Targeted Exodus of Wealth Management Clients, Perceived Operational Weakness or Key Personnel Departures",
+      "diagnosis": "HIGH RISK: 3 hypothesis(es) indicate systemic concern - Cumulative Brand Destruction, LCR Breach via Deposit Flight, CDS Spread Automated Breaches",
       "surviving_hypotheses": [
+        "H18",
         "H01",
-        "H02",
-        "H03",
-        "H04",
-        "H06",
-        "H07",
-        "H08"
+        "H06"
       ],
       "key_evidence": [],
       "recommended_actions": [
@@ -226,7 +573,7 @@
       ]
     },
     "network_alerts": [],
-    "created_at": "2026-03-07 11:29:42.351088+00:00",
-    "updated_at": "2026-03-07 11:38:48.794802+00:00"
+    "created_at": "2026-03-09 15:09:42.461682+00:00",
+    "updated_at": "2026-03-09 15:29:46.193775+00:00"
   }
 }

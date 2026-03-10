@@ -12,12 +12,12 @@ load_dotenv()
 
 # Gemini API Configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = "gemini-2.5-flash"  # Using flash for testing due to quota limits on 3.1-pro
+GEMINI_MODEL = "gemini-3-pro-preview"  # Production reasoning model for hypothesis elimination (use gemini-2.5-flash for faster testing)
 GEMINI_TEMPERATURE = 0.2  # Low temperature for reasoning consistency
 
 # Investigation Lifecycle Limits
-MAX_CYCLES = 5  # Maximum reasoning cycles before forced convergence
-MAX_HYPOTHESES = 10  # Maximum hypotheses to track per investigation
+MAX_CYCLES = 8  # Maximum reasoning cycles before forced convergence (raised from 5 for evidence-driven convergence)
+MAX_HYPOTHESES = 20  # Maximum hypotheses to track per investigation (raised from 10 for broader coverage)
 CONVERGENCE_THRESHOLD = 2  # Converge when ≤2 hypotheses remain
 STAGNATION_CYCLES = 2  # Force convergence if count unchanged for N cycles
 

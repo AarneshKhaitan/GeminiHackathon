@@ -51,12 +51,12 @@ class EliminatedHypothesis(BaseModel):
 class CrossModalFlag(BaseModel):
     """Cross-modal contradiction between structural and empirical evidence."""
 
-    structural_atom_id: str = Field(
-        ...,
+    structural_atom_id: str | None = Field(
+        default=None,
         description="ID of structural observation"
     )
-    empirical_atom_id: str = Field(
-        ...,
+    empirical_atom_id: str | None = Field(
+        default=None,
         description="ID of empirical observation"
     )
     detected_in_cycle: int = Field(

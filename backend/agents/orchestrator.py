@@ -368,14 +368,15 @@ def update_case_file_with_investigator_output(
 # =============================================================================
 
 
-def decide_convergence(case_file: dict, cycle_num: int, min_cycles: int = 3) -> dict:
+def decide_convergence(case_file: dict, cycle_num: int, min_cycles: int = 3, evidence_quality: float = None) -> dict:
     """
-    Decide whether to continue investigation or converge.
+    Evidence-driven convergence: continue until clear stopping condition.
 
     Args:
         case_file: Current case file (dict)
         cycle_num: Current cycle number
         min_cycles: Minimum cycles before convergence allowed (default: 3)
+        evidence_quality: Optional average similarity score from evidence selector (0-1)
 
     Returns:
         {
@@ -385,17 +386,18 @@ def decide_convergence(case_file: dict, cycle_num: int, min_cycles: int = 3) -> 
             "cycles_completed": int
         }
 
-    Convergence triggers:
-        0. Minimum cycles not yet reached (forced continue)
-        1. Hypothesis count ≤ CONVERGENCE_THRESHOLD (2)
-        2. Max cycles reached
-        3. Stagnation: hypothesis count unchanged for STAGNATION_CYCLES
-        4. All hypotheses eliminated (edge case)
+    Convergence triggers (in priority order):
+        1. Minimum cycles not reached (forced continue)
+        2. Hypothesis count ≤ 2 (clear winner(s))
+        3. Stable state: all scores > 0.85 and no eliminations (strong consensus)
+        4. Evidence corpus exhausted (no eliminations in last 2 cycles after cycle 5)
+        5. Hard cycle limit reached (safety valve at 8 cycles)
+        6. All hypotheses eliminated (edge case)
     """
     case_file_obj = CaseFile(**case_file)
     hypotheses_count = len(case_file_obj.active_hypotheses)
 
-    # Trigger 0: Enforce minimum cycles (demo requirement)
+    # Trigger 0: Enforce minimum cycles
     if cycle_num < min_cycles:
         return {
             "decision": "continue",
@@ -404,7 +406,7 @@ def decide_convergence(case_file: dict, cycle_num: int, min_cycles: int = 3) -> 
             "cycles_completed": cycle_num,
         }
 
-    # Trigger 1: Hypothesis count at or below threshold
+    # Trigger 1: Clear convergence (≤2 hypotheses)
     if hypotheses_count <= CONVERGENCE_THRESHOLD:
         return {
             "decision": "converge",
@@ -413,30 +415,48 @@ def decide_convergence(case_file: dict, cycle_num: int, min_cycles: int = 3) -> 
             "cycles_completed": cycle_num,
         }
 
-    # Trigger 2: Max cycles reached
-    if cycle_num >= MAX_CYCLES:
-        return {
-            "decision": "converge",
-            "reason": f"Max cycles ({MAX_CYCLES}) reached",
-            "hypotheses_count": hypotheses_count,
-            "cycles_completed": cycle_num,
-        }
+    # Trigger 2: Stable state - all surviving hypotheses have high scores (strong consensus)
+    if hypotheses_count > 0 and cycle_num >= 4:
+        scores = [h.score for h in case_file_obj.active_hypotheses]
+        min_score = min(scores) if scores else 0
 
-    # Trigger 3: Stagnation check (hypothesis count unchanged)
-    if len(case_file_obj.cycle_history) >= STAGNATION_CYCLES:
-        recent_counts = [
-            record.hypotheses_count
-            for record in case_file_obj.cycle_history[-STAGNATION_CYCLES:]
-        ]
-        if len(set(recent_counts)) == 1:  # All counts identical
+        # Check if last cycle had 0 eliminations and all scores are high
+        if len(case_file_obj.cycle_history) >= 1:
+            last_cycle = case_file_obj.cycle_history[-1]
+            if last_cycle.eliminations_count == 0 and min_score >= 0.85:
+                return {
+                    "decision": "converge",
+                    "reason": f"Stable state: all {hypotheses_count} hypotheses have strong evidence support (min score: {min_score:.2f})",
+                    "hypotheses_count": hypotheses_count,
+                    "cycles_completed": cycle_num,
+                }
+
+    # Trigger 3: Evidence corpus exhausted
+    # Check if last 2 cycles had zero eliminations (after cycle 5)
+    if cycle_num >= 5 and len(case_file_obj.cycle_history) >= 2:
+        last_two_eliminations = sum(
+            cycle.eliminations_count for cycle in case_file_obj.cycle_history[-2:]
+        )
+
+        if last_two_eliminations == 0 and hypotheses_count > 2:
             return {
                 "decision": "converge",
-                "reason": f"Stagnation: hypothesis count unchanged for {STAGNATION_CYCLES} cycles",
+                "reason": f"Evidence exhausted: no eliminations in last 2 cycles, {hypotheses_count} hypotheses remain",
                 "hypotheses_count": hypotheses_count,
                 "cycles_completed": cycle_num,
             }
 
-    # Trigger 4: All hypotheses eliminated (edge case)
+    # Trigger 4: Hard cycle limit (safety valve) - raised from 5 to 8
+    HARD_MAX_CYCLES = 8
+    if cycle_num >= HARD_MAX_CYCLES:
+        return {
+            "decision": "converge",
+            "reason": f"Hard cycle limit ({HARD_MAX_CYCLES}) reached",
+            "hypotheses_count": hypotheses_count,
+            "cycles_completed": cycle_num,
+        }
+
+    # Trigger 5: All hypotheses eliminated (edge case)
     if hypotheses_count == 0:
         return {
             "decision": "converge",

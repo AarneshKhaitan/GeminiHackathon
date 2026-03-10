@@ -14,25 +14,25 @@ from utils.logger import get_logger
 logger = get_logger("batch_tagger")
 
 
-async def tag_batch(
-    batch: list[dict],
+async def tag_single_batch(
+    observations: list[dict],
     hypotheses: list[dict],
-    batch_num: int,
+    batch_num: int = 1,
 ) -> list[dict]:
     """
-    Tag a single batch of observations in parallel.
+    Tag a batch of observations against hypotheses.
 
     Args:
-        batch: List of observations to tag (10-15 observations)
+        observations: List of observations to tag
         hypotheses: Active hypotheses to tag against
-        batch_num: Batch number for logging
+        batch_num: Batch number for logging (default: 1)
 
     Returns:
         List of tagged observations
     """
-    logger.info(f"Batch {batch_num}: Tagging {len(batch)} observations against {len(hypotheses)} hypotheses")
+    logger.info(f"Batch {batch_num}: Tagging {len(observations)} observations against {len(hypotheses)} hypotheses")
 
-    prompt = build_evidence_tagging_prompt(batch, hypotheses)
+    prompt = build_evidence_tagging_prompt(observations, hypotheses)
     result = await call_gemini(prompt)
 
     # Handle both response formats
@@ -48,6 +48,10 @@ async def tag_batch(
 
     logger.info(f"Batch {batch_num}: Tagged {len(tagged)} observations successfully")
     return tagged
+
+
+# Alias for backward compatibility
+tag_batch = tag_single_batch
 
 
 async def tag_all_evidence_parallel(

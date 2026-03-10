@@ -126,16 +126,17 @@ async def gather_evidence(
     if not active_hypotheses:
         print("  [packager] No active hypotheses - returning untagged evidence")
         logger.info("No active hypotheses - returning untagged evidence")
-        return raw_evidence[:15]  # Limit to 15
+        request_count = len(evidence_requests) if evidence_requests else 5
+        limit = min(request_count, len(raw_evidence))
+        return raw_evidence[:limit]
 
-    # LIMIT evidence to prevent Gemini JSON parsing errors
-    # Too many observations causes malformed JSON responses
-    # Reduced to 15 to handle growing context in later cycles and ensure valid JSON
-    MAX_EVIDENCE_PER_BATCH = 15
+    # LIMIT evidence to EXACTLY what investigator requested
+    request_count = len(evidence_requests) if evidence_requests else 5
+    MAX_EVIDENCE_PER_BATCH = min(request_count, len(raw_evidence))
     evidence_subset = raw_evidence[:MAX_EVIDENCE_PER_BATCH]
 
-    print(f"  [packager] Limiting to {len(evidence_subset)} observations for tagging (max {MAX_EVIDENCE_PER_BATCH})")
-    logger.info(f"Limiting to {len(evidence_subset)} observations for tagging (max {MAX_EVIDENCE_PER_BATCH})")
+    print(f"  [packager] Tagging {len(evidence_subset)} observations (requested: {request_count})")
+    logger.info(f"Tagging {len(evidence_subset)} observations (requested: {request_count})")
 
     # ONE Gemini call to tag limited atoms against active hypotheses
     prompt = build_evidence_tagging_prompt(evidence_subset, active_hypotheses)
