@@ -10,6 +10,7 @@ interface SurvivingCardProps {
 export function SurvivingCard({ hypothesis, showChain = false }: SurvivingCardProps) {
   const conf = Math.round(hypothesis.currentConfidence * 100)
   const isContradiction = hypothesis.status === 'contradiction'
+  const isUnscored = hypothesis.currentConfidence < 0  // -1 means not yet scored
 
   const accentColor = isContradiction ? '#D4651A' : '#2E9E72'
 
@@ -27,19 +28,21 @@ export function SurvivingCard({ hypothesis, showChain = false }: SurvivingCardPr
         position: 'relative',
       }}
     >
-      {/* Confidence bar — thin line at bottom */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          height: '1px',
-          width: `${conf}%`,
-          backgroundColor: accentColor,
-          opacity: 0.5,
-          transition: 'width 0.5s ease-out',
-        }}
-      />
+      {/* Confidence bar — thin line at bottom, only if scored */}
+      {!isUnscored && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            height: '1px',
+            width: `${conf}%`,
+            backgroundColor: accentColor,
+            opacity: 0.5,
+            transition: 'width 0.5s ease-out',
+          }}
+        />
+      )}
 
       <div className="px-3 py-2.5">
         {/* Header row */}
@@ -49,22 +52,32 @@ export function SurvivingCard({ hypothesis, showChain = false }: SurvivingCardPr
               {hypothesis.id}
             </span>
             <span className="shrink-0 text-[9px] font-mono" style={{ color: accentColor }}>
-              {isContradiction ? '≠' : '✓'}
+              {isContradiction ? '≠' : isUnscored ? '·' : '✓'}
             </span>
             <span className="text-[10px] font-mono font-medium leading-tight" style={{ color: '#EDE4D4' }}>
               {hypothesis.label}
             </span>
           </div>
           <div className="shrink-0 flex flex-col items-end gap-0.5">
-            <MonoValue color={accentColor} size="sm">{conf}%</MonoValue>
-            <span className="text-[7px] font-mono" style={{ color: '#4A3D2A' }}>CONF</span>
+            {isUnscored ? (
+              <span className="text-[8px] font-mono" style={{ color: '#4A3D2A' }}>
+                NOT SCORED
+              </span>
+            ) : (
+              <>
+                <MonoValue color={accentColor} size="sm">{conf}%</MonoValue>
+                <span className="text-[7px] font-mono" style={{ color: '#4A3D2A' }}>CONF</span>
+              </>
+            )}
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-[9px] font-mono leading-relaxed mb-1.5" style={{ color: '#8C7A5E' }}>
-          {hypothesis.description}
-        </p>
+        {hypothesis.description && (
+          <p className="text-[9px] font-mono leading-relaxed mb-1.5" style={{ color: '#8C7A5E' }}>
+            {hypothesis.description}
+          </p>
+        )}
 
         {/* Cross-modal conflict */}
         {isContradiction && hypothesis.crossModalConflict && (

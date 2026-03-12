@@ -20,6 +20,7 @@ import type {
   InvestigatorCycleWindow,
   PackagerCycleWindow,
   OrchestratorCycleWindow,
+  CrossModalFlag,
 } from '../types/investigation'
 import type { WSMessage } from '../types/api'
 
@@ -90,6 +91,7 @@ interface InvestigationState {
   evidencePending: EvidencePending[]
   activeEvidenceRequests: EvidenceRequest[]
   agentStatuses: Record<'structural' | 'market' | 'news', AgentStatus>
+  crossModalFlags: CrossModalFlag[]
 
   tier2EvalText: string
   tier2EvalDone: boolean
@@ -110,7 +112,7 @@ interface InvestigationState {
 
 interface UIState {
   activeScreen: -1 | 0 | 1 | 2
-  rightPanelTab: 'evidence' | 'tokens' | 'reasoning'
+  rightPanelTab: 'evidence' | 'tokens' | 'reasoning' | 'crossModal' | 'pending'
   mockMode: boolean
   mockPlaybackSpeed: number
   isTransitioning: boolean
@@ -119,7 +121,7 @@ interface UIState {
   tierTransitionTo: TierLevel | null
 
   setActiveScreen: (screen: -1 | 0 | 1 | 2) => void
-  setRightPanelTab: (tab: 'evidence' | 'tokens' | 'reasoning') => void
+  setRightPanelTab: (tab: 'evidence' | 'tokens' | 'reasoning' | 'crossModal' | 'pending') => void
   setMockMode: (enabled: boolean) => void
   setMockPlaybackSpeed: (speed: number) => void
   triggerAlertFlash: () => void
@@ -156,6 +158,7 @@ export const useStore = create<Store>()(
     evidencePending: [],
     activeEvidenceRequests: [],
     agentStatuses: { ...defaultAgentStatuses },
+    crossModalFlags: [],
 
     tier2EvalText: '',
     tier2EvalDone: false,
@@ -220,6 +223,7 @@ export const useStore = create<Store>()(
       s.evidencePending = []
       s.activeEvidenceRequests = []
       s.agentStatuses = { ...defaultAgentStatuses }
+      s.crossModalFlags = []
       s.tier2EvalText = ''
       s.tier2EvalDone = false
       s.compressedReasoning = ''
@@ -384,6 +388,15 @@ export const useStore = create<Store>()(
 
         case 'KEY_INSIGHT_ADDED':
           s.keyInsights.push(msg.insight)
+          break
+
+        case 'CROSS_MODAL_DETECTED':
+          s.crossModalFlags.push({
+            structuralAtomId: msg.structuralAtomId,
+            empiricalAtomId: msg.empiricalAtomId,
+            cycle: msg.cycle,
+            description: msg.description,
+          })
           break
 
         case 'TOKEN_USAGE_CYCLE': {

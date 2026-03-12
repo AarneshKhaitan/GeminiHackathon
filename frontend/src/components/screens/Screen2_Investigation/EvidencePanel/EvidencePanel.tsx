@@ -1,7 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import { useStore } from '../../../../store'
 import { EvidenceAtomCard } from './EvidenceAtomCard'
-import { AgentStatusRow } from './AgentStatusRow'
 
 export function EvidencePanel() {
   const atoms = useStore((s) => s.evidenceAtoms)
@@ -18,11 +17,9 @@ export function EvidencePanel() {
           className="text-[9px] tracking-[0.2em]"
           style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, color: '#8C7A5E' }}
         >EVIDENCE STREAM</span>
-      </div>
-
-      {/* Agent status */}
-      <div style={{ borderBottom: '1px solid #2E2820' }}>
-        <AgentStatusRow />
+        <span className="ml-auto text-[8px] font-mono" style={{ color: '#4A3D2A' }}>
+          {atoms.length} ATOMS
+        </span>
       </div>
 
       {/* Evidence atoms feed */}

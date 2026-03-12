@@ -1,4 +1,4 @@
-export type TierLevel = 2 | 3
+export type TierLevel = 2 | 3 | 4
 
 export type SystemStatus =
   | 'IDLE'
@@ -19,6 +19,13 @@ export type EvidenceType = 'structural' | 'market' | 'news' | 'filing'
 export type Novelty = 'low' | 'medium' | 'high' | 'critical'
 
 // ─── Hypothesis ─────────────────────────────────────────────────────────────
+
+export interface CrossModalFlag {
+  structuralAtomId: string
+  empiricalAtomId: string
+  cycle: number
+  description: string
+}
 
 export interface CrossModalConflict {
   structuralAtom: string

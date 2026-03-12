@@ -36,6 +36,7 @@ export type WSMessage =
   | { type: 'CONVERGENCE_REACHED'; diagnosis: AlertDiagnosis }
   | { type: 'CONTAGION_DETECTED'; targets: ContagionTarget[] }
   | { type: 'INVESTIGATION_COMPLETE' }
+  | { type: 'CROSS_MODAL_DETECTED'; structuralAtomId: string; empiricalAtomId: string; cycle: number; description: string }
   // Token tracking
   | { type: 'TOKEN_USAGE_CYCLE'; data: TokenUsageByCycle }
   | { type: 'INVESTIGATOR_WINDOW_UPDATE'; data: InvestigatorCycleWindow }
