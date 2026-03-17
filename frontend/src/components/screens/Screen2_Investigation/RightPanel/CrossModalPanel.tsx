@@ -35,7 +35,7 @@ export function CrossModalPanel() {
       {/* Flags list */}
       <div className="flex-1 overflow-y-auto">
         <AnimatePresence mode="popLayout" initial={false}>
-          {flags.map((flag, idx) => (
+          {flags.map((flag, _idx) => (
             <motion.div
               key={`${flag.cycle}-${flag.structuralAtomId}-${flag.empiricalAtomId}`}
               layout

@@ -35,7 +35,7 @@ export function EvidencePendingPanel() {
       {/* Pending requests list */}
       <div className="flex-1 overflow-y-auto">
         <AnimatePresence mode="popLayout" initial={false}>
-          {pending.map((item, idx) => (
+          {pending.map((item, _idx) => (
             <motion.div
               key={`${item.requestedInCycle}-${item.description.slice(0, 30)}`}
               layout
